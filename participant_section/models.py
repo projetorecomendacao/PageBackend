@@ -1,7 +1,6 @@
 from django.db import models
-
 from institution_section.models import Address
-from page_section.models import Page
+#from page_section.models import Page
 
 
 class Participant(models.Model):
@@ -60,7 +59,7 @@ class ParticipantSituation (models.Model):
     date = models.DateField()
     study_time = models.IntegerField()
 
-    page = models.OneToOneField(Page, on_delete=models.CASCADE, related_name='participant_situation')
+#    page = models.OneToOneField(Page, on_delete=models.CASCADE, related_name='participant_situation')
     current_situation = models.OneToOneField(Participant, on_delete=models.DO_NOTHING, related_name='current_situation')
     history = models.ForeignKey(Participant, on_delete=models.DO_NOTHING, related_name='situation_history', blank=True)
     address = models.ForeignKey(Address, on_delete=models.DO_NOTHING, related_name='participant_situations')

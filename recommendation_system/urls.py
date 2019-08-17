@@ -28,6 +28,8 @@ from page_section.api.viewsets import DA_AttitudesViewSet, DB_LifeQualityViewSet
 from participant_section.api.viewsets import ParticipantViewSet, IncomeViewSet, ParticipantSocialMediaViewSet, \
     MaritalStatusViewSet, SchoolingViewSet, ProfessionalsActivitiesViewSet, ReligionViewSet, ParticipantSituationViewSet
 from review_section.api.viewsets import OfferViewSet, ReviewViewSet
+from assessment_section.api.viewsets import DemandsProblemsViewSet, ActionsViewSet, ServicesViewSet, GoalsViewSet, AssessmentsControlViewSet, ExpertAssessmentViewSet, ActionsImplementationViewSet
+from experts_section.api.viewsets import ExpertViewSet,ExpertiseViewSet
 
 router = routers.DefaultRouter()
 
@@ -76,6 +78,19 @@ router.register(r'participants_situations', ParticipantSituationViewSet, base_na
 # reviews_section
 router.register(r'offers', OfferViewSet, base_name='Offers')
 router.register(r'reviews', ReviewViewSet, base_name='Reviews')
+
+# assessment_section
+router.register(r'demands_problems', DemandsProblemsViewSet, base_name='demands_problems')
+router.register(r'actions', ActionsViewSet, base_name='actions')
+router.register(r'services', ServicesViewSet, base_name='services')
+router.register(r'goals', GoalsViewSet, base_name='goals')
+router.register(r'assessment_controls', AssessmentsControlViewSet, base_name='assessments_controls')
+router.register(r'expert_assessment', ExpertAssessmentViewSet, base_name='expert_assessment')
+router.register(r'actions_implementation', ActionsImplementationViewSet, base_name='actions_implementation')
+
+# experts_section
+router.register(r'expertise', ExpertiseViewSet, base_name='Expertise')
+router.register(r'expert', ExpertViewSet, base_name='Expert')
 
 urlpatterns = [
     path('', include(router.urls)),

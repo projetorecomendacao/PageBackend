@@ -1,10 +1,10 @@
 from rest_framework.serializers import ModelSerializer
-from review_section.models import Offer, Review
+from review_section.models import Offers, Review
 
 
 class OfferSerializer(ModelSerializer):
     class Meta:
-        model = Offer
+        model = Offers
         fields = '__all__'
 
 

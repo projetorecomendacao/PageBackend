@@ -1,3 +1,4 @@
 from django.contrib import admin
+from participant_section.models import ParticipantSituation
 
-# Register your models here.
+admin.site.register(ParticipantSituation)

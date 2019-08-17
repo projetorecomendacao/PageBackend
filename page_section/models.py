@@ -2,6 +2,8 @@ from django.db import models
 
 from activities_section.models import Activity
 from health_section.models import Diseases, Medication
+from review_section.models import Offers
+
 
 
 class DA_Attitudes (models.Model):
@@ -322,3 +324,19 @@ class Page (models.Model):
     DL_Violence = models.OneToOneField(DL_Violence, on_delete=models.CASCADE, related_name='page')
     DM_SocialVulnerability = models.OneToOneField(DM_SocialVulnerability, on_delete=models.CASCADE, related_name='page')
     DN_Fragility = models.OneToOneField(DN_Fragility, on_delete=models.CASCADE, related_name='page')
+    recommendedActivities = models.ManyToManyField(Offers,through='RecommendedActivities',related_name='page')
+
+    class Meta:
+        ordering = ['id']
+
+class RecommendedActivities (models.Model):
+    page = models.ForeignKey(Page, on_delete=models.CASCADE)
+    offer = models.ForeignKey(Offers, on_delete=models.CASCADE)
+    data = models.DateField()
+    systemRating = models.IntegerField()
+    expertRating = models.IntegerField()
+    accepted = models.BooleanField()
+    expertConsideration = models.TextField()
+
+    class Meta:
+        ordering = ['id']

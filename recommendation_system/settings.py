@@ -39,11 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'activities_section',
-    'institution_section',
-    'review_section',
-    'participant_section',
-    'page_section',
+    'assessment_section',
+    'experts_section',
     'health_section',
+    'institution_section',
+    'page_section',
+    'participant_section',
+#    'recommender_section',
+    'review_section',
 ]
 
 MIDDLEWARE = [
