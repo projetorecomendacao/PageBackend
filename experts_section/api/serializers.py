@@ -9,5 +9,5 @@ class ExpertSerializer(ModelSerializer):
 
 class ExpertiseSerializer(ModelSerializer):
     class Meta:
-        model = Expertise,
+        model = Expertise
         fields = '__all__'

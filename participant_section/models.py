@@ -8,9 +8,14 @@ class Participant(models.Model):
     communication = models.CharField(max_length=50)
     birth_date = models.DateField()
     gender = models.CharField(max_length=1)
+    weight = models.FloatField()
+    height = models.FloatField()
 
     class Meta:
         ordering = ['id']
+
+    def BMI (self):
+        pass
 
 
 class Income (models.Model):

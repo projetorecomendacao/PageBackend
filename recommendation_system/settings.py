@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'institution_section',
     'page_section',
     'participant_section',
+    'drinks_section',
 #    'recommender_section',
     'review_section',
 ]
