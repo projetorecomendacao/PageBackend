@@ -80,4 +80,5 @@ router.register(r'reviews', ReviewViewSet, base_name='Reviews')
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('auth/', include('rest_framework_social_oauth2.urls'))
 ]
