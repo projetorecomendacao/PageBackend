@@ -21,13 +21,19 @@ from activities_section.api.viewsets import CharacteristicViewSet, BenefitViewSe
     ActivityViewSet
 from institution_section.api.viewsets import AddressViewSet, ContactViewSet, LocationViewSet, InstructorViewSet, \
     ResponsibleViewSet, InstitutionViewSet
-from page_section.api.viewsets import DA_AttitudesViewSet, DB_LifeQualityViewSet, DC_SensesViewSet, \
-    DD_MalnutritionViewSet, DE_FunctionalCapacityViewSet, DF_DepressionViewSet, DG_CognitionViewSet, \
-    DH_CardiovascularFactorsViewSet, DI_MedicationManagementViewSet, DJ_AmbientViewSet, DK_FallsViewSet, \
-    DL_ViolenceViewSet, DM_SocialVulnerabilityViewSet, DN_FragilityViewSet, PageViewSet
+from page_section.api.viewsets import  NegativeAttitudesAgingViewSet, CognitionDeficitViewSet, DepressionViewSet, PsychologicalAspectsViewSet, \
+     BiologicalAspectsViewSet, SensoryDeficitViewSet, FunctionalDisabilityViewSet, MalnutritionViewSet, CardiovascularFactorsViewSet, MisuseMedicationsViewSet, \
+     SocialAspectsViewSet, LowSocialSupportViewSet, EnvironmentalProblemsViewSet, InternalEnvironmentViewSet, RiskBehaviorViewSet, ExternalEnvironmentViewSet, ViolenceViewSet,\
+     MultidisciplinaryDomainViewSet, FallsViewSet, \
+     PageViewSet
 from participant_section.api.viewsets import ParticipantViewSet, IncomeViewSet, ParticipantSocialMediaViewSet, \
     MaritalStatusViewSet, SchoolingViewSet, ProfessionalsActivitiesViewSet, ReligionViewSet, ParticipantSituationViewSet
 from review_section.api.viewsets import OfferViewSet, ReviewViewSet
+from assessment_section.api.viewsets import DemandsProblemsViewSet, ActionsViewSet, ServicesViewSet, GoalsViewSet, AssessmentsControlViewSet, ExpertAssessmentViewSet, ActionsImplementationViewSet
+from experts_section.api.viewsets import ExpertViewSet,ExpertiseViewSet
+from health_section.api.viewsets import DiseasesViewSet, TherapeuticClassViewSet, HealthProblemsViewSet, MedicinesViewSet, FracturesViewSet
+from drinks_section.api.viewsets import DrinksViewSet, IngestedDrinksViewSet
+
 
 router = routers.DefaultRouter()
 
@@ -47,20 +53,25 @@ router.register(r'instructors', InstructorViewSet, base_name='Instructor')
 router.register(r'responsibles', ResponsibleViewSet, base_name='Responsible')
 
 # page_section
-router.register(r'DA_attitudes', DA_AttitudesViewSet, base_name='DA_attitudes')
-router.register(r'DB_life_quality', DB_LifeQualityViewSet, base_name='DB_life_quality')
-router.register(r'DC_senses', DC_SensesViewSet, base_name='DC_senses')
-router.register(r'DD_malnutricion', DD_MalnutritionViewSet, base_name='DD_malnutricion')
-router.register(r'DE_functional_capacity', DE_FunctionalCapacityViewSet, base_name='DE_functional_capacity')
-router.register(r'DF_depression', DF_DepressionViewSet, base_name='DF_depression')
-router.register(r'DG_cognition', DG_CognitionViewSet, base_name='DG_cognition')
-router.register(r'DH_cardiovascular_factors', DH_CardiovascularFactorsViewSet, base_name='DH_cardiovascular_factors')
-router.register(r'DI_medication_management', DI_MedicationManagementViewSet, base_name='DI_medication_management')
-router.register(r'DJ_ambient', DJ_AmbientViewSet, base_name='DJ_ambient')
-router.register(r'DK_falls', DK_FallsViewSet, base_name='DK_falls')
-router.register(r'DL_violence', DL_ViolenceViewSet, base_name='DL_violence')
-router.register(r'DM_social_vulnerability', DM_SocialVulnerabilityViewSet, base_name='DM_social_vulnerability')
-router.register(r'DN_fragility', DN_FragilityViewSet, base_name='DN_fragility')
+router.register(r'negativeAttitudesAging', NegativeAttitudesAgingViewSet, base_name='negativeAttitudesAging')
+router.register(r'cognitionDeficit',CognitionDeficitViewSet, base_name='cognitionDeficit')
+router.register(r'depression',DepressionViewSet, base_name='depression')
+router.register(r'psychologicalAspects',PsychologicalAspectsViewSet, base_name='psychologicalAspects')
+router.register(r'biologicalAspects',BiologicalAspectsViewSet, base_name='biologicalAspects')
+router.register(r'sensoryDeficit',SensoryDeficitViewSet, base_name='sensoryDeficit')
+router.register(r'functionalDisability',FunctionalDisabilityViewSet, base_name='functionalDisability')
+router.register(r'malnutrition',MalnutritionViewSet, base_name='malnutrition')
+router.register(r'cardiovascularFactors',CardiovascularFactorsViewSet, base_name='cardiovascularFactors')
+router.register(r'misuseMedications',MisuseMedicationsViewSet, base_name='misuseMedications')
+router.register(r'socialAspects',SocialAspectsViewSet, base_name='socialAspects')
+router.register(r'lowSocialSupport',LowSocialSupportViewSet, base_name='lowSocialSupport')
+router.register(r'environmentalProblems',EnvironmentalProblemsViewSet, base_name='environmentalProblems')
+router.register(r'internalEnvironment',InternalEnvironmentViewSet, base_name='internalEnvironment')
+router.register(r'riskBehavior',RiskBehaviorViewSet, base_name='riskBehavior')
+router.register(r'externalEnvironment',ExternalEnvironmentViewSet, base_name='externalEnvironment')
+router.register(r'violence',ViolenceViewSet, base_name='violence')
+router.register(r'multidisciplinaryDomain',MultidisciplinaryDomainViewSet, base_name='multidisciplinaryDomain')
+router.register(r'falls',FallsViewSet, base_name='falls')
 router.register(r'page', PageViewSet, base_name='page')
 
 # participant_section
@@ -77,8 +88,34 @@ router.register(r'participants_situations', ParticipantSituationViewSet, base_na
 router.register(r'offers', OfferViewSet, base_name='Offers')
 router.register(r'reviews', ReviewViewSet, base_name='Reviews')
 
+# assessment_section
+router.register(r'demands_problems', DemandsProblemsViewSet, base_name='demands_problems')
+router.register(r'actions', ActionsViewSet, base_name='actions')
+router.register(r'services', ServicesViewSet, base_name='services')
+router.register(r'goals', GoalsViewSet, base_name='goals')
+router.register(r'assessment_controls', AssessmentsControlViewSet, base_name='assessments_controls')
+router.register(r'expert_assessment', ExpertAssessmentViewSet, base_name='expert_assessment')
+router.register(r'actions_implementation', ActionsImplementationViewSet, base_name='actions_implementation')
+
+# experts_section
+router.register(r'expertise', ExpertiseViewSet, base_name='expertise')
+router.register(r'expert', ExpertViewSet, base_name='expert')
+
+#health_section
+router.register(r'diseases',DiseasesViewSet,base_name='diseases')
+router.register(r'therapeuticClass',TherapeuticClassViewSet,base_name='therapeuticClass')
+router.register(r'healthProblems',HealthProblemsViewSet,base_name='healthProblems')
+router.register(r'medicines',MedicinesViewSet,base_name='medicines')
+router.register(r'fractures',FracturesViewSet,base_name='fractures')
+
+#drinks_section
+router.register(r'drinks', DrinksViewSet, base_name='drinks')
+router.register(r'ingestedDrinks', IngestedDrinksViewSet, base_name='ingestedDrinks')
+
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('auth/', include('rest_framework_social_oauth2.urls'))
 ]
+
+

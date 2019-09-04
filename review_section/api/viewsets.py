@@ -1,11 +1,11 @@
 from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import ModelViewSet
-from review_section.models import Offer, Review
+from review_section.models import Offers, Review
 from review_section.api.serializers import OfferSerializer, ReviewSerializer
 
 
 class OfferViewSet(ModelViewSet):
-    queryset = Offer.objects.all()
+    queryset = Offers.objects.all()
     serializer_class = OfferSerializer
     filter_backends = (SearchFilter,)
     search_fields = (

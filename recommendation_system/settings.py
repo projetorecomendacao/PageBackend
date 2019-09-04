@@ -36,15 +36,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'activities_section',
-    'institution_section',
-    'review_section',
-    'participant_section',
-    'page_section',
-    'health_section',
     'oauth2_provider',
     'social_django',
-    'rest_framework_social_oauth2'
+    'rest_framework_social_oauth2',
+    'activities_section',
+    'assessment_section',
+    'experts_section',
+    'health_section',
+    'institution_section',
+    'page_section',
+    'participant_section',
+    'drinks_section',
+    'review_section'
 ]
 
 MIDDLEWARE = [
