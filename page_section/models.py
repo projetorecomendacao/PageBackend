@@ -5,24 +5,20 @@ from review_section.models import Offers
 from drinks_section.models import IngestedDrinks
 from assessment_section.models import ExpertAssessment
 
-# Begin psychological aspects
 
+# Begin psychological aspects
 class CognitionDeficit (models.Model):
     q1MemoryGoodLikeBefore = models.BooleanField()
     q2MemoryTest = models.BooleanField()
     q3LanguageFunctionAttention = models.BooleanField()
-    q4VisospatialAbility =models.BooleanField()
+    q4VisospatialAbility = models.BooleanField()
     q4VisospatialAbilityScore = models.IntegerField()
-    q5Praxia = models.BooleanField ()
-    q6MemoryTest = models.BooleanField ()
-    maxScore = models.IntegerField()
+    q5Praxia = models.BooleanField()
+    q6MemoryTest = models.BooleanField()
+    maxScore = models.IntegerField(default=6)
 
     def score(self):
         pass
-
-    def __init__(self):
-
-        self.MaxScore = 6
 
     def investigate(self):
         pass
@@ -37,6 +33,7 @@ class AgingAspects (models.Model):
     class Meta:
         ordering = ['id']
 
+
 class NegativeAttitudesAging (models.Model):
     q7AgeSelfPerception = models.IntegerField()
     q7AgeSelfPerceptionWhy = models.TextField()
@@ -44,17 +41,14 @@ class NegativeAttitudesAging (models.Model):
     q8AgingPositivePoints = models.ManyToManyField(AgingAspects,related_name='PositivePoints', null=True)
     q8AgingNegativePoints = models.ManyToManyField(AgingAspects,related_name='NegativePoints', null=True)
     q8AgingAnalyse = models.BooleanField()
-    maxScore = models.IntegerField()
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 2
+    maxScore = models.IntegerField(default=2)
 
     def investigate(self):
         pass
 
     class Meta:
         ordering = ['id']
+
 
 class Depression (models.Model):
     description = models.TextField()
@@ -64,11 +58,7 @@ class Depression (models.Model):
     q12FearBadThingsHappen = models.BooleanField()
     q13ImpatientDisquiet = models.BooleanField()
     q14ConcentrationProblem = models.BooleanField()
-    maxScore = models.IntegerField()
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 6
+    maxScore = models.IntegerField(default=6)
 
     def investigate(self):
         pass
@@ -78,9 +68,9 @@ class Depression (models.Model):
 
 
 class PsychologicalAspects (models.Model):
-    cognitionDeficit = models.OneToOneField(CognitionDeficit, on_delete= models.CASCADE, null=True)
-    negativeAttitudesAging = models.OneToOneField(NegativeAttitudesAging,  on_delete= models.CASCADE, null=True)
-    depression = models.OneToOneField(Depression,  on_delete= models.CASCADE, null=True)
+    cognitionDeficit = models.OneToOneField(CognitionDeficit, on_delete=models.CASCADE, null=True)
+    negativeAttitudesAging = models.OneToOneField(NegativeAttitudesAging,  on_delete=models.CASCADE, null=True)
+    depression = models.OneToOneField(Depression,  on_delete=models.CASCADE, null=True)
     comments = models.TextField()
     maxScore = models.IntegerField()
 
@@ -89,31 +79,30 @@ class PsychologicalAspects (models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        max_score = 0
+        for score in (self.cognitionDeficit, self.negativeAttitudesAging, self.depression):
+            max_score += score.maxScore
+        self.maxScore = max_score
 
     class Meta:
         ordering = ['id']
 
     def score(self):
         pass
-
 # End psychological aspects
 
-# Begin Biological Aspects
 
+# Begin Biological Aspects
 class SensoryDeficit(models.Model):
     q15VisionProblems = models.BooleanField()
     q16HearingProblems = models.BooleanField()
     q17TasteProblems = models.BooleanField()
     q18SensesProblems = models.BooleanField()
     q19InteractionProblems = models.BooleanField()
-    maxScore = models.IntegerField()
+    maxScore = models.IntegerField(default=6)
 
     def investigate(self):
         pass
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 6
 
     class Meta:
         ordering = ['id']
@@ -129,20 +118,17 @@ class FunctionalDisability (models.Model):
     q23UseTelephone = models.BooleanField()
     q24DressUp = models.BooleanField()
     q25TakeShower = models.BooleanField()
-    maxScore = models.IntegerField()
+    maxScore = models.IntegerField(default=6)
 
     def investigate(self):
         pass
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 6
 
     class Meta:
         ordering = ['id']
 
     def score(self):
         pass
+
 
 class Malnutrition (models.Model):
     d26YourselfMalnourished = models.BooleanField()
@@ -152,15 +138,11 @@ class Malnutrition (models.Model):
     d30LostWeightNoReason = models.BooleanField()
     d30LostWeightNoReasonAmount = models.IntegerField()
     d31StressIllnessHospitalization = models.BooleanField()
-    q32BMI_Less22 = models.BooleanField() #Usar cálculo de BMI do participante
-    maxScore = models.IntegerField()
+    q32BMI_Less22 = models.BooleanField()  # Usar cálculo de BMI do participante
+    maxScore = models.IntegerField(default=6)
 
     def investigate(self):
         pass
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 6
 
     class Meta:
         ordering = ['id']
@@ -180,21 +162,18 @@ class CardiovascularFactors (models.Model):
     q38Practice150MinutesExercises = models.BooleanField()
     q39HealthyEating = models.BooleanField()
     q40AlcoholIngestedLastWeek = models.ForeignKey(IngestedDrinks, on_delete=models.CASCADE, null=True)
-    q41BMI_Obesity = models.BooleanField() #Usar cálculo do BMI de participante
-    maxScore = models.IntegerField()
+    q41BMI_Obesity = models.BooleanField()  # Usar cálculo do BMI de participante
+    maxScore = models.IntegerField(default=9)
 
     def investigate(self):
         pass
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 9
 
     class Meta:
         ordering = ['id']
 
     def score(self):
         pass
+
 
 class MisuseMedications (models.Model):
     q42DiseasesLast5Years = models.ManyToManyField(Diseases, related_name='patients', blank=True)
@@ -209,14 +188,10 @@ class MisuseMedications (models.Model):
     q51SelfMedication = models.BooleanField()
     q52InappropriateMedication = models.BooleanField()
     q53RiskAdverseReaction = models.BooleanField()
-    maxScore = models.IntegerField()
+    maxScore = models.IntegerField(default=9)
 
     def investigate(self):
         pass
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 9
 
     class Meta:
         ordering = ['id']
@@ -239,21 +214,25 @@ class BiologicalAspects (models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        max_score = 0
+        for score in (self.sensoryDeficit, self.functionalDisability, self.malNutrition,
+                      self.cardiovascularFactors, self.misuseMedications):
+            max_score += score.maxScore
+        self.maxScore = max_score
 
     class Meta:
         ordering = ['id']
 
     def score(self):
         pass
-
 # End Biological Aspects
 
-# Begin Social Aspects
 
+# Begin Social Aspects
 class LowSocialSupport (models.Model):
     q54Spouse = models.BooleanField()
     q54Mother = models.BooleanField()
-    q53Father = models.BooleanField ()
+    q53Father = models.BooleanField()
     q54Brothers = models.IntegerField()
     q54Children = models.IntegerField()
     q54GranChildren = models.IntegerField()
@@ -265,14 +244,10 @@ class LowSocialSupport (models.Model):
     q60SomeoneToHaveFun = models.BooleanField()
     q61ParticipateSocialEvents = models.BooleanField()
     q62RegularyHealtServices = models.BooleanField()
-    maxScore = models.IntegerField()
+    maxScore = models.IntegerField(default=9)
 
     def investigate(self):
         pass
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 9
 
     class Meta:
         ordering = ['id']
@@ -281,7 +256,8 @@ class LowSocialSupport (models.Model):
         pass
 
 
-class InternalEnvironment (models.Model):
+class EnvironmentalProblems (models.Model):
+    # Internal environment
     q63EstableFurniture = models.BooleanField()
     q64LooseObjectsCarpets = models.BooleanField()
     q65SlipperyFloor = models.BooleanField()
@@ -290,18 +266,12 @@ class InternalEnvironment (models.Model):
     q68SuitableStairsSteps = models.BooleanField()
     q69NonSlipperyCarpet = models.BooleanField()
 
-    def calcular(self):
-        pass
-
-class RiskBehavior (models.Model):
+    # riskBehavior
     q70GetOnStool = models.BooleanField()
     q71TurnLightsOff = models.BooleanField()
     q72SafeShoes = models.BooleanField()
 
-    def calcular(self):
-        pass
-
-class ExternalEnvironment (models.Model):
+    # externalEnvironment
     q73ManicureSidewalks = models.BooleanField()
     q74PublicTransportAccess = models.BooleanField()
     q75CommerceAccess = models.BooleanField()
@@ -309,28 +279,19 @@ class ExternalEnvironment (models.Model):
     q77FunAccess = models.BooleanField()
     q78Safety = models.BooleanField()
 
-    def calcular(self):
-        pass
-
-
-class EnvironmentalProblems (models.Model):
-    internalEnvironment = models.OneToOneField(InternalEnvironment, on_delete=models.CASCADE, null=True)
-    riskBehavior = models.OneToOneField(RiskBehavior, on_delete=models.CASCADE)
-    externalEnvironment = models.OneToOneField(ExternalEnvironment, on_delete=models.CASCADE, null=True)
-    maxScore = models.IntegerField()
+    maxScore = models.IntegerField(default=16)
 
     def investigate(self):
         pass
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 16
+    def score(self):
+        pass
+
+    def calcular(self):
+        pass
 
     class Meta:
         ordering = ['id']
-
-    def score(self):
-        pass
 
 
 class Violence (models.Model):
@@ -342,20 +303,17 @@ class Violence (models.Model):
     q84SomeoneUsedMoney = models.BooleanField()
     q85TouchedWithoutPermission = models.BooleanField()
     q86DontTakeCareHealth = models.BooleanField()
-    maxScore = models.IntegerField()
+    maxScore = models.IntegerField(default=8)
 
     def investigate(self):
         pass
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 8
 
     class Meta:
         ordering = ['id']
 
     def score(self):
         pass
+
 
 class SocialAspects (models.Model):
     lowSocialSupport = models.OneToOneField(LowSocialSupport, on_delete=models.CASCADE, null=True)
@@ -369,23 +327,25 @@ class SocialAspects (models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.MaxScore = 8
+        max_score = 0
+        for score in (self.lowSocialSupport, self.environmentalProblems, self.violence):
+            max_score += score.maxScore
+        self.maxScore = max_score
 
     class Meta:
         ordering = ['id']
 
     def score(self):
         pass
-
 # End Social Aspects
 
-# Begin Multidisciplinary Domain
 
+# Begin Multidisciplinary Domain
 class Falls (models.Model):
     q87FallsLastYear = models.BooleanField()
     q88AmountFallsLastYear = models.IntegerField()
     q89FracturesDueToFalls = models.BooleanField()
-    q89FracturesList = models.ForeignKey(Fractures,on_delete=models.CASCADE, null=True)
+    q89FracturesList = models.ForeignKey(Fractures, on_delete=models.CASCADE, null=True)
     q90Strength_MMII = models.BooleanField()
     q91Equilibrium = models.BooleanField()
     q92OlderThan75 = models.BooleanField()
@@ -399,14 +359,10 @@ class Falls (models.Model):
     q100PriorAVE = models.BooleanField()
     q101PsychotropicMedicationsUse = models.BooleanField()
     q102HasDiseases = models.BooleanField()
-    maxScore = models.IntegerField()
+    maxScore = models.IntegerField(default=8)
 
     def investigate(self):
         pass
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 8
 
     class Meta:
         ordering = ['id']
@@ -416,23 +372,25 @@ class Falls (models.Model):
 
 
 class MultidisciplinaryDomain (models.Model):
-    falls = models.OneToOneField (Falls, on_delete=models.CASCADE, null=True)
+    falls = models.OneToOneField(Falls, on_delete=models.CASCADE, null=True)
     comments = models.TextField()
-    maxScore = models.IntegerField()
+    maxScore = models.IntegerField(default=8)
 
     def investigate(self):
         pass
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.MaxScore = 8
-
-    class Meta:
-        ordering = ['id']
-
     def score(self):
         pass
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        max_score = 0
+        for score in (self.falls,):
+            max_score += score.maxScore
+        self.maxScore = max_score
+
+    class Meta:
+        ordering = ['id']
 # End Multidisciplinary Domain
 
 
@@ -445,10 +403,15 @@ class Page (models.Model):
     socialAspects = models.OneToOneField(SocialAspects, on_delete=models.CASCADE, null=True)
     multidisciplinaryDomain = models.OneToOneField(MultidisciplinaryDomain, on_delete=models.CASCADE, null=True)
     expertAssessment = models.ForeignKey(ExpertAssessment, on_delete=models.CASCADE, null=True)
-    recommendedActivities = models.ManyToManyField(Offers,through='RecommendedActivities',related_name='page', null=True)
+    recommendedActivities = models.ManyToManyField(Offers,
+                                                   through='RecommendedActivities',
+                                                   related_name='page',
+                                                   null=True
+                                                   )
 
     class Meta:
         ordering = ['id']
+
 
 class RecommendedActivities (models.Model):
     page = models.ForeignKey(Page, on_delete=models.CASCADE)

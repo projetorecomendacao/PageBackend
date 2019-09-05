@@ -10,7 +10,7 @@ class Drinks(models.Model):
 
 
 class IngestedDrinks (models.Model):
-    drink = models.ForeignKey(Drinks, on_delete= models.CASCADE)
+    drink = models.ForeignKey(Drinks, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
     class Meta:

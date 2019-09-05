@@ -1,6 +1,5 @@
 from django.db import models
 from institution_section.models import Address
-#from page_section.models import Page
 
 
 class Participant(models.Model):
@@ -14,7 +13,7 @@ class Participant(models.Model):
     class Meta:
         ordering = ['id']
 
-    def BMI (self):
+    def BMI(self):
         pass
 
 
