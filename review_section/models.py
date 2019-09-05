@@ -11,7 +11,7 @@ class Offers(models.Model):
     cost = models.CharField(max_length=30)
     locations = models.ForeignKey(Location, on_delete=models.DO_NOTHING, related_name='offers', blank=True, null=True)
     activities = models.ForeignKey(Activity, on_delete=models.DO_NOTHING, related_name='offers', blank=True, null=True)
-    #participants = models.ManyToManyField(Participant, related_name='offers', blank=True)
+    # participants = models.ManyToManyField(Participant, related_name='offers', blank=True)
 
     class Meta:
         ordering = ['id']

@@ -1,10 +1,12 @@
 from django.db import models
 from institution_section.models import Address
-#from page_section.models import Page
 
 
 class Participant(models.Model):
     name = models.CharField(max_length=50)
+    email = models.EmailField(unique=True)
+    age = models.IntegerField()
+    profile_photo_URL = models.ImageField(upload_to='profile_photos', null=True)
     communication = models.CharField(max_length=50)
     birth_date = models.DateField()
     gender = models.CharField(max_length=1)
@@ -14,7 +16,7 @@ class Participant(models.Model):
     class Meta:
         ordering = ['id']
 
-    def BMI (self):
+    def BMI(self):
         pass
 
 
