@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
@@ -24,10 +25,11 @@ from institution_section.api.viewsets import AddressViewSet, ContactViewSet, Loc
 from page_section.api.viewsets import  NegativeAttitudesAgingViewSet, CognitionDeficitViewSet, DepressionViewSet,\
     PsychologicalAspectsViewSet, BiologicalAspectsViewSet, SensoryDeficitViewSet, FunctionalDisabilityViewSet,\
     MalnutritionViewSet, CardiovascularFactorsViewSet, MisuseMedicationsViewSet, SocialAspectsViewSet,\
-    LowSocialSupportViewSet, EnvironmentalProblemsViewSet, InternalEnvironmentViewSet, RiskBehaviorViewSet,\
-    ExternalEnvironmentViewSet, ViolenceViewSet, MultidisciplinaryDomainViewSet, FallsViewSet, PageViewSet
+    LowSocialSupportViewSet, EnvironmentalProblemsViewSet, ViolenceViewSet, MultidisciplinaryDomainViewSet,\
+    FallsViewSet, PageViewSet
 from participant_section.api.viewsets import ParticipantViewSet, IncomeViewSet, ParticipantSocialMediaViewSet, \
     MaritalStatusViewSet, SchoolingViewSet, ProfessionalsActivitiesViewSet, ReligionViewSet, ParticipantSituationViewSet
+from recommendation_system import settings
 from review_section.api.viewsets import OfferViewSet, ReviewViewSet
 from assessment_section.api.viewsets import DemandsProblemsViewSet, ActionsViewSet, ServicesViewSet, GoalsViewSet,\
     AssessmentsControlViewSet, ExpertAssessmentViewSet, ActionsImplementationViewSet
@@ -68,9 +70,6 @@ router.register(r'misuseMedications', MisuseMedicationsViewSet, base_name='misus
 router.register(r'socialAspects', SocialAspectsViewSet, base_name='socialAspects')
 router.register(r'lowSocialSupport', LowSocialSupportViewSet, base_name='lowSocialSupport')
 router.register(r'environmentalProblems', EnvironmentalProblemsViewSet, base_name='environmentalProblems')
-router.register(r'internalEnvironment', InternalEnvironmentViewSet, base_name='internalEnvironment')
-router.register(r'riskBehavior', RiskBehaviorViewSet, base_name='riskBehavior')
-router.register(r'externalEnvironment', ExternalEnvironmentViewSet, base_name='externalEnvironment')
 router.register(r'violence', ViolenceViewSet, base_name='violence')
 router.register(r'multidisciplinaryDomain', MultidisciplinaryDomainViewSet, base_name='multidisciplinaryDomain')
 router.register(r'falls', FallsViewSet, base_name='falls')
@@ -100,8 +99,8 @@ router.register(r'expert_assessment', ExpertAssessmentViewSet, base_name='expert
 router.register(r'actions_implementation', ActionsImplementationViewSet, base_name='actions_implementation')
 
 # experts_section
-router.register(r'expertise', ExpertiseViewSet, base_name='expertise')
-router.register(r'expert', ExpertViewSet, base_name='expert')
+router.register(r'expertises', ExpertiseViewSet, base_name='expertise')
+router.register(r'experts', ExpertViewSet, base_name='expert')
 
 # health_section
 router.register(r'diseases', DiseasesViewSet, base_name='diseases')
@@ -118,6 +117,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('auth/', include('rest_framework_social_oauth2.urls'))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

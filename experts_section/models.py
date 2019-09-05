@@ -12,8 +12,9 @@ class Expertise (models.Model):
 
 class Expert (models.Model):
     name = models.CharField(max_length=60)
-    expertises = models.ManyToManyField(Expertise, related_name='experts')
-    contacts = models.ManyToManyField(Participant, related_name='experts')
+    email = models.EmailField(unique=True)
+    expertises = models.ManyToManyField(Expertise, related_name='experts', blank=True)
+    contacts = models.ManyToManyField(Participant, related_name='experts', blank=True)
 
     class Meta:
         ordering = ['id']

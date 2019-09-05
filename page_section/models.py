@@ -38,8 +38,8 @@ class NegativeAttitudesAging (models.Model):
     q7AgeSelfPerception = models.IntegerField()
     q7AgeSelfPerceptionWhy = models.TextField()
     q7AgeSelfPerceptionAnalyze = models.BooleanField()
-    q8AgingPositivePoints = models.ManyToManyField(AgingAspects,related_name='PositivePoints', null=True)
-    q8AgingNegativePoints = models.ManyToManyField(AgingAspects,related_name='NegativePoints', null=True)
+    q8AgingPositivePoints = models.ManyToManyField(AgingAspects, related_name='PositivePoints', blank=True)
+    q8AgingNegativePoints = models.ManyToManyField(AgingAspects, related_name='NegativePoints', blank=True)
     q8AgingAnalyse = models.BooleanField()
     maxScore = models.IntegerField(default=2)
 
@@ -406,7 +406,7 @@ class Page (models.Model):
     recommendedActivities = models.ManyToManyField(Offers,
                                                    through='RecommendedActivities',
                                                    related_name='page',
-                                                   null=True
+                                                   blank=True
                                                    )
 
     class Meta:

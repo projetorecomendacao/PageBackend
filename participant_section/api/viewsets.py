@@ -1,11 +1,15 @@
+from rest_framework import status
 from rest_framework.filters import SearchFilter
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from experts_section.models import Expert
 from participant_section.api.serializers import ParticipantSerializer, IncomeSerializer, \
     ParticipantSocialMediaSerializer, MaritalStatusSerializer, SchoolingSerializer, ProfessionalsActivitiesSerializer, \
     ReligionSerializer, ParticipantSituationSerializer
 from participant_section.models import Participant, Income, ParticipantSocialMedia, MaritalStatus, Schooling, \
     ProfessionalsActivities, Religion, ParticipantSituation
+from utils.api.serializer import IsExpert
 
 
 class ParticipantViewSet(ModelViewSet):
@@ -13,6 +17,28 @@ class ParticipantViewSet(ModelViewSet):
     serializer_class = ParticipantSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('name', 'communication', 'birth_date', 'gender')
+    permission_classes = [IsExpert]
+
+    def get_queryset(self):
+        return Expert.objects.get(email=self.request.user.email).contacts
+
+    def create(self, request, *args, **kwargs):
+        participant = Participant.objects.filter(email=self.request.data.get('email'))
+        print(request.data)
+        if participant.exists():
+            participant = participant.first()
+            Expert.objects.get(email=self.request.user.email).contacts.add(participant)
+            serializer = self.get_serializer(participant)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return super().create(request, args, kwargs)
+
+    def perform_create(self, serializer):
+        Expert.objects.get(email=self.request.user.email).contacts.add(serializer.save())
+
+    def destroy(self, request, *args, **kwargs):
+        Expert.objects.get(email=self.request.user.email).contacts.remove(self.get_object())
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class IncomeViewSet(ModelViewSet):
