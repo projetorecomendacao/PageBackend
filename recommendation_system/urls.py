@@ -37,6 +37,8 @@ from experts_section.api.viewsets import ExpertViewSet, ExpertiseViewSet
 from health_section.api.viewsets import DiseasesViewSet, TherapeuticClassViewSet, HealthProblemsViewSet,\
     MedicinesViewSet, FracturesViewSet
 from drinks_section.api.viewsets import DrinksViewSet, IngestedDrinksViewSet
+from page_section.views import testar
+
 
 
 router = routers.DefaultRouter()
@@ -116,6 +118,7 @@ router.register(r'ingestedDrinks', IngestedDrinksViewSet, base_name='ingestedDri
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('teste/', testar),
     path('auth/', include('rest_framework_social_oauth2.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

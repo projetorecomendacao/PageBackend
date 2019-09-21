@@ -4,18 +4,27 @@ from health_section.models import Diseases, Medicines, HealthProblems, Fractures
 from review_section.models import Offers
 from drinks_section.models import IngestedDrinks
 from assessment_section.models import ExpertAssessment
+from experts_section.models import Gerontologist
+
+class Options():
+    CHOICES = [
+        ["S", "Sim"],
+        ["N", "Não"]
+    ]
 
 
 # Begin psychological aspects
 class CognitionDeficit (models.Model):
-    q1MemoryGoodLikeBefore = models.BooleanField()
-    q2MemoryTest = models.BooleanField()
-    q3LanguageFunctionAttention = models.BooleanField()
-    q4VisospatialAbility = models.BooleanField()
-    q4VisospatialAbilityScore = models.IntegerField()
-    q5Praxia = models.BooleanField()
-    q6MemoryTest = models.BooleanField()
-    maxScore = models.IntegerField(default=6)
+    q1_memory_good_like_before = models.CharField("1. O(A) senhor(a) considera que sua memória é tão boa quanto antes?", max_length=1,default="N",choices=Options.CHOICES)
+    q2_memory_test = models.CharField("2.Memória", max_length=1,default="N",choices=Options.CHOICES)
+    q3_language_function_attention = models.CharField("3.Linguagem, função executiva e atenção", max_length=1, default="N", choices=Options.CHOICES)
+    q4_visospatial_ability = models.CharField("4. Habilidade visuoespacial", max_length=1, default="N", choices=Options.CHOICES)
+    q4_visospatial_ability_score = models.IntegerField("4. Habilidade visuoespacial - Pontuação", default=0)
+    q5_praxia = models.CharField("5.Praxia", max_length=1,default="N",choices=Options.CHOICES)
+    q6_memory_test = models.CharField("6.Memória", max_length=1,default="N",choices=Options.CHOICES)
+    need_investigation = models.CharField("Necessita Investigação?", max_length=1,default="N",choices=Options.CHOICES)
+    max_score = models.IntegerField(default=6)
+
 
     def score(self):
         pass
@@ -35,13 +44,14 @@ class AgingAspects (models.Model):
 
 
 class NegativeAttitudesAging (models.Model):
-    q7AgeSelfPerception = models.IntegerField()
-    q7AgeSelfPerceptionWhy = models.TextField()
-    q7AgeSelfPerceptionAnalyze = models.BooleanField()
-    q8AgingPositivePoints = models.ManyToManyField(AgingAspects, related_name='PositivePoints', blank=True)
-    q8AgingNegativePoints = models.ManyToManyField(AgingAspects, related_name='NegativePoints', blank=True)
-    q8AgingAnalyse = models.BooleanField()
-    maxScore = models.IntegerField(default=2)
+    q7_age_self_perception = models.IntegerField("7.Que idade o(a) senhor(a) sente ter? ", blank=True, null=True)
+    q7_age_self_perception_why = models.TextField("7. Por quê?", blank=True, null=True)
+    q7_age_self_perception_analyze = models.CharField("7. O idoso se sente mais velho do que realmente é?", max_length=1, default="N", choices=Options.CHOICES)
+    q8_aging_positive_points = models.ManyToManyField(AgingAspects, related_name='PositivePoints', blank=True, verbose_name="Aspectos positivos Envelhecimento")
+    q8_aging_negative_points = models.ManyToManyField(AgingAspects, related_name='NegativePoints', blank=True, verbose_name="Aspectos positivos Envelhecimento")
+    q8_aging_analyse = models.CharField("8. É perceptível uma visão mais negativa da velhice? ", max_length=1, default="N", choices=Options.CHOICES)
+    need_investigation = models.CharField("Necessita Investigação?", max_length=1,default="N",choices=Options.CHOICES)
+    max_score = models.IntegerField(default=2)
 
     def investigate(self):
         pass
@@ -51,14 +61,14 @@ class NegativeAttitudesAging (models.Model):
 
 
 class Depression (models.Model):
-    description = models.TextField()
-    q9SatisfiedWithLife = models.BooleanField()
-    q10FrequentlySad = models.BooleanField()
-    q11StoppedDoingThings = models.BooleanField()
-    q12FearBadThingsHappen = models.BooleanField()
-    q13ImpatientDisquiet = models.BooleanField()
-    q14ConcentrationProblem = models.BooleanField()
-    maxScore = models.IntegerField(default=6)
+    q9_satisfied_with_life = models.CharField("9.De modo Geral Está Satisfeito com a vida?", max_length=1,default="N",choices=Options.CHOICES)
+    q10_frequently_sad = models.CharField("10. O(A) senhor(a) se sente triste com frequência?", max_length=1,default="N",choices=Options.CHOICES)
+    q11_stopped_doing_things = models.CharField("11. O(A) senhor(a) abandonou muitas coisas que fazia ou gostava de fazer?",max_length=1,default="N",choices=Options.CHOICES )
+    q12_fear_bad_things_happen = models.CharField("12. O(A) senhor(a) tem medo que algum mal vá lhe acontecer?", max_length=1,default="N",choices=Options.CHOICES)
+    q13_impatient_disquiet = models.CharField("13. O(A) senhor(a) se sente impaciente e agitado(a) com frequência?", max_length=1,default="N",choices=Options.CHOICES)
+    q14_concentration_problem = models.CharField("14. O(A) senhor(a) tem dificuldade em se concentar?",max_length=1, default="N",choices=Options.CHOICES)
+    need_investigation = models.CharField("Necessita Investigação?",max_length=1, default="N",choices=Options.CHOICES)
+    max_score = models.IntegerField(default=6)
 
     def investigate(self):
         pass
@@ -68,11 +78,11 @@ class Depression (models.Model):
 
 
 class PsychologicalAspects (models.Model):
-    cognitionDeficit = models.OneToOneField(CognitionDeficit, on_delete=models.CASCADE, null=True)
-    negativeAttitudesAging = models.OneToOneField(NegativeAttitudesAging,  on_delete=models.CASCADE, null=True)
+    cognition_deficit = models.OneToOneField(CognitionDeficit, on_delete=models.CASCADE, null=True)
+    negative_attitudes_aging = models.OneToOneField(NegativeAttitudesAging, on_delete=models.CASCADE, null=True)
     depression = models.OneToOneField(Depression,  on_delete=models.CASCADE, null=True)
-    comments = models.TextField()
-    maxScore = models.IntegerField()
+    comments = models.TextField("Observações sobre o bloco Psicológico")
+    max_score = models.IntegerField(default=14)
 
     def investigate(self):
         pass
@@ -80,9 +90,10 @@ class PsychologicalAspects (models.Model):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         max_score = 0
-        for score in (self.cognitionDeficit, self.negativeAttitudesAging, self.depression):
-            max_score += score.maxScore
-        self.maxScore = max_score
+        for score in (self.cognition_deficit, self.negative_attitudes_aging, self.depression):
+           pass
+           # max_score += score.max_score
+        self.max_score = max_score
 
     class Meta:
         ordering = ['id']
@@ -394,15 +405,32 @@ class MultidisciplinaryDomain (models.Model):
 # End Multidisciplinary Domain
 
 
+class DemandMap (models.Model):
+    dm3_unmet_demands = models.TextField(null=True)
+    gerontologist_assessment =  models.TextField(null=True)
+
+    def d1_domain_contribution_calculation(self):
+        pass
+
+    def d2_dimension_contribution_calculation(self):
+        pass
+
+
 class Page (models.Model):
-    date = models.DateField()
-    selfHealthReport = models.TextField(null=True)
-    unmetDemands = models.TextField(null=True)
+    gerontologist = models.ForeignKey(Gerontologist, on_delete=models.CASCADE, null=True)
+    date = models.DateField("Data da Entrevista", null="True")
+    created_at = models.DateTimeField('Criado em', auto_now_add=True, null="True")
+    p1_self_health_report = models.TextField("Auto Relato de Saúde - Como o senhor(a)", null=True)
+    #Dimensões do Page
     psychologicalAspects = models.OneToOneField(PsychologicalAspects, on_delete=models.CASCADE, null=True)
     biologicalAspects = models.OneToOneField(BiologicalAspects, on_delete=models.CASCADE, null=True)
     socialAspects = models.OneToOneField(SocialAspects, on_delete=models.CASCADE, null=True)
     multidisciplinaryDomain = models.OneToOneField(MultidisciplinaryDomain, on_delete=models.CASCADE, null=True)
+    #Mapa de Demandas
+    demandMap = models.OneToOneField(DemandMap,on_delete=models.CASCADE, null=True)
+    #Avaliação Multidisciplinar
     expertAssessment = models.ForeignKey(ExpertAssessment, on_delete=models.CASCADE, null=True)
+    #Atividades Recomendadas
     recommendedActivities = models.ManyToManyField(Offers,
                                                    through='RecommendedActivities',
                                                    related_name='page',
@@ -411,6 +439,9 @@ class Page (models.Model):
 
     class Meta:
         ordering = ['id']
+
+    def scores(self):
+        pass
 
 
 class RecommendedActivities (models.Model):

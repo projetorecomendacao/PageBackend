@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .example.Text3 span, .example.Text3 {
+          writing-mode: vertical-rl;
+          -webkit-writing-mode: vertical-rl;
+          -ms-writing-mode: vertical-rl;
+        }
+    </style>
+
+</head>
+<body>
+<center>{{ page.as_p }} </center>
+
+
+    <h1 align="center">AVALIAÇÃO DE RISCO DE VULNERABILIDADE BIOPSICOSSOCIAL EM IDOSOS</h1>
+<table border="2" width="100%">
+    <tr>
+        <td colspan="3" bgcolor="blue" align="center"><h2>RELACIONADOS A ASPECTOS PSICOLÓGICOS</h2></td>
+    </tr>
+    <TR>
+        <td class="example Text3" WIDTH="10%" align="center"><span><B>DÉFICIT COGNITIVO</B></span></td>
+        <TD width="60">{{ cognition1.as_p }}</TD>
+        <td class="example Text3" WIDTH="30%" align="center"><span><B>Pontuação Máxima(6):<br> {{cognition2.as_p}} </B></span></td>
+    </TR>
+
+    <TR>
+        <td class="example Text3" WIDTH="10%" align="center"><span><B>ATITUDES NEGATIVAS EM RELAÇÃO <br> AO PROCESSO DE ENVELHECIMENTO</B></span></td>
+        <TD width="60">{{ negative1.as_p }}</TD>
+        <td class="example Text3" WIDTH="30%" align="center"><span><B>Pontuação Máxima(2):<br> {{negative2.as_p}} </B></span></td>
+    </TR>
+
+
+    <TR>
+        <td class="example Text3" WIDTH="10%" align="center"><span><B>DEPRESSÃO</B></span></td>
+        <TD width="60">{{ depression1.as_p }}</TD>
+        <td class="example Text3" WIDTH="30%" align="center"><span><B>Pontuação Máxima(6):<br> {{depression2.as_p}} </B></span></td>
+    </TR>
+    <tr>
+        <td colspan="3" width="100%">
+            {{ psychological.as_p }}
+        </td>
+    </tr>
+
+
+  <tr>
+    <td>vertical-rl</td>
+    <td class="example Text3" colspan="2"><span>Example text</span></td>
+  </tr>
+</table>
+</body>
+</html>

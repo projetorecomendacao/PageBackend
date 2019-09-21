@@ -19,3 +19,8 @@ class Expert (models.Model):
     class Meta:
         ordering = ['id']
 
+
+class Gerontologist (Expert):
+
+    class Meta:
+        ordering = ['id']
