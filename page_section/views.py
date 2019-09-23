@@ -3,14 +3,31 @@ from django.http import HttpResponse
 from .forms import *
 
 def testar(request):
-    pageForm = PageForm()
     depressionForm = DepressionForm()
-    depressionForm2 = DepressionForm2()
     cognitionDeficitForms = CognitionDeficitForms ()
-    cognitionDeficitForms2 = CognitionDeficitForms2 ()
     negativeAttitudesAgingForms = NegativeAttitudesAgingForms ()
-    negativeAttitudesAgingForms2 = NegativeAttitudesAgingForms2 ()
     psychologicalAspectsForm = PsychologicalAspectsForm()
+    sensoryDeficitForm = SensoryDeficitForm()
+    functionalDisabilityForm = FunctionalDisabilityForm()
+    malnutritionForm = MalnutritionForm()
+    cardiovascularFactorsForm = CardiovascularFactorsForm()
+    misuseMedicationsForm = MisuseMedicationsForm()
+    misuseMedicationsForm42 = MisuseMedicationsForm42()
+    misuseMedicationsForm43 = MisuseMedicationsForm43()
+    biologicalAspectsForm = BiologicalAspectsForm()
+    lowSocialSupportForm = LowSocialSupportForm()
+    environmentalProblemsForm = EnvironmentalProblemsForm()
+    violenceForm = ViolenceForm()
+    socialAspectsForm = SocialAspectsForm ()
+    fallsForm = FallsForm()
+    multidisciplinaryDomainForm = MultidisciplinaryDomainForm()
+    pageForm = PageForm()
 
-    return render(request, 'teste.html', {'page': pageForm,'cognition1':cognitionDeficitForms,'cognition2':cognitionDeficitForms2,'depression1': depressionForm, 'depression2': depressionForm2, \
-                                          'negative1': negativeAttitudesAgingForms, 'negative2': negativeAttitudesAgingForms2,'psychological': psychologicalAspectsForm})
+    return render(request, 'teste.html', {'cognition':cognitionDeficitForms,'depression': depressionForm, 'negative':
+                  negativeAttitudesAgingForms, 'psychological': psychologicalAspectsForm,
+                  'sensory' : sensoryDeficitForm, 'functional' : functionalDisabilityForm, 'malnutrition': malnutritionForm,
+                  'cardiovascular' : cardiovascularFactorsForm, 'biological':biologicalAspectsForm,
+                  'low_social' : lowSocialSupportForm, 'environmental': environmentalProblemsForm,
+                  'violence' : violenceForm, 'social' : socialAspectsForm, 'falls' : fallsForm,
+                  'multidisciplinary': multidisciplinaryDomainForm, 'page' : pageForm, 'misuse42' : misuseMedicationsForm42,
+                   'misuse43': misuseMedicationsForm43, 'misuse' : misuseMedicationsForm })
