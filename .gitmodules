@@ -1,0 +1,3 @@
+[submodule "path_to_submodule"] 
+  path = laurentino@laurentino-Inspiron-7472:~/projetos/projetorecomendacao/active-aging-project
+  url = https://github.com/projetorecomendacao/active-aging-project.git
