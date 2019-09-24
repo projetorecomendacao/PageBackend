@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from review_section.models import Offers, Review
+from recommender_section.models import Offers
 
 
 class OfferSerializer(ModelSerializer):
@@ -8,7 +8,3 @@ class OfferSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class ReviewSerializer(ModelSerializer):
-    class Meta:
-        model = Review
-        fields = '__all__'

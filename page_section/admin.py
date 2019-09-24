@@ -1,5 +1,9 @@
 from django.contrib import admin
-from page_section.models import *
+from page_section.models_0_page import *
+from page_section.models_1_psicologico import *
+from page_section.models_2_Biologicos import *
+from page_section.models_3_sociais import *
+from page_section.models_4_multidimensional import *
 
 admin.site.register(Page)
 admin.site.register(CognitionDeficit)
@@ -19,5 +23,4 @@ admin.site.register(Violence)
 admin.site.register(SocialAspects)
 admin.site.register(Falls)
 admin.site.register(MultidisciplinaryDomain)
-admin.site.register(DemandMap)
 admin.site.register(RecommendedActivities)

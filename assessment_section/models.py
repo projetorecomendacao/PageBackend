@@ -1,10 +1,9 @@
 from django.db import models
-from experts_section.models import Expertise, Expert
+from experts_section.models import *
 
 
 class DemandsProblems (models.Model):
-    description = models.CharField(max_length=60)
-
+    description = models.CharField("Descrição do Problema ou Demanda",max_length=100)
     class Meta:
         ordering = ['id']
 
@@ -24,41 +23,62 @@ class Services(models.Model):
 
 
 class Goals(models.Model):
+    CHOICES = [
+        ["C", "Curto"],
+        ["M", "Médio"],
+        ["L","Longo"]
+    ]
+    term = models.CharField("Prazo de implementação", max_length=1, default="C", choices=CHOICES)
     description = models.CharField(max_length=60)
 
     class Meta:
         ordering = ['id']
 
-
-class AssessmentsControl(models.Model):
-    data = models.DateField()
-    results = models.TextField()
-    adequacy = models.TextField()
-
-    class Meta:
-        ordering = ['id']
-
-
-class ExpertAssessment(models.Model):
-    description = models.TextField()
-    actions = models.ManyToManyField(Actions, through='ActionsImplementation')
+class ActionsPlanning (models.Model):
+    demand_problem = models.ForeignKey(DemandsProblems,verbose_name="Demanda/Problema", on_delete=models.CASCADE)
+    goals = models.ManyToManyField(Goals,verbose_name="Establecimento de Metas")
+    actions = models.ManyToManyField(Actions,verbose_name='Ações')
+    services = models.ManyToManyField(Services,verbose_name='Serviços')
 
     class Meta:
         ordering = ['id']
 
 
-class ActionsImplementation(models.Model):
-    data = models.DateField()
-    actions = models.ForeignKey(Actions, on_delete=models.CASCADE)
-    expertAssessment = models.ForeignKey(ExpertAssessment, on_delete=models.CASCADE)
-    assessmentsControl = models.ForeignKey(AssessmentsControl,
-                                           on_delete=models.CASCADE,
-                                           null=True,
-                                           related_name='actionImplementation'
-                                           )
-    services = models.ManyToManyField(Services, related_name='actionImplementation')
-    expert = models.ManyToManyField(Expert,related_name='actionImplementation')
-    expertise = models.ManyToManyField(Expertise, related_name='actionImplementation')
+class ActionImplementationCoordenation(models.Model):
+    data = models.DateField("Data")
+    action = models.ForeignKey(Actions, verbose_name="Ação Implementada",on_delete=models.CASCADE)
+    expertise = models.ManyToManyField(Expertise,verbose_name="Profissionais Envolvidos")
+    services = models.ManyToManyField(Services,verbose_name="Serviços realizados")
 
     class Meta:
         ordering = ['id']
+
+class ReassessmentControl (models.Model):
+    data = models.DateField("Data")
+    action_result = models.CharField("Ação/resultado",max_length=100,null=True)
+    adequacy = models.CharField("Adequação/Metas/Ações",max_length=100,null=True)
+
+    class Meta:
+        ordering = ['id']
+
+class DemandMap(models.Model):
+    created_at = models.DateField()
+    updated_at = models.DateField()
+    dm3_unmet_demands = models.TextField('O(a) idoso(a) apresenta outras demandas não contempladas no mapa? Se sim, especificar:',null=True)
+    gerontologist_assessment =  models.TextField('Avaliação do Gerontólogo',null=True)
+    actions_planning = models.ForeignKey(ActionsPlanning, on_delete=models.CASCADE, verbose_name="Planejamento das Ações")
+    actions_implementation_coordenation : models.ForeignKey(ActionImplementationCoordenation, on_delete=models.CASCADE,verbose_name="Coordenação e Implementação das Ações")
+    reassessment_control : models.ForeignKey(ActionsPlanning, on_delete=models.CASCADE,verbose_name="Planejamento das Ações")
+
+    def d1_domain_contribution_calculation(self):
+        pass
+
+    def d2_dimension_contribution_calculation(self):
+        pass
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Mapa das Demandas'
+        verbose_name_plural = 'Mapa das Demandas'
+
+

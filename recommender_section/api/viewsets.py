@@ -1,7 +1,7 @@
 from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import ModelViewSet
-from review_section.models import Offers, Review
-from review_section.api.serializers import OfferSerializer, ReviewSerializer
+from recommender_section.models import Offers
+from recommender_section.api.serializers import OfferSerializer
 
 
 class OfferViewSet(ModelViewSet):
@@ -14,8 +14,4 @@ class OfferViewSet(ModelViewSet):
     # )
 
 
-class ReviewViewSet(ModelViewSet):
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
-    filter_backends = (SearchFilter,)
-    search_fields = ('rate', 'date') #, 'activity__description')
+

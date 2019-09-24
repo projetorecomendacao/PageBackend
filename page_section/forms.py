@@ -1,5 +1,10 @@
 from django import forms
-from .models import *
+from page_section.models_1_psicologico import NegativeAttitudesAging, CognitionDeficit, Depression, PsychologicalAspects
+from page_section.models_2_Biologicos import BiologicalAspects, SensoryDeficit, FunctionalDisability, Malnutrition, CardiovascularFactors, MisuseMedications
+from page_section.models_3_sociais import SocialAspects, LowSocialSupport, EnvironmentalProblems, Violence
+from page_section.models_4_multidimensional import MultidisciplinaryDomain, Falls
+from page_section.models_0_page import Page
+
 
 
 class CognitionDeficitForms(forms.ModelForm):

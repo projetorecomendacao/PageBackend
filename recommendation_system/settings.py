@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'page_section',
     'participant_section',
     'drinks_section',
-    'review_section'
+    'recommender_section'
 ]
 
 MIDDLEWARE = [

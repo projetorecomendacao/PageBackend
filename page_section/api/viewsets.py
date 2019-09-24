@@ -1,9 +1,9 @@
-from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import ModelViewSet
-
-from page_section.models import NegativeAttitudesAging, CognitionDeficit, Depression, PsychologicalAspects, \
-    BiologicalAspects, SensoryDeficit, FunctionalDisability, Malnutrition, CardiovascularFactors, MisuseMedications, \
-    SocialAspects, LowSocialSupport, EnvironmentalProblems, Violence, MultidisciplinaryDomain, Falls, Page
+from page_section.models_1_psicologico import NegativeAttitudesAging, CognitionDeficit, Depression, PsychologicalAspects
+from page_section.models_2_Biologicos import BiologicalAspects, SensoryDeficit, FunctionalDisability, Malnutrition, CardiovascularFactors, MisuseMedications
+from page_section.models_3_sociais import SocialAspects, LowSocialSupport, EnvironmentalProblems, Violence
+from page_section.models_4_multidimensional import MultidisciplinaryDomain, Falls
+from page_section.models_0_page import Page
 from page_section.api.serializers import NegativeAttitudesAgingSerializer, CognitionDeficitSerializer,\
     DepressionSerializer, PsychologicalAspectsSerializer, BiologicalAspectsSerializer, SensoryDeficitSerializer,\
     FunctionalDisabilitySerializer, MalnutritionSerializer, CardiovascularFactorsSerializer,\
