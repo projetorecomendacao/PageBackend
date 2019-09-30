@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from rest_framework import routers
 
@@ -37,7 +38,8 @@ from health_section.api.viewsets import DiseasesViewSet, TherapeuticClassViewSet
     MedicinesViewSet, FracturesViewSet
 from drinks_section.api.viewsets import DrinksViewSet, IngestedDrinksViewSet
 from page_section.views import testar
-
+from page_section import views as page_view
+from drinks_section.api.viewsets import *
 
 
 router = routers.DefaultRouter()
@@ -111,13 +113,16 @@ router.register(r'fractures', FracturesViewSet, base_name='fractures')
 
 # drinks_section
 router.register(r'drinks', DrinksViewSet, base_name='drinks')
-router.register(r'ingestedDrinks', IngestedDrinksViewSet, base_name='ingestedDrinks')
+router.register(r'ingestedDrinks',IngestedDrinksViewSet, base_name='ingestedDrinks')
 
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('teste/', testar),
-    path('auth/', include('rest_framework_social_oauth2.urls'))
+    path('teste/', testar,name='testar'),
+    path('auth/', include('rest_framework_social_oauth2.urls')),
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('account/', include('django.contrib.auth.urls')),
+    path('logout/', auth_views.LogoutView.as_view(template_name='registration/login.html'), name='logout'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-

@@ -12,6 +12,7 @@
     </style>
 
 </head>
+  {% if request.user.is_authenticated %}
 <body leftmargin="20%" rightmargin="20%">
 <center><h1>PAGE</h1></center>
 
@@ -340,9 +341,10 @@
     <tr>  <td colspan="3" width="100%">  {{ multidisciplinary.comments }}  </td> </tr>
     <TR><TD COLSPAN="3" BGCOLOR="#FF99FF"> </TD></TR>
 </table>
+  {% else %}
+  <h1>Fudeu !!!!!!!</h1>
 
-
-
+  {% endif %}
 
 </body>
 </html>

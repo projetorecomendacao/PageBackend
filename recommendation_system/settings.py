@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework_social_oauth2',
     'corsheaders',
+    'widget_tweaks',
     'activities_section',
     'assessment_section',
     'experts_section',
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
     'page_section',
     'participant_section',
     'drinks_section',
-    'recommender_section'
+    'recommender_section',
 ]
 
 MIDDLEWARE = [
@@ -92,7 +93,7 @@ WSGI_APPLICATION = 'recommendation_system.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),, Consolas, DejaVu Sans Mono, monospace
 #     }
 # }
 if 'RDS_DB_NAME' in os.environ:
@@ -174,3 +175,6 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '693202023661-6bahsc7d6bm8p6rm2squgka93fsmsf94.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'RlJXpzctTjd9BncZJrdK7ShZ'
+
+LOGIN_REDIRECT_URL = '/teste/'
+LOGOUT_REDIRECT_URL = '/login/'
