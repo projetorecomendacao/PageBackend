@@ -66,9 +66,17 @@ class DemandMap(models.Model):
     updated_at = models.DateField()
     dm3_unmet_demands = models.TextField('O(a) idoso(a) apresenta outras demandas não contempladas no mapa? Se sim, especificar:',null=True)
     gerontologist_assessment =  models.TextField('Avaliação do Gerontólogo',null=True)
-    actions_planning = models.ForeignKey(ActionsPlanning, on_delete=models.CASCADE, verbose_name="Planejamento das Ações")
-    actions_implementation_coordenation : models.ForeignKey(ActionImplementationCoordenation, on_delete=models.CASCADE,verbose_name="Coordenação e Implementação das Ações")
-    reassessment_control : models.ForeignKey(ActionsPlanning, on_delete=models.CASCADE,verbose_name="Planejamento das Ações")
+    demands_problems = models.TextField('Demandas/Problemas',null=True)
+    goals = models.TextField('Metas',null=True)
+    actions_organization = models.TextField('Organização das Ações',null=True)
+    coordenation_implementation = models.TextField('Coordenação / Implementação',null=True)
+    control = models.TextField('Controle / Reavaliação',null=True)
+#    actions_planning = models.ForeignKey(ActionsPlanning, on_delete=models.CASCADE, verbose_name="Planejamento das Ações")
+#    actions_implementation_coordenation : models.ForeignKey(ActionImplementationCoordenation, on_delete=models.CASCADE,verbose_name="Coordenação e Implementação das Ações")
+#    reassessment_control : models.ForeignKey(ActionsPlanning, on_delete=models.CASCADE,verbose_name="Planejamento das Ações")
+
+    def escores(self):
+        pass
 
     def d1_domain_contribution_calculation(self):
         pass
@@ -80,5 +88,3 @@ class DemandMap(models.Model):
         ordering = ['id']
         verbose_name = 'Mapa das Demandas'
         verbose_name_plural = 'Mapa das Demandas'
-
-

@@ -16,8 +16,8 @@ class LowSocialSupport (models.Model):
     q60_someone_to_have_fun = models.CharField(Options.questions[60], max_length=1, default="N", choices=Options.CHOICES)
     q61_participate_social_events = models.CharField(Options.questions[61], max_length=1, default="N", choices=Options.CHOICES)
     q62_regulary_healt_services = models.CharField(Options.questions[62], max_length=1, default="N", choices=Options.CHOICES)
-    need_investigation = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    max_score = models.IntegerField(default=9)
+    need_investigation_low = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    max_score_low = models.IntegerField(default=9)
 
     def investigate(self):
         pass
@@ -54,8 +54,8 @@ class EnvironmentalProblems (models.Model):
     q77_fun_access = models.CharField(Options.questions[77], max_length=1, default="N", choices=Options.CHOICES)
     q78_safety = models.CharField(Options.questions[78], max_length=1, default="N", choices=Options.CHOICES)
 
-    need_investigation = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    max_score = models.IntegerField(default=16)
+    need_investigation_env = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    max_score_env = models.IntegerField(default=16)
 
     def investigate(self):
         pass
@@ -81,8 +81,8 @@ class Violence (models.Model):
     q84_someone_used_money = models.CharField(Options.questions[84], max_length=1, default="N", choices=Options.CHOICES)
     q85_touched_without_permission = models.CharField(Options.questions[85], max_length=1, default="N", choices=Options.CHOICES)
     q86_dont_take_care_health = models.CharField(Options.questions[86], max_length=1, default="N", choices=Options.CHOICES)
-    need_investigation = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    max_score = models.IntegerField(default=8)
+    need_investigation_violence = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    max_score_violence = models.IntegerField(default=8)
 
     def investigate(self):
         pass
@@ -100,8 +100,8 @@ class SocialAspects (models.Model):
     lowSocialSupport = models.OneToOneField(LowSocialSupport, on_delete=models.CASCADE, null=True)
     environmentalProblems = models.OneToOneField(EnvironmentalProblems, on_delete=models.CASCADE, null=True)
     violence = models.OneToOneField(Violence, on_delete=models.CASCADE, null=True)
-    comments = models.TextField('Observações Sobre o Bloco Social')
-    maxScore = models.IntegerField('Pontuação Máxima',default=32)
+    comments_social = models.TextField('Observações Sobre o Bloco Social')
+    maxScore_social = models.IntegerField('Pontuação Máxima',default=32)
 
     def investigate(self):
         pass

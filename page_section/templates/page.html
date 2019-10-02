@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .example.Text3 span, .example.Text3 {
+          writing-mode: vertical-rl;
+          -webkit-writing-mode: vertical-rl;
+          -ms-writing-mode: vertical-rl;
+        }
+    </style>
+   <style>
+    body{font-family:Calibri, Tahoma, Arial}
+    .TabControl{ width:100%; overflow:hidden; height:100%}
+    .TabControl #header{ width:100%; border: solid 1px; overflow:hidden; cursor:hand}
+    .TabControl #content{ width:100%; border: solid 1px;overflow:hidden; height:700px; }
+    .TabControl .abas{display:inline;}
+    .TabControl .abas li{float:left}
+    .aba{width:200px; height:60px; border:solid 1px; border-radius:5px 5px 0 0;
+      text-align:center; padding-top:5px; background:#3A5FCD}
+    .ativa{width:200px; height:60px; border:solid 1 px; border-radius:5px 5px 0 0;
+        text-align:center; padding-top:5px; background:#27408B;}
+    .ativa span, .selected span{color:#FF0000}
+    .TabControl #content{background:#27408B}
+    .TabControl .conteudo{width:100%;  background:#27408B; display:none; height:100%;color:#000000}
+    .selected{width:200px; height:60px; border:solid 1 px; border-radius:5px 5px 0 0;
+          text-align:center; padding-top:5px; background:#27408B}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $("#content div:nth-child(1)").show();
+        $(".abas li:first div").addClass("selected");
+        $(".aba").click(function(){
+          $(".aba").removeClass("selected");
+          $(this).addClass("selected");
+          var indice = $(this).parent().index();
+          indice++;
+          $("#content div").hide();
+          $("#content div:nth-child("+indice+")").show();
+        });
+
+        $(".aba").hover(
+        function(){$(this).addClass("ativa")},
+        function(){$(this).removeClass("ativa")}
+        );
+      });
+  </script>
+
+</head>
+
+<body>
+  {% if request.user.is_authenticated %}
+  {% load static %}
+  <table border="2" width='100%'>
+
+    <tr>
+      <td rowspan="3" width='16%'> <img src='page.jpg'   height="100px" width="100px"> </td>
+      <td colspan="2" >{{ page.service.label_tag }} {{page.service}}</td>
+    </tr>
+    <tr>
+      <td  width='42%'>{{ page.entrance.label_tag }} {{page.entrance}}</td>
+      <td  width='42%'>{{ page.interviewed.label_tag }} {{page.interviewed}}</td>
+    </tr>
+    <tr>
+      <td>{{ page.interviewer.label_tag }} {{page.interviewer}}</td>
+      <td>{{ page.avaliation_date.label_tag }} {{page.avaliation_date}}</td>
+    </tr>
+
+  </table>
+  <br>
+
+
+    <div class="TabControl">
+      <div id="header">
+        <ul class="abas">
+          <li>
+            <div class="aba" style="background-color:silver">
+              <span>PARTICIPANTE</span>
+            </div>
+          </li>
+          <li>
+            <div class="aba" style="background-color:#0099FF">
+              <span>RELACIONADOS A ASPECTOS PSICOLÓGICOS</span>
+            </div>
+          </li>
+          <li>
+            <div class="aba" style="background-color:#33CC99">
+              <span>RELACIONADOS A ASPECTOS BIOLÓGICOS</span>
+            </div>
+          </li>
+          <li>
+            <div class="aba" style="background-color:#FFFF00">
+              <span>RELACIONADOS A ASPECTOS SOCIAIS</span>
+            </div>
+          </li>
+          <li>
+            <div class="aba" style="background-color:#FF22FF">
+              <span>DOMÍNIO MULTIDIMENSIONAL</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div id="content">
+
+        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--PARTICIPANTE !-->
+          <table border="2" width="100%">
+              <tr>
+                  <td  bgcolor="silver" align="center"><h2>PARTICIPANTE</h2></td>
+              </tr>
+              <form action="{% url 'grava_page' %}" method="post">
+                  {% csrf_token %}
+                  {% for field in participant %}
+                        <tr>
+                          <TD width="100%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                          </tr>
+                    {% endfor %}
+                    {% for field in participant_situation %}
+                        <tr>
+                          <TD width="100%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                         </tr>
+                    {% endfor %}
+          </table>
+        </div> <!--PARTICIPANTE !-->
+
+
+
+
+        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--PSICOLÓGICOS !-->
+
+          <table border="2" width="100%">
+              <tr>
+                  <td colspan="3" bgcolor="#0099FF" align="center"><h2>RELACIONADOS A ASPECTOS PSICOLÓGICOS</h2></td>
+              </tr>
+              {% for field in cognition %}
+                   {% if field != cognition.max_score_cognition %}
+                      {% if field != cognition.need_investigation_cognition %}
+                          <tr>
+                          {% if field == cognition.q1_memory_good_like_before %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="7" BGCOLOR="#3399CC">
+                                  <span><B>DÉFICIT<br>COGNITIVO</B></span></td>
+                          {% endif %}
+                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                          {% if field == cognition.q1_memory_good_like_before %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="7" BGCOLOR="#3399CC">
+                                  <span><B>Pontuação Máxima( 6 ):<br> {{ cognition.need_investigation_cognition.label_tag }}
+                                  {{ cognition.need_investigation_cognition }}  </B></span></td>
+                          {% endif %}
+                          </tr>
+                      {% endif %}
+                   {% endif %}
+              {% endfor %}
+
+               <TR><TD COLSPAN="3" BGCOLOR="#0099FF"></TD> </TR>
+
+              {% for field in negative %}
+                  {% if field != negative.max_score_negative %}
+                      {% if field != negative.need_investigation_negative %}
+                          <tr>
+                          {% if field == negative.q7_age_self_perception %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                                  <span><B>ATITUDES
+                                  NEGATIVAS EM RELAÇÃO AO<br>PROCESSO DE ENVELHECIMENTO</B></span></td>
+                          {% endif %}
+                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                          {% if field == negative.q7_age_self_perception %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                                  <span><B>
+                                  Pontuação Máxima( 2 ):<br> {{ negative.need_investigation_negative.label_tag }} {{ negative.need_investigation_negative }}  </B></span></td>
+                          {% endif %}
+                          </tr>
+                      {% endif %}
+                  {% endif %}
+              {% endfor %}
+
+               <TR><TD COLSPAN="3" BGCOLOR="#0099FF"></TD> </TR>
+
+              {% for field in depression %}
+                  {% if field != depression.max_score_depression %}
+                      {% if field != depression.need_investigation_depression %}
+                          <tr>
+                          {% if field == depression.q9_satisfied_with_life %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                                  <span><B>DEPRESSÃO</B></span></td>
+                          {% endif %}
+                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                          {% if field == depression.q9_satisfied_with_life %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                                  <span><B>
+                                  Pontuação Máxima( 6 ):<br> {{ depression.need_investigation_depression.label_tag }}
+                                  {{ depression.need_investigation_depression }}  </B></span></td>
+                          {% endif %}
+                          </tr>
+                      {% endif %}
+                  {% endif %}
+              {% endfor %}
+              <tr>  <td colspan="3" width="100%" BGCOLOR="#0099FF" ALIGN="CENTER"><B> OBSERVAÇÕES SOBRE O BLOCO PSICOLÓGICO </B> </td></tr>
+              <tr>  <td colspan="3" width="100%">  {{ psychological.comments_psico }}  </td> </tr>
+               <TR><TD COLSPAN="3" BGCOLOR="#0099FF"></TD> </TR>
+          </table>
+
+        </div> <!--PSICOLÓGICOS !-->
+
+        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--BIOLÓGICOS !-->
+        </table>
+            <table border="2" width="100%">  <body leftmargin="20%" rightmargin="20%">
+            <tr>
+                <td colspan="3" bgcolor="#33CC99" align="center"><h2>RELACIONADOS A ASPECTOS BIOLÓGICOS</h2></td>
+            </tr>
+
+            {% for field in sensory %}
+                {% if field != sensory.max_score_sensory %}
+                    {% if field != sensory.need_investigation_sensory %}
+                        <tr>
+                        {% if field == sensory.q15_vision_problems %}
+                            <td class="example Text3" WIDTH="10%" align="center" rowspan="5" BGCOLOR="#339999">
+                                <span><B>DÉFICIT<BR>SENSORIAL</B></span></td>
+                        {% endif %}
+                        <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                        {% if field == sensory.q15_vision_problems %}
+                            <td class="example Text3" WIDTH="10%" align="center" rowspan="5" BGCOLOR="#339999">
+                                <span><B>
+                                Pontuação Máxima( 5 ):<br> {{ sensory.need_investigation_sensory.label_tag }}
+                                {{ sensory.need_investigation_sensory }}  </B></span></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+             <TR><TD COLSPAN="3" BGCOLOR="#33CC99"></TD> </TR>
+
+            {% for field in functional %}
+                {% if field != functional.max_score_functional %}
+                    {% if field != functional.need_investigation_functional %}
+                        <tr>
+                        {% if field == functional.q20_to_shop %}
+                            <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#339999">
+                                <span><B>INCAPACIDADE<BR>FUNCIONAL</B></span></td>
+                        {% endif %}
+                        <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                        {% if field == functional.q20_to_shop %}
+                            <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#339999">
+                                <span><B>
+                                Pontuação Máxima( 6 ):<br> {{ functional.need_investigation_functional.label_tag }}
+                                {{ functional.need_investigation_functional }}  </B></span></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+             <TR><TD COLSPAN="3" BGCOLOR="#33CC99"></TD> </TR>
+
+             {% for field in malnutrition %}
+                {% if field !=  malnutrition.max_score_malnutrition %}
+                    {% if field != malnutrition.need_investigation_malnutrition %}
+                        <tr>
+                        {% if field == malnutrition.d26_yourself_malnourished %}
+                            <td class="example Text3" WIDTH="10%" align="center" rowspan="7" BGCOLOR="#339999">
+                                <span><B>DESNUTRIÇÃO</B></span></td>
+                        {% endif %}
+                        <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                        {% if field == malnutrition.d26_yourself_malnourished %}
+                            <td class="example Text3" WIDTH="10%" align="center" rowspan="7" BGCOLOR="#339999">
+                                <span><B>
+                                Pontuação Máxima( 7 ):<br> {{ malnutrition.need_investigation_malnutrition.label_tag }}
+                                {{ malnutrition.need_investigation_malnutrition }  </B></span></td>
+                        {% endif %}
+                      </tr>
+                   {% endif %}
+                {% endif %}
+             {% endfor %}
+             <TR><TD COLSPAN="3" BGCOLOR="#33CC99"></TD> </TR>
+             <tr>
+                <td class="example Text3" WIDTH="10%" align="center" rowspan="13" BGCOLOR="#339999">
+                <span><B>DOENÇAS CARDIOVASCULARES (DCV)</B></span></td>
+                <TD width="80%" valign="middle"> 42. Nos últimos 5 anos, algum médico ou outro profissional de saúde já disse que o(a)
+                                                 senhor(a) tem: <br> {{ misuse42.as_p }}
+                </TD>
+                <td class="example Text3" WIDTH="10%" align="center" rowspan="13" BGCOLOR="#339999">
+                                <span><B>
+                                Pontuação Máxima( 9 ):<br> {{ misuse.need_investigation_misuse.label_tag }}
+                                {{ misuse.need_investigation_misuse }}  </B></span>
+                </td>
+             </tr>
+            <tr><td> 43. O(A) senhor(a) tem algum dos seguintes problemas de saúde: <br> {{ misuse43.as_p }} </td></tr>
+            {% for field in misuse %}
+                {% if field != misuse.max_score_misuse %}
+                    {% if field != misuse.need_investigation_misuse %}
+                        <tr>
+                            <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td align="center">
+                    <table border="1">
+                        <tr>
+                            <td bgcolor="silver" align="center" rowspan="2">No. Diagnósticos</td>
+                            <td bgcolor="silver" colspan="2" align="center"> Uso de medicamento inapropriado </td>
+                        </tr>
+                        <tr>
+                            <td align="center" bgcolor="silver">sim</td>
+                            <td align="center" bgcolor="silver">Não</td>
+                        </tr>
+                        <tr>0
+                            <td align="center" bgcolor="silver">1</td>
+                            <td align="center">9</td>
+                            <td align="center">18</td>
+                        </tr>
+                        <tr>
+                            <td align="center" bgcolor="silver">2</td>
+                            <td align="center">6</td>
+                            <td align="center">15</td>
+                        <tr>
+                            <td align="center" bgcolor="silver">3</td>
+                            <td align="center">2</td>
+                            <td align="center">11</td>
+                        </tr>
+                        <tr>
+                            <td align="center" bgcolor="silver">4</td>
+                            <td align="center">0</td>
+                            <td align="center">7</td>
+                        </tr>
+                        <tr>
+                            <td align="center" bgcolor="silver">5</td>
+                            <td align="center">0</td>
+                            <td align="center">4</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>  <td colspan="3" width="100%" BGCOLOR="#33CC99" ALIGN="CENTER"><B> OBSERVAÇÕES SOBRE O BLOCO BIOLÓGICO </B> </td></tr>
+            <tr>  <td colspan="3" width="100%">  {{ biological.comments_bio }}  </td> </tr>
+             <TR><TD COLSPAN="3" BGCOLOR="#33cc99"> </TD> </TR>
+        </table>
+        </div> <!--BIOLÓGICOS !-->
+
+        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!-- SOCIAIS !-->
+          <table border="2" width="100%">
+              <tr>
+                  <td colspan="3" bgcolor="#FFFF99" align="center"><h2>RELACIONADOS A ASPECTOS SOCIAIS</h2></td>
+              </tr>
+
+              {% for field in low_social %}
+                   {% if field != low_social.max_score_low %}
+                      {% if field != low_social.need_investigation_low %}
+                          <tr>
+                          {% if field == low_social.q54_spouse %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="14" BGCOLOR="#FFFFCC">
+                                  <span><B>BAIXO SUPORTE<BR>SOCIAL</B></span></td>
+                          {% endif %}
+                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                          {% if field == low_social.q54_spouse %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="14" BGCOLOR="#FFFFCC">
+                                  <span><B>Pontuação Máxima( 8 ):<br> {{ low_social.need_investigation_low.label_tag }}
+                                  {{ low_social.need_investigation_low }}  </B></span></td>
+                          {% endif %}
+                          </tr>
+                      {% endif %}
+                   {% endif %}
+              {% endfor %}
+
+               <TR><TD COLSPAN="3" BGCOLOR="#FFFF99"> </TD> </TR>
+
+              {% for field in environmental %}
+                  {% if field != environmental.max_score_env %}
+                      {% if field != environmental.need_investigation_env %}
+                          <tr>
+                          {% if field == environmental.q63_estable_furniture %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="19" BGCOLOR="#FFFFCC">
+                                  <span><B>PROBLEMAS AMBIENTAIS </B></span></td>
+                              <td align="center" width="80%" bgcolor="CCCCC"><B>Ambiente Interno</B> </td>
+                              <td class="example Text3" WIDTH0="10%" align="center" rowspan="19" BGCOLOR="#FFFFCC">
+                                  <span><B>
+                                  Pontuação Máxima( 16 ):<br> {{ environmental.need_investigation_env.label_tag }}
+                                      {{ environmental.need_investigation_env }}  </B></span></td></tr><tr>
+                          {% endif %}
+                          {% if field == environmental.q70_get_on_stool %}
+                              <td align="center" width="80%" bgcolor="CCCCC"><B>Comportamento de Risco</B> </td></tr><tr>
+                          {% endif %}
+                          {% if field == environmental.q73_manicure_sidewalks %}
+                              <td align="center" width="80%" bgcolor="CCCCC"><B>Ambiente Externo</B> </td></tr><tr>
+                          {% endif %}
+                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                          </tr>
+                      {% endif %}
+                  {% endif %}
+              {% endfor %}
+
+               <TR><TD COLSPAN="3" BGCOLOR="#FFFF99"> </TD> </TR>
+
+              {% for field in violence %}
+                  {% if field != violence.max_score_violence %}
+                      {% if field != violence.need_investigation_violence %}
+                          <tr>
+                          {% if field == violence.q79_afraid_close_person %}
+                              <td class="example Text3" https://www.google.com/search?q=pgcc&oq=pgcc&aqs=chrome..69i57j0l5.1791j0j7&sourceid=chrome&ie=UTF-8WIDTH="10%" align="center" rowspan="8" BGCOLOR="#FFFFCC">
+                                  <span><B>VIOLÊNCIA</B></s0pan></td>
+                          {% endif %}
+                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                          {% if field == violence.q79_afraid_close_person %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="8" BGCOLOR="#FFFFCC">
+                                  <span><B>
+                                  Pontuação Máxima( 8 ):<br> {{ violence.need_investigation_violence.label_tag }}
+                                  {{ violence.need_investigation_violence }}  </B></span></td>
+                          {% endif %}
+                          </tr>
+                      {% endif %}
+                  {% endif %}
+              {% endfor %}
+              <tr>  <td colspan="3" width="100%" BGCOLOR="#FFFF99" ALIGN="CENTER"><B> OBSERVAÇÕES SOBRE O BLOCO SOCIAL </B> </td></tr>
+              <tr>  <td colspan="3" width="100%">  {{ social.comments_social }}  </td> </tr>
+               <TR><TD COLSPAN="3" BGCOLOR="#FFFF99"> </TD></TR>
+          </table>
+        </div> <!--SOCIAIS !-->
+
+        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--MULTIDIMENSIONAL !-->
+          <table border="2" width="100%">
+              <tr>overflow: auto;
+                  <td colspan="3" bgcolor="#FF22FF" align="center"><h2>DOMÍNIO MULTIDIMENSIONAL</h2></td>
+              </tr>
+
+              {% for field in falls %}
+                   {% if field != falls.max_score_falls %}
+                      {% if field != falls.need_investigation_falls %}
+                          <tr>
+                          {% if field == falls.q87_falls_last_year %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="19" BGCOLOR="#FFBBFF">
+                                  <span><B>QUEDAS</B></span></td>
+                          {% endif %}
+
+                          {% if field == falls.q92_older_than75 %}
+                              <td WIDTH="80%" align="center">
+                                  <span><B>Baseado nas respostas de itens anteriores, identifique se o idoso apresenta/utiliza
+                                  </B></span></td></tr><tr>
+                          {% endif %}
+                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                          {% if field == falls.q87_falls_last_year %}
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="19" BGCOLOR="#FFBBFF">
+                                  <span><B>Pontuação Máxima( 8 ):<br> {{ falls.need_investigation_falls.label_tag }}
+                                      {{ falls.need_investigation_falls }}  </B></span></td>
+                          {% endif %}
+                          </tr>
+                      {% endif %}
+                   {% endif %}
+              {% endfor %}
+
+              <tr>  <td colspan="3" width="100%" BGCOLOR="#FF22FF" ALIGN="CENTER"><B> OBSERVAÇÕES SOBRE O BLOCO MULTIDIMENSIONAL </B> </td></tr>
+              <tr>  <td colspan="3" width="100%">  {{ multidisciplinary.comments_multi }}  </td> </tr>
+              <TR><TD COLSPAN="3" BGCOLOR="#FF99FF"> </TD></TR>
+          </table>
+        </div> <!--MULTIDIMENSIONAL !-->
+
+      </div>
+    </div>
+    <br>
+    <center>  <input type="submit" value="Gravar"> </center>
+  </form>
+  {% else %}
+  <h1>Fudeu !!!!!!!</h1>
+
+  {% endif %}
+
+</body>
+</html>

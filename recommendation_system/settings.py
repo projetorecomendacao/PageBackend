@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework_social_oauth2',
     'corsheaders',
+    'bootstrapform',
     'widget_tweaks',
     'activities_section',
     'assessment_section',
@@ -156,6 +157,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

@@ -206,3 +206,60 @@ class Options():
                     membros inferiores, convulsões, artrite, osteoporose, incontinência, diabetes, neuropatia, hipotensão \
                     postural [Ver questões 42 e 43]")
 
+        PROBLEMS =[
+            ["N","Não"],
+            ["E","Estresse Psicológico"],
+            ["D", "Doença Aguda"],
+            ["I", "Internação"],
+            ["K", "Estresse Psicológico e Doença Aguda"],
+            ["W", "Estresse Psicológico e Internação"],
+            ["Y", "Doença Aguda e Internação"],
+            ["Z", "Todos"]
+        ]
+
+        INCOME =[
+            ["BPC","BPC"],
+            ["Até um salário mínimo","Até um salário mínimo"],
+            ["mais de 1 a 2 salários mínimos", "mais de 1 a 2 salários mínimos"],
+            ["mais de 2 a 3 salários mínimos", "mais de 2 a 3 salários mínimos"],
+            ["mais de 3 a 4 salários mínimos", "mais de 3 a 4 salários mínimos"],
+            ["mais de 4 a 5 salários mínimos", "mais de 4 a 5 salários mínimos"],
+            ["mais de 5 a 10 salários mínimos", "mais de 5 a 10 salários mínimos"],
+            ["mais de 10 salários mínimos", "mais de 10 salários mínimos"]
+        ]
+
+        MARITALSTATUS =[
+            ["Solteiro(a)","Solteiro(a)"],
+            ["Casado(a)/União Estável","Casado(a)/União Estável"],
+            ["Separado(a)/Divorciado(a)", "Separado(a)/Divorciado(a)"],
+            ["Viúvo(a)", "Viúvo(a)"],
+        ]
+
+        SCHOOL =[
+            ["analfabeto","analfabeto"],
+            ["ensino fundamental (incompleto)","ensino fundamental (incompleto)"],
+            ["ensino fundamental (completo)", "ensino fundamental (completo)"],
+            ["ensino médio (incompleto)", "ensino médio (incompleto)"],
+            ["ensino médio (completo)", "ensino médio (completo)"],
+            ["ensino superior (incompleto)", "ensino superior (incompleto)"],
+            ["ensino superior (completo)", "ensino superior (completo)"],
+            ["ensino supeiror (com pós-graduação)", "ensino supeiror (com pós-graduação)"],
+        ]
+
+
+        LIVEWITH= [
+            ["sozinho","sozinho"],
+            ["somente com o cônjuge","somente com o cônjuge"],
+            ["com o cônjuge e filhos", "com o cônjuge e filhos"],
+            ["com o cônjuge, filhos e netos", "com o cônjuge, filhos e netos"],
+            ["com o cônjuge e netos", "com o cônjuge e netos"],
+            ["com filho(s)", "com filho(s)"],
+            ["com filho(s) e netos", "com filho(s) e netos"],
+            ["com netos", "com netos"],
+            ["outros", "outros"],
+        ]
+
+        GENDER =[
+                    ["M","Masculino"],
+                    ["F","Feminino"],
+        ]

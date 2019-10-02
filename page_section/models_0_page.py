@@ -9,22 +9,27 @@ from .models_2_Biologicos import BiologicalAspects
 from .models_3_sociais import SocialAspects
 from .models_4_multidimensional import MultidisciplinaryDomain
 
-
 class Page (models.Model):
-    #Data que foi feita a entrevista
-    date = models.DateField("Data da Entrevista", null="True")
+    #Serviço ou instituição
+    service = models.CharField('Serviço/instituição',max_length=60)
+    #Data Entrada no serviçoptimize
+    entrance = models.DateField('Data de Entrada no Serviço',null=True)
+    #Entrevistado
+    interviewed = models.CharField('Pessoa entrevistada:', max_length=20)
+    #Entrevistador
+    interviewer = models.CharField('Nome do Entrevistador:',max_length=30)
+    #Data que foi feita a avaliação
+    avaliation_date = models.DateField("Data da Avaliação", null="True")
     #Data da Criação
     created_at = models.DateTimeField('Criado em', auto_now_add=True, null="True")
     #Data da ùltima atualização
-    updated_at = models.DateTimeField('Atualizado em: ', null= True)
+    updated_at = models.DateTimeField('Atualizado em: ', auto_now = True, null= True)
     #Gerontólogo Responsável
     gerontologist = models.ForeignKey(Gerontologist, on_delete=models.CASCADE, verbose_name='Gerontologista Resposável')
     #Participante
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, null=True, verbose_name = 'Participante')
     #Dados do Participante no Momento da criação do Page
     participant_situation = models.ForeignKey(ParticipantSituation,on_delete=models.CASCADE, null=True, verbose_name = 'Situação do Participante')
-    #Auto Relato de Saúde
-    p1_self_health_report = models.TextField("Auto Relato de Saúde - Como o senhor(a)", null=True)
     #Dimensões do Page
     psychologicalAspects = models.OneToOneField(PsychologicalAspects, on_delete=models.CASCADE, null=True,verbose_name='Relacionados a Aspectos Psicológicos')
     biologicalAspects = models.OneToOneField(BiologicalAspects, on_delete=models.CASCADE, null=True,verbose_name='Relacionados a Aspectos Biológicos')
@@ -43,6 +48,3 @@ class Page (models.Model):
 
     def scores(self):
         pass
-
-
-

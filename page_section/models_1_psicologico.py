@@ -9,8 +9,8 @@ class CognitionDeficit (models.Model):
     q4_visospatial_ability_score = models.IntegerField(Options.questions[4][1], default=0)
     q5_praxia = models.CharField(Options.questions[5], max_length=1,default="N",choices=Options.CHOICES)
     q6_memory_test = models.CharField(Options.questions[6], max_length=1,default="N",choices=Options.CHOICES)
-    need_investigation = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    max_score = models.IntegerField(default=6)
+    need_investigation_cognition = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    max_score_cognition = models.IntegerField(default=6)
 
 
     def score(self):
@@ -26,7 +26,7 @@ class CognitionDeficit (models.Model):
 
 
 class AgingAspects (models.Model):
-    description: models.CharField(max_length=60)
+    description = models.CharField(max_length=60)
 
     class Meta:
         ordering = ['id']
@@ -40,8 +40,8 @@ class NegativeAttitudesAging (models.Model):
     q8_aging_positive_points = models.TextField(Options.questions[8][1], blank=True, null=True)
     q8_aging_negative_points = models.TextField(Options.questions[8][2], blank=True, null=True)
     q8_aging_analyse = models.CharField(Options.questions[8][0], max_length=1, default="N", choices=Options.CHOICES)
-    need_investigation = models.CharField(Options.need_investigation_question, max_length=1,default="N",choices=Options.CHOICES)
-    max_score = models.IntegerField(default=2)
+    need_investigation_negative = models.CharField(Options.need_investigation_question, max_length=1,default="N",choices=Options.CHOICES)
+    max_score_negative = models.IntegerField(default=2)
 
     def investigate(self):
         pass
@@ -59,8 +59,8 @@ class Depression (models.Model):
     q12_fear_bad_things_happen = models.CharField(Options.questions[12],max_length=1,default="N",choices=Options.CHOICES)
     q13_impatient_disquiet = models.CharField(Options.questions[13], max_length=1,default="N",choices=Options.CHOICES)
     q14_concentration_problem = models.CharField(Options.questions[14],max_length=1, default="N",choices=Options.CHOICES)
-    need_investigation = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    max_score = models.IntegerField(default=6)
+    need_investigation_depression = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    max_score_depression = models.IntegerField(default=6)
 
     def investigate(self):
         pass
@@ -74,8 +74,8 @@ class PsychologicalAspects (models.Model):
     cognition_deficit = models.OneToOneField(CognitionDeficit, on_delete=models.CASCADE, null=True,verbose_name='Déficit Cognitivo')
     negative_attitudes_aging = models.OneToOneField(NegativeAttitudesAging, on_delete=models.CASCADE, null=True ,verbose_name='Atitude Negativa em Relação ao Envelhecimento')
     depression = models.OneToOneField(Depression,  on_delete=models.CASCADE, null=True,verbose_name='Depressão')
-    comments = models.TextField("Observações sobre o bloco Psicológico")
-    max_score = models.IntegerField('Pontuação Máxima',default=14)
+    comments_psico = models.TextField("Observações sobre o bloco Psicológico")
+    max_score_psico = models.IntegerField('Pontuação Máxima',default=14)
 
     def investigate(self):
         pass

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .example.Text3 span, .example.Text3 {
+          writing-mode: vertical-rl;
+          -webkit-writing-mode: vertical-rl;
+          -ms-writing-mode: vertical-rl;
+        }
+    </style>
+   <style>
+    body{font-family:Calibri, Tahoma, Arial}
+    .TabControl{ width:100%; overflow:hidden; height:100%}
+    .TabControl #header{ width:100%; border: solid 1px; overflow:hidden; cursor:hand}
+    .TabControl #content{ width:100%; border: solid 1px;overflow:hidden; height:700px; }
+    .TabControl .abas{display:inline;}
+    .TabControl .abas li{float:left}
+    .aba{width:200px; height:60px; border:solid 1px; border-radius:5px 5px 0 0;
+      text-align:center; padding-top:5px; background:#3A5FCD}
+    .ativa{width:200px; height:60px; border:solid 1 px; border-radius:5px 5px 0 0;
+        text-align:center; padding-top:5px; background:#27408B;}
+    .ativa span, .selected span{color:#FF0000}
+    .TabControl #content{background:#27408B}
+    .TabControl .conteudo{width:100%;  background:#27408B; display:none; height:100%;color:#000000}
+    .selected{width:200px; height:60px; border:solid 1 px; border-radius:5px 5px 0 0;
+          text-align:center; padding-top:5px; background:#27408B}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $("#content div:nth-child(1)").show();
+        $(".abas li:first div").addClass("selected");
+        $(".aba").click(function(){
+          $(".aba").removeClass("selected");
+          $(this).addClass("selected");
+          var indice = $(this).parent().index();
+          indice++;
+          $("#content div").hide();
+          $("#content div:nth-child("+indice+")").show();
+        });
+
+        $(".aba").hover(
+        function(){$(this).addClass("ativa")},
+        function(){$(this).removeClass("ativa")}
+        );
+      });
+  </script>
+
+</head>
+
+<body>
+  {% if request.user.is_authenticated %}
+  {% load static %}
+  <table border="2" width='100%'>
+
+    <tr>
+      <td rowspan="3" width='16%'> <img src='page.jpg'   height="100px" width="100px"> </td>
+      <td colspan="2" >Participante: {{ page.p01_name }}</td>
+    </tr>
+    <tr>
+      <td  width='42%'>Entrada no Serviço: {{ page.p01_name }}</td>
+      <td  width='42%'>Pessoa entrevistada: {{ page.p01_name }}</td>
+    </tr>
+    <tr>
+      <td>Entrevistador: {{ page.p01_name }}</td>
+      <td>Data da Avaliação: {{ page.p01_name }}</td>
+    </tr>
+
+  </table>
+  <br>
+
+
+    <div class="TabControl">
+      <div id="header">
+        <ul class="abas">
+          <li>
+            <div class="aba" style="background-color:orange">
+              <span>ESCORES</span>
+            </div>
+          </li>
+          <li>
+            <div class="aba" style="background-color:#0099FF">
+              <span>CONTRIBUIÇÃO POR DOMÍNIO</span>
+            </div>
+          </li>
+          <li>
+            <div class="aba" style="background-color:#33CC99">
+              <span>CONTRIBUIÇÃO POR DIMENSÃO</span>
+            </div>
+          </li>
+          <li>
+            <div class="aba" style="background-color:silver">
+              <span>AVALIAÇÃO E PLANEJAMENTO</span>
+            </div>
+          </li>
+          <li>
+            <div class="aba" style="background-color:#FF22FF">
+              <span>ATIVIDADES RECOMENDADAS</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <form action="{% url 'grava_demanda' %}" method="post">
+      {% csrf_token %}
+
+      <div id="content">
+        <div class="conteudo" style="overflow: auto;background-color:white"> <!--ESCORES !-->
+          <br><br>
+          <table border="2" width="100%">
+              <tr>
+                  <td  bgcolor="orange" align="center" colspan="3"><h3>ESCORES</h3></td>
+              </tr>
+              <tr>
+                  <td  bgcolor="orange" align="center" valign="middle" rowspan="4">PONTUAÇÃO POR DIMENSÃO</td>
+                  <td  bgcolor="blue" align="center" valign="middle" colspan="2"> ASPECTOS PSICOLÓGICOS (MÁXIMA = 14 PONTOS) </td>
+              </tr>
+              <tr>
+                  <td  bgcolor="green" align="center" valign="middle" colspan="2"> ASPECTOS BIOLÓGICOS (MÁXIMA = 36 PONTOS) </td>
+              </tr>
+              <tr>
+                  <td  bgcolor="yellow" align="center" valign="middle" colspan="2"> ASPECTOS SOCIAIS (MÁXIMA = 32 PONTOS) </td>
+              </tr>
+              <tr>
+                  <td  bgcolor="pink" align="center" valign="middle" colspan="2"> QUEDAS (MÁXIMA = 16 PONTOS) </td>
+              </tr>
+              <tr>
+                  <td  bgcolor="silver" align="center" colspan="3"><h3>PONTUAÇÃO TOTAL (MÁXIMA = 98 PONTOS) </h3></td>
+              </tr>
+              <tr>
+                  <td  bgcolor="orange" align="center" colspan="3"><h3>CLASSIFICAÇÃO DE RISCO DE VULNERABILIDADE BIOPSICOSSOCIAL </h3></td>
+              </tr>
+              <tr>
+                  <td  bgcolor="silver" align="center" width="34%"> MAIOR QUE 70 PONTOS = RISCO BAIXO </h3></td>
+                  <td  bgcolor="silver" align="center" width="33%"> 69 A 40 PONTOS = RISCO MODERADO </h3></td>
+                  <td  bgcolor="silver" align="center" width="33%"> MENOR 39 PONTOS = RISCO ALTO </h3></td>
+              </tr>
+          </table>
+        </div> <!--ESCORES !-->
+
+
+        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--CONTRIBUIÇÃO POR DOMÍNIO !-->
+          <table border="2" width="100%">
+              <tr>
+                  <td colspan="3" bgcolor="#0099FF" align="center"><h2>AQUI VAI TER UM GRÁFICO</h2></td>
+              </tr>
+          </table>
+        </div> <!--CONTRIBUIÇÃO POR DOMÍNIO !-->
+
+        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--CONTRIBUIÇÃO POR DIMENSÃO !-->
+        </table>
+            <table border="2" width="100%">  <body leftmargin="20%" rightmargin="20%">
+            <tr>
+                <td bgcolor="#33CC99" align="center"><h2>AQUI VAI TER UM GRÁFICO</h2></td>
+            </tr>
+        </table>
+      </div> <!--CONTRIBUIÇÃO POR DIMENSÃO !-->
+
+        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!-- AVALIAÇÃO E PLANEJAMENTO !-->
+          <table border="2" width="100%">
+              <tr>
+                  <td  bgcolor="silver" align="center"><h2>AVALIAÇÃO DO GERONTÓLOGO</h2></td>
+              </tr>
+              <tr>
+                  <td  align="center"><br><br></td>
+              </tr>
+            </table>
+            <br>
+            <br>
+            <table border="2" width="100%">
+              <tr>
+                  <td  align="center"><h2>II - PLANEJAMENTO DAS AÇÕES</h2></td>
+              </tr>
+              <tr>
+                  <td  bgcolor="silver" align="left">1. Identificação das Demandas/Problemas (listes as demandas/problemas identificadas na avaliação de acordo com a
+                                                                          ordem de prioridade. Lembre-se de verificar se as prioridades da equipe são compatíveis com as prioridades do
+                                                                          idoso/família). </td>
+              </tr>
+              <tr>
+                  <td  align="center"><br><br></td>
+              </tr>
+              <tr>
+                  <td  bgcolor="silver" align="left">2. Estabelecimento das Metas (estipule as metas a curto, médio e longo prazos para cada problema ou demanda
+                                                                           identificada no item anterior). </td>
+              </tr>
+              <tr>
+                  <td  align="center"><br><br></td>
+              </tr>
+              <tr>
+                  <td  bgcolor="silver" align="left">3. Organização das Ações e dos Serviços (especifique as características das ações e dos serviços necessários para que a
+                                                                          pessoa idosa alcance as metas estipuladas no item anterior – exemplo: número de visitas domiciliares, agendamento
+                                                                          de consultas, intervenções, tratamentos, encaminhamentos, etc.).</td>
+              </tr>
+              <tr>
+                  <td  align="center"><br><br></td>
+              </tr>
+              </table>
+
+
+        </div> <!--AVALIAÇÃO E PLANEJAMENTO !-->
+
+        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--ANÁLISE ATIVIDADES RECOMENDADAS !-->
+          <table border="2" width="100%">
+              <tr>overflow: auto;
+                  <td colspan="6" bgcolor="#FF22FF" align="center"><h2>ATIVIDADES RECOMENDADAS - DISPONIVEIS</h2></td>
+              </tr>
+              <tr>
+                <td width='15%' align='center'><H3>Atividade</H3></td>
+                <td width='20%' align='center'><H3>Descrição</H3></td>
+                <td width='10%' align='center'><H3>Score</H3></td>
+                <td width='10%' align='center'><H3>Nota Especialista</H3></td>
+                <td width='10%' align='center'><H3>Aceito?</H3></td>
+                <td width='35%' align='center'><H3>Análise especialista</H3></td>
+              </tr>
+              <tr>
+                <td align='left'><a href="">Atividade</a></td>
+                <td align='left'>Descrição</td>
+                <td align='center'><a href="">Score</a></td>
+                <td align='center'>Nota Especialista</td>
+                <td align='center'>Aceito?</td>
+                <td align='left'>Análise especialista</td>
+              </tr>
+          </table>
+          <br><br>
+          <table border="2" width="100%">
+              <tr>overflow: auto;
+                  <td colspan="6" bgcolor="#FF22FF" align="center"><h2>ATIVIDADES RECOMENDADAS - NÃO DISPONIVEIS</h2></td>
+              </tr>
+              <tr>
+                <td width='15%' align='center'><H3>Atividade</H3></td>
+                <td width='20%' align='center'><H3>Descrição</H3></td>
+                <td width='10%' align='center'><H3>Score</H3></td>
+                <td width='10%' align='center'><H3>Nota Especialista</H3></td>
+                <td width='10%' align='center'><H3>Aceito?</H3></td>
+                <td width='35%' align='center'><H3>Análise especialista</H3></td>
+              </tr>
+              <tr>
+                <td align='left'><a href="">Atividade</a></td>
+                <td align='left'>Descrição</td>
+                <td align='center'><a href="">Score</a></td>
+                <td align='center'>Nota Especialista</td>
+                <td align='center'>Aceito?</td>
+                <td align='left'>Análise especialista</td>
+              </tr>
+          </table>
+
+        </div> <!--ANÁLISE ATIVIDADES RECOMENDADAS !-->
+
+      </div>
+    </div>
+    <br>
+    <center>  <input type="submit" value="Gravar"> </center>
+  </form>
+  {% else %}
+  <h1>Fudeu !!!!!!!</h1>
+
+  {% endif %}
+
+</body>
+</html>

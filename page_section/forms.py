@@ -4,6 +4,8 @@ from page_section.models_2_Biologicos import BiologicalAspects, SensoryDeficit, 
 from page_section.models_3_sociais import SocialAspects, LowSocialSupport, EnvironmentalProblems, Violence
 from page_section.models_4_multidimensional import MultidisciplinaryDomain, Falls
 from page_section.models_0_page import Page
+from participant_section.models import  Participant, ParticipantSituation
+from assessment_section.models import DemandMap
 
 
 
@@ -21,7 +23,6 @@ class DepressionForm(forms.ModelForm):
     class Meta:
         model = Depression
         fields = '__all__'
-
 
 class PsychologicalAspectsForm(forms.ModelForm):
     class Meta:
@@ -54,7 +55,7 @@ class MisuseMedicationsForm(forms.ModelForm):
         fields = ['q44_amount_diagnostics','q45_medicines','q46_medicines_increase','q47_know_medicines',
                   'q48_medications_prescribed','q49_medicine_medical_advice','q50_already_stopped_medicines',
                   'q51_self_medication','q52_inappropriate_medication','q53_risk_adverse_reaction',
-                  'need_investigation', 'max_score']
+                  'need_investigation_misuse', 'max_score_misuse']
 
 class MisuseMedicationsForm42(forms.ModelForm):
     class Meta:
@@ -105,7 +106,22 @@ class MultidisciplinaryDomainForm (forms.ModelForm):
         model= MultidisciplinaryDomain
         fields = '__all__'
 
-class PageForm:
+class PageForm(forms.ModelForm):
     class Meta:
         model= Page
         fields = '__all__'
+
+class ParticipantForm(forms.ModelForm):
+    class Meta:
+        model= Participant
+        fields = '__all__'
+
+class ParticipantSituationForm(forms.ModelForm):
+        class Meta:
+            model= ParticipantSituation
+            fields = '__all__'
+
+class DemandMapForm(forms.ModelForm):
+        class Meta:
+            model= DemandMap
+            fields = '__all__'

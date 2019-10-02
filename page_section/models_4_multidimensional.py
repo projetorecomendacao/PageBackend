@@ -21,8 +21,8 @@ class Falls (models.Model):
     q100_prior_ave = models.CharField(Options.questions[100], max_length=1, default="N", choices=Options.CHOICES)
     q101_psychotropic_medications_use = models.CharField(Options.questions[101], max_length=1, default="N", choices=Options.CHOICES)
     q102_has_diseases = models.CharField(Options.questions[102], max_length=1, default="N", choices=Options.CHOICES)
-    need_investigation = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    max_score = models.IntegerField(default=8)
+    need_investigation_falls = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    max_score_falls = models.IntegerField(default=8)
 
     def investigate(self):
         pass
@@ -38,8 +38,8 @@ class Falls (models.Model):
 
 class MultidisciplinaryDomain (models.Model):
     falls = models.OneToOneField(Falls, on_delete=models.CASCADE, null=True)
-    comments = models.TextField('Observações Sobre o Bloco Multidimensional')
-    maxScore = models.IntegerField('Pontuação Máxima',default=8)
+    comments_multi = models.TextField('Observações Sobre o Bloco Multidimensional')
+    maxScore_multi = models.IntegerField('Pontuação Máxima',default=8)
 
     def investigate(self):
         pass

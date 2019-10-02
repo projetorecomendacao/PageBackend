@@ -19,6 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from rest_framework import routers
 
+
 from activities_section.api.viewsets import CharacteristicViewSet, BenefitViewSet, RestrictionViewSet, TypeViewSet, \
     ActivityViewSet
 from institution_section.api.viewsets import AddressViewSet, ContactViewSet, LocationViewSet, InstructorViewSet, \
@@ -37,7 +38,7 @@ from experts_section.api.viewsets import ExpertViewSet, ExpertiseViewSet
 from health_section.api.viewsets import DiseasesViewSet, TherapeuticClassViewSet, HealthProblemsViewSet,\
     MedicinesViewSet, FracturesViewSet
 from drinks_section.api.viewsets import DrinksViewSet, IngestedDrinksViewSet
-from page_section.views import testar
+from page_section.views import testar, abas, grava_page, grava_demanda
 from page_section import views as page_view
 from drinks_section.api.viewsets import *
 
@@ -91,7 +92,7 @@ router.register(r'participants_situations', ParticipantSituationViewSet, base_na
 # reviews_section
 router.register(r'offers', OfferViewSet, base_name='Offers')
 
-# assessment_section
+# assessment_section    path('grava_page',grava_page,name='grava_page'),
 router.register(r'demands_problems', DemandsProblemsViewSet, base_name='demands_problems')
 router.register(r'actions', ActionsViewSet, base_name='actions')
 router.register(r'services', ServicesViewSet, base_name='services')
@@ -112,17 +113,20 @@ router.register(r'medicines', MedicinesViewSet, base_name='medicines')
 router.register(r'fractures', FracturesViewSet, base_name='fractures')
 
 # drinks_section
-router.register(r'drinks', DrinksViewSet, base_name='drinks')
+router.register(r'drinks', DrinksViewSet, base_name='drinks')    
 router.register(r'ingestedDrinks',IngestedDrinksViewSet, base_name='ingestedDrinks')
 
-from django.contrib.auth import views as auth_views
 urlpatterns = [
-    path('', include(router.urls)),
+#    path('', include(router.urls)),
+    path('',auth_views.LoginView.as_view(template_name='registration/login.html'), name="vazio"),
     path('admin/', admin.site.urls),
     path('teste/', testar,name='testar'),
     path('auth/', include('rest_framework_social_oauth2.urls')),
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('account/', include('django.contrib.auth.urls')),
-    path('logout/', auth_views.LogoutView.as_view(template_name='registration/login.html'), name='logout'),
+#    path('account/', include('django.contrib.auth.urls')),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('abas',abas,name='abas'),
+    path('grava_page',grava_page,name='grava_page'),
+    path('grava_demanda',grava_demanda,name='grava_demanda'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
