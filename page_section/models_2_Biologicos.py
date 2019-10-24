@@ -49,7 +49,7 @@ class Malnutrition (models.Model):
     d27_chewing_mouth_problems = models.CharField(Options.questions[27], max_length=1, default="N", choices=Options.CHOICES)
     d28_less3_meal_daily = models.CharField(Options.questions[28], max_length=1, default="N", choices=Options.CHOICES)
     d29_decreases_amount_food = models.CharField(Options.questions[29], max_length=1, default="N", choices=Options.CHOICES)
-    d30_lost_weight_no_reason = models.CharField(Options.questions[30], max_length=1, default="N", choices=Options.LOSTWEIGHT)
+    d30_lost_weight_no_reason = models.CharField(Options.questions[30], max_length=15, default="N", choices=Options.LOSTWEIGHT)
     d31_stress_illness_hospitalization = models.CharField(Options.questions[31], max_length=1, default="N", choices=Options.CHOICES)
     q32_bmi_less22 = models.CharField(Options.questions[32], max_length=1, default="N", choices=Options.CHOICES)  # Usar cálculo de BMI do participante
     need_investigation_malnutrition = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)

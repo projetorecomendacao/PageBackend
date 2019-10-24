@@ -3,61 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style type="text/css">
-        .example.Text3 span, .example.Text3 {
-          writing-mode: vertical-rl;
-          -webkit-writing-mode: vertical-rl;
-          -ms-writing-mode: vertical-rl;
-        }
-    </style>
-   <style>
-    body{font-family:Calibri, Tahoma, Arial}
-    .TabControl{ width:100%; overflow:hidden; height:100%}
-    .TabControl #header{ width:100%; border: solid 1px; overflow:hidden; cursor:hand}
-    .TabControl #content{ width:100%; border: solid 1px;overflow:hidden; height:700px; }
-    .TabControl .abas{display:inline;}
-    .TabControl .abas li{float:left}
-    .aba{width:200px; height:60px; border:solid 1px; border-radius:5px 5px 0 0;
-      text-align:center; padding-top:5px; background:#3A5FCD}
-    .ativa{width:200px; height:60px; border:solid 1 px; border-radius:5px 5px 0 0;
-        text-align:center; padding-top:5px; background:#27408B;}
-    .ativa span, .selected span{color:#FF0000}
-    .TabControl #content{background:#27408B}
-    .TabControl .conteudo{width:100%;  background:#27408B; display:none; height:100%;color:#000000}
-    .selected{width:200px; height:60px; border:solid 1 px; border-radius:5px 5px 0 0;
-          text-align:center; padding-top:5px; background:#27408B}
-</style>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 
-  <script type="text/javascript">
-      $(document).ready(function(){
-        $("#content div:nth-child(1)").show();
-        $(".abas li:first div").addClass("selected");
-        $(".aba").click(function(){
-          $(".aba").removeClass("selected");
-          $(this).addClass("selected");
-          var indice = $(this).parent().index();
-          indice++;
-          $("#content div").hide();
-          $("#content div:nth-child("+indice+")").show();
-        });
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-        $(".aba").hover(
-        function(){$(this).addClass("ativa")},
-        function(){$(this).removeClass("ativa")}
-        );
-      });
-  </script>
+      <script type="text/javascript">
+        google.charts.load("current", {packages:['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+            ["Domíniot", "Contribuição", { role: "style" } ],
+            ["Qualidade de Vida", 60, "black"],
+            ["Sentidos", 85, "silver"],
+            ["Desnutrição", 45, "gold"],
+            ["Capacidade Funcional",75, "color: #e5e4e2"],
+            ["Depressãol", 60, "color: #FF0000"],
+            ["Cognição", 54, "color: #FFFF00"],
+            ["RCV", 35  , "color: #00FF00" ],
+            ["Medicamentos", 60, "pink"],
+            ["Ambiente", 85, "orange"],
+            ["Quedas", 45, "yellow"],
+            ["Violência", 35, "color: #00FFFF"],
+            ["Vulnerbilidade", 25  , "color: #0000FF"],
+            ["Fragilidade", 90 , "color: #0F0F0F"]
+
+          ]);
+
+          var view = new google.visualization.DataView(data);
+          view.setColumns([0, 1,
+                           { calc: "stringify",
+                             sourceColumn: 1,
+                             type: "string",
+                             role: "annotation" },
+                           2]);
+
+          var options = {
+            title: "Contribuição (em %) de cada domínio",
+            width: 800,
+            height: 600,
+            bar: {groupWidth: "95%"},
+            legend: { position: "none" },
+          };
+          var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+          chart.draw(view, options);
+      }
+      </script>
+
+      <script type="text/javascript">
+        google.charts.load("current", {packages:['corechart']});
+        google.charts.setOnLoadCallback(drawChart2);
+        function drawChart2() {
+          var data2 = google.visualization.arrayToDataTable([
+            ["Domíniot", "Contribuição", { role: "style" } ],
+            ["Psicológica", 60, "blue'"],
+            ["Biológica", 85, "green"],
+            ["Social", 45, "yellow"],
+            ["Quedas",75, "pink"]
+          ]);
+
+          var view2 = new google.visualization.DataView(data2);
+          view2.setColumns([0, 1,
+                           { calc: "stringify",
+                             sourceColumn: 1,
+                             type: "string",
+                             role: "annotation" },
+                           2]);
+
+          var options2 = {
+            title: "Contribuição (em %) de cada dimensão",
+            width: 800,
+            height: 600,
+            bar: {groupWidth: "95%"},
+            legend: { position: "none" },
+          };
+          var chart2 = new google.visualization.ColumnChart(document.getElementById("columnchart_values2"));
+          chart2.draw(view2, options2);
+      }
+      </script>
+
+
 
 </head>
 
-<body>
+<body leftmargin="10%" rightmargin="10%">
   {% if request.user.is_authenticated %}
   {% load static %}
+
   <table border="2" width='100%'>
 
     <tr>
-      <td rowspan="3" width='16%'> <img src='page.jpg'   height="100px" width="100px"> </td>
+      <td rowspan="3" width='16%'> <img src='/static/page.jpg'   height="100px" width="100px"> </td>
       <td colspan="2" >Participante: {{ page.p01_name }}</td>
     </tr>
     <tr>
@@ -73,43 +107,9 @@
   <br>
 
 
-    <div class="TabControl">
-      <div id="header">
-        <ul class="abas">
-          <li>
-            <div class="aba" style="background-color:orange">
-              <span>ESCORES</span>
-            </div>
-          </li>
-          <li>
-            <div class="aba" style="background-color:#0099FF">
-              <span>CONTRIBUIÇÃO POR DOMÍNIO</span>
-            </div>
-          </li>
-          <li>
-            <div class="aba" style="background-color:#33CC99">
-              <span>CONTRIBUIÇÃO POR DIMENSÃO</span>
-            </div>
-          </li>
-          <li>
-            <div class="aba" style="background-color:silver">
-              <span>AVALIAÇÃO E PLANEJAMENTO</span>
-            </div>
-          </li>
-          <li>
-            <div class="aba" style="background-color:#FF22FF">
-              <span>ATIVIDADES RECOMENDADAS</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-
       <form action="{% url 'grava_demanda' %}" method="post">
       {% csrf_token %}
-
-      <div id="content">
-        <div class="conteudo" style="overflow: auto;background-color:white"> <!--ESCORES !-->
-          <br><br>
+          <br>
           <table border="2" width="100%">
               <tr>
                   <td  bgcolor="orange" align="center" colspan="3"><h3>ESCORES</h3></td>
@@ -139,27 +139,14 @@
                   <td  bgcolor="silver" align="center" width="33%"> MENOR 39 PONTOS = RISCO ALTO </h3></td>
               </tr>
           </table>
-        </div> <!--ESCORES !-->
+
+          <div id="columnchart_values2" style="width: 700px; height: 600px; float: left"></div>
+          <div id="columnchart_values" style="width: 700px; height: 600px; float:right"></div>
 
 
-        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--CONTRIBUIÇÃO POR DOMÍNIO !-->
-          <table border="2" width="100%">
-              <tr>
-                  <td colspan="3" bgcolor="#0099FF" align="center"><h2>AQUI VAI TER UM GRÁFICO</h2></td>
-              </tr>
-          </table>
-        </div> <!--CONTRIBUIÇÃO POR DOMÍNIO !-->
 
-        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--CONTRIBUIÇÃO POR DIMENSÃO !-->
-        </table>
-            <table border="2" width="100%">  <body leftmargin="20%" rightmargin="20%">
-            <tr>
-                <td bgcolor="#33CC99" align="center"><h2>AQUI VAI TER UM GRÁFICO</h2></td>
-            </tr>
-        </table>
-      </div> <!--CONTRIBUIÇÃO POR DIMENSÃO !-->
 
-        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!-- AVALIAÇÃO E PLANEJAMENTO !-->
+<br>
           <table border="2" width="100%">
               <tr>
                   <td  bgcolor="silver" align="center"><h2>AVALIAÇÃO DO GERONTÓLOGO</h2></td>
@@ -180,14 +167,14 @@
                                                                           idoso/família). </td>
               </tr>
               <tr>
-                  <td  align="center"><br><br></td>
+                  <td  align="center"><textarea cols='160' rows='15'></textarea></td>
               </tr>
               <tr>
                   <td  bgcolor="silver" align="left">2. Estabelecimento das Metas (estipule as metas a curto, médio e longo prazos para cada problema ou demanda
                                                                            identificada no item anterior). </td>
               </tr>
               <tr>
-                  <td  align="center"><br><br></td>
+                  <td  align="center"><textarea cols='160' rows='15'></textarea></td>
               </tr>
               <tr>
                   <td  bgcolor="silver" align="left">3. Organização das Ações e dos Serviços (especifique as características das ações e dos serviços necessários para que a
@@ -195,14 +182,13 @@
                                                                           de consultas, intervenções, tratamentos, encaminhamentos, etc.).</td>
               </tr>
               <tr>
-                  <td  align="center"><br><br></td>
+                  <td  align="center"><textarea cols='160' rows='15'></textarea></td>
               </tr>
               </table>
 
 
-        </div> <!--AVALIAÇÃO E PLANEJAMENTO !-->
+      <br>
 
-        <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--ANÁLISE ATIVIDADES RECOMENDADAS !-->
           <table border="2" width="100%">
               <tr>overflow: auto;
                   <td colspan="6" bgcolor="#FF22FF" align="center"><h2>ATIVIDADES RECOMENDADAS - DISPONIVEIS</h2></td>
@@ -247,15 +233,14 @@
               </tr>
           </table>
 
-        </div> <!--ANÁLISE ATIVIDADES RECOMENDADAS !-->
 
-      </div>
-    </div>
+
+
     <br>
     <center>  <input type="submit" value="Gravar"> </center>
   </form>
   {% else %}
-  <h1>Fudeu !!!!!!!</h1>
+  <h1>Não autorizado !!!!!!!</h1>
 
   {% endif %}
 

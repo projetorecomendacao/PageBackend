@@ -1,0 +1,90 @@
+<!-- grafico.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Django Survey</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+      google.charts.load("current", {packages:['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Domíniot", "Contribuição", { role: "style" } ],
+          ["Qualidade de Vida", 60, "black"],
+          ["Sentidos", 85, "silver"],
+          ["Desnutrição", 45, "gold"],
+          ["Capacidade Funcional",75, "color: #e5e4e2"],
+          ["Depressãol", 60, "color: #FF0000"],
+          ["Cognição", 54, "color: #FFFF00"],
+          ["RCV", 35  , "color: #00FF00" ],
+          ["Medicamentos", 60, "pink"],
+          ["Ambiente", 85, "orange"],
+          ["Quedas", 45, "yellow"],
+          ["Violência", 35, "color: #00FFFF"],
+          ["Vulnerbilidade", 25  , "color: #0000FF"],
+          ["Fragilidade", 90 , "color: #0F0F0F"]
+
+        ]);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+                         { calc: "stringify",
+                           sourceColumn: 1,
+                           type: "string",
+                           role: "annotation" },
+                         2]);
+
+        var options = {
+          title: "Contribuição (em %) de cada domínio",
+          width: 900,
+          height: 600,
+          bar: {groupWidth: "95%"},
+          legend: { position: "none" },
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        chart.draw(view, options);
+    }
+    </script>
+
+      <script type="text/javascript">
+        google.charts.load("current", {packages:['corechart']});
+        google.charts.setOnLoadCallback(drawChart2);
+        function drawChart2() {
+          var data2 = google.visualization.arrayToDataTable([
+            ["Domíniot", "Contribuição", { role: "style" } ],
+            ["Psicológica", 60, "blue'"],
+            ["Biológica", 85, "green"],
+            ["Social", 45, "yellow"],
+            ["Quedas",75, "pink"]
+          ]);
+
+          var view2 = new google.visualization.DataView(data2);
+          view2.setColumns([0, 1,
+                           { calc: "stringify",
+                             sourceColumn: 1,
+                             type: "string",
+                             role: "annotation" },
+                           2]);
+
+          var options2 = {
+            title: "Contribuição (em %) de cada dimensão",
+            width: 900,
+            height: 600,
+            bar: {groupWidth: "95%"},
+            legend: { position: "none" },
+          };
+          var chart2 = new google.visualization.ColumnChart(document.getElementById("columnchart_values2"));
+          chart2.draw(view2, options2);
+      }
+      </script>
+
+</head>
+<body>
+  <div id="columnchart_values2" style="width: 900px; height: 600px;"></div>
+  <div id="columnchart_values" style="width: 900px; height: 600px;"></div>
+</body>
+</html>

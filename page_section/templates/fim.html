@@ -6,8 +6,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Django Survey</title>
+  <style>
+  /* Tooltip container */
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  }
+
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+  </style>
+
+
 </head>
 <body>
+          <div class="tooltip">Hover over me <span class="tooltiptext">Tooltip text</span> </div>
+
   <h1> Fim !!!! </h1>
+      <script>
+          // This is a stacked 3D Rose chart. The data is the same as a regular stacked
+          // Rose chart and looks just like the data that you'd pass to a grouped or
+          // stacked Bar chart.
+          new RGraph.Rose({
+              id: 'cvs',
+              data: [[[20][20][20]],[[20][20][20][20][20]],[[20][20][20][20][20]],[[20][20][20][20]],[[20][20][20][20][20]],[[20][20][20][20][20]],[[20][20][20]],[[20][20][20]],[[20][20][20][20][20]],[[20][20][20][20][20]],[[20][20][20][20][20]],[[20][20][20][20]]],
+              options: {
+                  colorsStroke: 'rgba(0,0,0,0)',
+                  margin: 4,
+                  variant: 'stacked3d',
+                  variantThreedDepth: 30,
+                  labelsAxes: 'n',
+                  colors: ['gradient(red:red)','gradient(red:yellow)','gradient(yellow:yellow)','gradient(yellow:green)',],
+                  tooltips: [
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard',
+                      'Wilf','Harry','Gerrard'
+                  ],
+                  //labels: ['Qualidade de Vida','Sentidos','Desnutrição','Capacidade Funcional','Depressão','Cognição','RCV','Medicamentos','Ambiente','Quedas','Violência','Vulnerbilidade','Fragilidade'],
+                  labels: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+                  textAccessible: false
+              }
+          }).draw().on('tooltip', function (obj)
+          {
+              // This is a 'tooltip' event listener. It's triggered whenever a
+              // tooltip is shown.
+
+              // Get the tooltip DIV tag from the RGraph registry
+              var tooltip = RGraph.Registry.get('tooltip');
+
+              // Add the numerical value, using the sequentialised data and the tooltip index,
+              // to the tooltip DIV tag
+              tooltip.innerHTML += ': <b>' + obj.data_seq[tooltip.__index__] + '%</b>';
+
+              // Adding the extra text above means that the width of the tooltip has to be
+              // increased too - so do that here.
+              tooltip.style.width = parseInt(tooltip.style.width) + 30 + 'px';
+          });
+      </script>
+
+
 </body>
 </html>

@@ -97,8 +97,9 @@ WSGI_APPLICATION = 'recommendation_system.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),, Consolas, DejaVu Sans Mono, monospace
 #     }
 # }
+
 if 'RDS_DB_NAME' in os.environ:
-    DATABASES = {
+    DATABASES = {     
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': os.environ['RDS_DB_NAME'],
@@ -156,7 +157,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "statics")
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
