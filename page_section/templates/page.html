@@ -27,7 +27,7 @@
     .selected{width:200px; height:60px; border:solid 1 px; border-radius:5px 5px 0 0;
           text-align:center; padding-top:5px; background:#27408B}
 </style>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 
   <script type="text/javascript">
       $(document).ready(function(){
@@ -49,15 +49,236 @@
       });
   </script>
 
+  <script type="text/javascript">
+    var respostas = new Array(103)
+    function encheVetor(){
+        respostas[1]=document.getElementById("id_q1_memory_good_like_before");
+        respostas[2]=document.getElementById("id_q2_memory_test");
+        respostas[3]=document.getElementById("id_q3_language_function_attention");
+        respostas[4]=document.getElementById("id_q4_visospatial_ability");
+        respostas[5]=document.getElementById("id_q5_praxia");
+        respostas[6]=document.getElementById("id_q6_memory_test");
+        respostas[7]=document.getElementById("id_q7_age_self_perception_analyze");
+        respostas[8]=document.getElementById("id_q8_aging_analyse");
+        respostas[9]=document.getElementById("id_q9_satisfied_with_life");
+        respostas[10]=document.getElementById("id_q10_frequently_sad");
+        respostas[11]=document.getElementById("id_q11_stopped_doing_things");
+        respostas[12]=document.getElementById("id_q12_fear_bad_things_happen");
+        respostas[13]=document.getElementById("id_q13_impatient_disquiet");
+        respostas[14]=document.getElementById("id_q14_concentration_problem");
+        respostas[15]=document.getElementById("id_q15_vision_problems");
+        respostas[16]=document.getElementById("id_q16_hearing_problems");
+        respostas[17]=document.getElementById("id_q17_taste_problems");
+        respostas[18]=document.getElementById("id_q18_senses_problems");
+        respostas[19]=document.getElementById("id_q19_interaction_problems");
+        respostas[20]=document.getElementById("id_q20_to_shop");
+        respostas[21]=document.getElementById("id_q21_use_transport");
+        respostas[22]=document.getElementById("id_q22_to_cook");
+        respostas[23]=document.getElementById("id_q23UseTelephone");
+        respostas[24]=document.getElementById("id_q24_dress_up");
+        respostas[25]=document.getElementById("id_q25TakeShower");
+        respostas[26]=document.getElementById("id_d26_yourself_malnourished");
+        respostas[27]=document.getElementById("id_d27_chewing_mouth_problems");
+        respostas[28]=document.getElementById("id_d28_less3_meal_daily");
+        respostas[29]=document.getElementById("id_d29_decreases_amount_food");
+        respostas[30]=document.getElementById("id_d30_lost_weight_no_reason");
+        respostas[31]=document.getElementById("id_d31_stress_illness_hospitalization");
+        respostas[32]=document.getElementById("id_q32_bmi_less22");
+        respostas[33]=document.getElementById("id_q33_dcv_familiar_history");
+        respostas[34]=document.getElementById("id_q34_hypertension");
+        respostas[35]=document.getElementById("id_q35_uncontrolled_diabetes");
+        respostas[36]=document.getElementById("id_q36_cholesterol");
+        respostas[37]=document.getElementById("id_q37_smoker");
+        respostas[38]=document.getElementById("id_q38_practice_150_minutes_exercises");
+        respostas[39]=document.getElementById("id_q39_healthy_eating");
+        respostas[40]=document.getElementById("id_q40_alcohol_Ingested_last_week");
+        respostas[41]=document.getElementById("id_q41_bmi_obesity");
+        respostas[46]=document.getElementById("id_q46_medicines_increase");
+        respostas[47]=document.getElementById("id_q47_know_medicines");
+        respostas[48]=document.getElementById("id_q48_medications_prescribed");
+        respostas[49]=document.getElementById("id_q49_medicine_medical_advice");
+        respostas[50]=document.getElementById("id_q50_already_stopped_medicines");
+        respostas[51]=document.getElementById("id_q51_self_medication");
+        respostas[52]=document.getElementById("id_q52_inappropriate_medication");
+        respostas[53]=document.getElementById("id_q53_risk_adverse_reaction");
+        respostas[55]=document.getElementById("id_q55_meet_family_friends");
+        respostas[56]=document.getElementById("id_q56_participate_family_decisions");
+        respostas[57]=document.getElementById("id_q57_satisfied_family_relationship");
+        respostas[58]=document.getElementById("id_q58_helped_if_need_money");
+        respostas[59]=document.getElementById("id_q59_someone_helps_if_need");
+        respostas[60]=document.getElementById("id_q60_someone_to_have_fun");
+        respostas[61]=document.getElementById("id_q61_participate_social_events");
+        respostas[62]=document.getElementById("id_q62_regulary_healt_services");
+        respostas[63]=document.getElementById("id_q63_estable_furniture");
+        respostas[64]=document.getElementById("id_q64_loose_objects_carpets");
+        respostas[65]=document.getElementById("id_q65_slippery_floor");
+        respostas[66]=document.getElementById("id_q66_handrail_on_stairs");
+        respostas[67]=document.getElementById("id_q67_lighted_stairs");
+        respostas[68]=document.getElementById("id_q68_suitable_stairs_steps");
+        respostas[69]=document.getElementById("id_q69_non_slippery_carpet");
+        respostas[70]=document.getElementById("id_q70_get_on_stool");
+        respostas[71]=document.getElementById("id_q71_turn_lights_off");
+        respostas[72]=document.getElementById("id_q72_safe_shoes");
+        respostas[73]=document.getElementById("id_q73_manicure_sidewalks");
+        respostas[74]=document.getElementById("id_q74_public_transport_access");
+        respostas[75]=document.getElementById("id_q75_commerce_access");
+        respostas[76]=document.getElementById("id_q76_ease_plasewalking");
+        respostas[77]=document.getElementById("id_q77_fun_access");
+        respostas[78]=document.getElementById("id_q78_safety");
+        respostas[79]=document.getElementById("id_q79_afraid_close_person");
+        respostas[80]=document.getElementById("id_q80_feels_abandoned");
+        respostas[81]=document.getElementById("id_q81_forced");
+        respostas[82]=document.getElementById("id_q82_assauteld");
+        respostas[83]=document.getElementById("id_q83_in_need");
+        respostas[84]=document.getElementById("id_q84_someone_used_money");
+        respostas[85]=document.getElementById("id_q85_touched_without_permission");
+        respostas[86]=document.getElementById("id_q86_dont_take_care_health");
+        respostas[87]=document.getElementById("id_q87_falls_last_year");
+        respostas[88]=document.getElementById("id_q88_fractures_due_to_falls");
+        respostas[89]=document.getElementById("id_q88_fractures_due_to_falls");
+        respostas[90]=document.getElementById("id_q90_strength_mmii");
+        respostas[91]=document.getElementById("id_q91_equilibrium");
+        respostas[92]=document.getElementById("id_q92_older_than75");
+        respostas[93]=document.getElementById("id_q93_female");
+        respostas[94]=document.getElementById("id_q94_cognitive_alterations");
+        respostas[95]=document.getElementById("id_q95_av_ds_commitment");
+        respostas[96]=document.getElementById("id_q96_visual_deficit");
+        respostas[97]=document.getElementById("id_q97_domestic_risks");
+        respostas[98]=document.getElementById("id_q98_behavior_risk");
+        respostas[99]=document.getElementById("id_q99_inactivity");
+        respostas[100]=document.getElementById("id_q100_prior_ave");
+        respostas[101]=document.getElementById("id_q101_psychotropic_medications_use");
+        respostas[102]=document.getElementById("id_q102_has_diseases");
+    }
+    var certo = new Array(103)
+    certo[1]="S";
+    certo[2]="S";
+    certo[3]="S";
+    certo[4]="S";
+    certo[5]="S";
+    certo[6]="S";
+    certo[7]="N";
+    certo[8]="N";
+    certo[9]="S";
+    certo[10]="N";
+    certo[11]="N";
+    certo[12]="N";
+    certo[13]="N";
+    certo[14]="N";
+    certo[15]="N";
+    certo[16]="N";
+    certo[17]="N";
+    certo[18]="N";
+    certo[19]="N";
+    certo[20]="N";
+    certo[21]="N";
+    certo[22]="N";
+    certo[23]="N";
+    certo[24]="N";
+    certo[25]="N";
+    certo[26]="N";
+    certo[27]="N";
+    certo[28]="N";
+    certo[29]="N";
+    certo[30]="Não";
+    certo[31]="N";
+    certo[32]="N";
+    certo[33]="N";
+    certo[34]="N";
+    certo[35]="N";
+    certo[36]="N";
+    certo[37]="N";
+    certo[38]="N";
+    certo[39]="N";
+    certo[40]="N";
+    certo[41]="N";
+    certo[42]="N";
+    certo[43]="N";
+    certo[44]="N";
+    certo[45]="N";
+    certo[46]="N";
+    certo[47]="N";
+    certo[48]="N";
+    certo[49]="N";
+    certo[50]="N";
+    certo[51]="N";
+    certo[52]="N";
+    certo[53]="N";
+    certo[54]="N";
+    certo[55]="S";
+    certo[56]="S";
+    certo[57]="S";
+    certo[58]="S";
+    certo[59]="S";
+    certo[60]="S";
+    certo[61]="S";
+    certo[62]="S";
+    certo[63]="S";
+    certo[64]="N";
+    certo[65]="N";
+    certo[66]="S";
+    certo[67]="S";
+    certo[68]="S";
+    certo[69]="S";
+    certo[70]="N";
+    certo[71]="N";
+    certo[72]="S";
+    certo[73]="S";
+    certo[74]="S";
+    certo[75]="S";
+    certo[76]="S";
+    certo[77]="S";
+    certo[78]="S";
+    certo[79]="N";
+    certo[80]="N";
+    certo[81]="N";
+    certo[82]="N";
+    certo[83]="N";
+    certo[84]="N";
+    certo[85]="N";
+    certo[86]="N";
+    certo[87]="N";
+    certo[88]="N";
+    certo[89]="X";
+    certo[90]="S";
+    certo[91]="S";
+    certo[92]="N";
+    certo[93]="N";
+    certo[94]="N";
+    certo[95]="N";
+    certo[96]="N";
+    certo[97]="N";
+    certo[98]="N";
+    certo[99]="N";
+    certo[100]="N";
+    certo[101]="N";
+    certo[102]="N";
+
+    function calcular(a,b,ele){
+        if (respostas[a] == null){
+            encheVetor();
+        }
+        conta=0;
+        for (i=a; i<= b; i++){
+            if (respostas[i].value == certo[i]){
+                conta++;
+            }
+        }
+        ele.value=conta;
+    }
+  </script>
+
 </head>
 
 <body>
   {% if request.user.is_authenticated %}
   {% load static %}
+  <form action="{% url 'grava_page' %}" method="post">
+  {% csrf_token %}
   <table border="2" width='100%'>
 
     <tr>
-      <td rowspan="3" width='16%'> <img src='page.jpg'   height="100px" width="100px"> </td>
+      <td rowspan="3" width='16%'> <img src='/static/page.jpg'    height="100px" width="100px"> </td>
       <td colspan="2" >{{ page.service.label_tag }} {{page.service}}</td>
     </tr>
     <tr>
@@ -70,7 +291,7 @@
     </tr>
 
   </table>
-  <br>
+  <br>the
 
 
     <div class="TabControl">
@@ -111,8 +332,6 @@
               <tr>
                   <td  bgcolor="silver" align="center"><h2>PARTICIPANTE</h2></td>
               </tr>
-              <form action="{% url 'grava_page' %}" method="post">
-                  {% csrf_token %}
                   {% for field in participant %}
                         <tr>
                           <TD width="100%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
@@ -145,9 +364,14 @@
                           {% endif %}
                           <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                           {% if field == cognition.q1_memory_good_like_before %}
-                              <td class="example Text3" WIDTH="10%" align="center" rowspan="7" BGCOLOR="#3399CC">
-                                  <span><B>Pontuação Máxima( 6 ):<br> {{ cognition.need_investigation_cognition.label_tag }}
-                                  {{ cognition.need_investigation_cognition }}  </B></span></td>
+                              <td WIDTH="10%" align="center" rowspan="7" BGCOLOR="#3399CC">
+                                  <B>Pontuação Máxima(6)<br>
+                                     <input type="text" name="c1" ID="id_c1" size="2" readonly><input type="button" value="Calc" onclick="calcular(1,6,document.getElementById('id_c1'))"> <br>
+                                  {{ cognition.need_investigation_cognition.label_tag }} <br>
+                                  {{ cognition.need_investigation_cognition }}  </B>
+
+
+                              </td>
                           {% endif %}
                           </tr>
                       {% endif %}
@@ -167,9 +391,12 @@
                           {% endif %}
                           <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                           {% if field == negative.q7_age_self_perception %}
-                              <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                              <td WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
                                   <span><B>
-                                  Pontuação Máxima( 2 ):<br> {{ negative.need_investigation_negative.label_tag }} {{ negative.need_investigation_negative }}  </B></span></td>
+                                  Pontuação Máxima(2)<br>
+                                  <input type="text" name="c2" ID="id_c2" size="2" readonly><input type="button" value="Calc" onclick="calcular(7,8,document.getElementById('id_c2'))"> <br>
+                                  {{ negative.need_investigation_negative.label_tag }}<br>
+                                  {{ negative.need_investigation_negative }}  </B></span></td>
                           {% endif %}
                           </tr>
                       {% endif %}
@@ -188,9 +415,11 @@
                           {% endif %}
                           <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                           {% if field == depression.q9_satisfied_with_life %}
-                              <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                              <td WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
                                   <span><B>
-                                  Pontuação Máxima( 6 ):<br> {{ depression.need_investigation_depression.label_tag }}
+                                  Pontuação Máxima(6)<br>
+                                  <input type="text" name="c3" ID="id_c3" size="2" readonly><input type="button" value="Calc" onclick="calcular(9,14,document.getElementById('id_c3'))"> <br>
+                                  {{ depression.need_investigation_depression.label_tag }}<br>
                                   {{ depression.need_investigation_depression }}  </B></span></td>
                           {% endif %}
                           </tr>
@@ -206,7 +435,7 @@
 
         <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--BIOLÓGICOS !-->
         </table>
-            <table border="2" width="100%">  <body leftmargin="20%" rightmargin="20%">
+            <table border="2" width="100%">
             <tr>
                 <td colspan="3" bgcolor="#33CC99" align="center"><h2>RELACIONADOS A ASPECTOS BIOLÓGICOS</h2></td>
             </tr>
@@ -221,9 +450,11 @@
                         {% endif %}
                         <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                         {% if field == sensory.q15_vision_problems %}
-                            <td class="example Text3" WIDTH="10%" align="center" rowspan="5" BGCOLOR="#339999">
+                            <td WIDTH="10%" align="center" rowspan="5" BGCOLOR="#339999">
                                 <span><B>
-                                Pontuação Máxima( 5 ):<br> {{ sensory.need_investigation_sensory.label_tag }}
+                                Pontuação Máxima(5)<br>
+                                <input type="text" name="c4" ID="id_c4" size="2" readonly><input type="button" value="Calc" onclick="calcular(15,19,document.getElementById('id_c4'))"> <br>
+                                {{ sensory.need_investigation_sensory.label_tag }}<br>
                                 {{ sensory.need_investigation_sensory }}  </B></span></td>
                         {% endif %}
                         </tr>
@@ -243,9 +474,11 @@
                         {% endif %}
                         <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                         {% if field == functional.q20_to_shop %}
-                            <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#339999">
+                            <td WIDTH="10%" align="center" rowspan="6" BGCOLOR="#339999">
                                 <span><B>
-                                Pontuação Máxima( 6 ):<br> {{ functional.need_investigation_functional.label_tag }}
+                                Pontuação Máxima(6)<br>
+                                <input type="text" name="c5" ID="id_c5" size="2" readonly><input type="button" value="Calc" onclick="calcular(20,25,document.getElementById('id_c5'))"> <br>
+                                {{ functional.need_investigation_functional.label_tag }}<br>
                                 {{ functional.need_investigation_functional }}  </B></span></td>
                         {% endif %}
                         </tr>
@@ -253,7 +486,7 @@
                 {% endif %}
             {% endfor %}
 
-             <TR><TD COLSPAN="3" BGCOLOR="#33CC99"></TD> </TR>
+            <TR><TD COLSPAN="3" BGCOLOR="#33CC99"></TD> </TR>
 
              {% for field in malnutrition %}
                 {% if field !=  malnutrition.max_score_malnutrition %}
@@ -265,25 +498,56 @@
                         {% endif %}
                         <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                         {% if field == malnutrition.d26_yourself_malnourished %}
-                            <td class="example Text3" WIDTH="10%" align="center" rowspan="7" BGCOLOR="#339999">
+                            <td  WIDTH="10%" align="center" rowspan="7" BGCOLOR="#339999">
                                 <span><B>
-                                Pontuação Máxima( 7 ):<br> {{ malnutrition.need_investigation_malnutrition.label_tag }}
-                                {{ malnutrition.need_investigation_malnutrition }  </B></span></td>
+                                Pontuação Máxima(7)<br>
+                                <input type="text" name="c6" ID="id_c6" size="2" readonly><input type="button" value="Calc" onclick="calcular(26,32,document.getElementById('id_c6'))"> <br>
+                                {{ malnutrition.need_investigation_malnutrition.label_tag }}<br>
+                                {{ malnutrition.need_investigation_malnutrition }}  </B></span></td>
                         {% endif %}
                       </tr>
                    {% endif %}
                 {% endif %}
              {% endfor %}
+
              <TR><TD COLSPAN="3" BGCOLOR="#33CC99"></TD> </TR>
+
+            {% for field in cardiovascular %}
+                {% if field != cardiovascular.max_score_cardio %}
+                    {% if field != cardiovascular.need_investigation_cardio %}
+                        <tr>
+                        {% if field == cardiovascular.q33_dcv_familiar_history %}
+                            <td class="example Text3" WIDTH="10%" align="center" rowspan="13" BGCOLOR="#339999">
+                                <span><B>DOENÇAS CARDIOVASCULARES (DCV)</B></span></td>
+                        {% endif %}
+                        <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                        {% if field == cardiovascular.q33_dcv_familiar_history %}
+                            <td WIDTH="10%" align="center" rowspan="13" BGCOLOR="#339999">
+                                <span><B>
+                                Pontuação Máxima(9)<br>
+                                <input type="text" name="c7" ID="id_c7" size="2" readonly><input type="button" value="Calc" onclick="calcular(33,41,document.getElementById('id_c7'))"> <br>
+                                {{ cardiovascular.need_investigation_cardio.label_tag }}<br>
+                                {{ cardiovascular.need_investigation_cardio  }}  </B></span></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+             <TR><TD COLSPAN="3" BGCOLOR="#33CC99"></TD> </TR>
+
+
              <tr>
                 <td class="example Text3" WIDTH="10%" align="center" rowspan="13" BGCOLOR="#339999">
-                <span><B>DOENÇAS CARDIOVASCULARES (DCV)</B></span></td>
+                <span><B>USO INADEQUADO DE MEDICAMENTOS</B></span></td>
                 <TD width="80%" valign="middle"> 42. Nos últimos 5 anos, algum médico ou outro profissional de saúde já disse que o(a)
                                                  senhor(a) tem: <br> {{ misuse42.as_p }}
                 </TD>
-                <td class="example Text3" WIDTH="10%" align="center" rowspan="13" BGCOLOR="#339999">
+                <td WIDTH="10%" align="center" rowspan="13" BGCOLOR="#339999">
                                 <span><B>
-                                Pontuação Máxima( 9 ):<br> {{ misuse.need_investigation_misuse.label_tag }}
+                                Pontuação Máxima(9)<br>
+                                <input type="text" name="c8" ID="id_c8" size="2" readonly><input type="button" value="Calc" onclick="calcular(46,53,document.getElementById('id_c8'))"> <br>
+                                {{ misuse.need_investigation_misuse.label_tag }}<br>
                                 {{ misuse.need_investigation_misuse }}  </B></span>
                 </td>
              </tr>
@@ -357,8 +621,10 @@
                           {% endif %}
                           <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                           {% if field == low_social.q54_spouse %}
-                              <td class="example Text3" WIDTH="10%" align="center" rowspan="14" BGCOLOR="#FFFFCC">
-                                  <span><B>Pontuação Máxima( 8 ):<br> {{ low_social.need_investigation_low.label_tag }}
+                              <td  WIDTH="10%" align="center" rowspan="14" BGCOLOR="#FFFFCC">
+                                  <span><B>Pontuação Máxima(8)<br>
+                                  <input type="text" name="c9" ID="id_c9" size="2" readonly><input type="button" value="Calc" onclick="calcular(55,62,document.getElementById('id_c9'))"> <br>
+                                  {{ low_social.need_investigation_low.label_tag }}<br>
                                   {{ low_social.need_investigation_low }}  </B></span></td>
                           {% endif %}
                           </tr>
@@ -376,10 +642,12 @@
                               <td class="example Text3" WIDTH="10%" align="center" rowspan="19" BGCOLOR="#FFFFCC">
                                   <span><B>PROBLEMAS AMBIENTAIS </B></span></td>
                               <td align="center" width="80%" bgcolor="CCCCC"><B>Ambiente Interno</B> </td>
-                              <td class="example Text3" WIDTH0="10%" align="center" rowspan="19" BGCOLOR="#FFFFCC">
+                              <td WIDTH0="10%" align="center" rowspan="19" BGCOLOR="#FFFFCC">
                                   <span><B>
-                                  Pontuação Máxima( 16 ):<br> {{ environmental.need_investigation_env.label_tag }}
-                                      {{ environmental.need_investigation_env }}  </B></span></td></tr><tr>
+                                  Pontuação Máxima(16)<br>
+                                  <input type="text" name="c10" ID="id_c10" size="2" readonly><input type="button" value="Calc" onclick="calcular(63,78,document.getElementById('id_c10'))"> <br>
+                                  {{ environmental.need_investigation_env.label_tag }}<br>
+                                  {{ environmental.need_investigation_env }}  </B></span></td></tr><tr>
                           {% endif %}
                           {% if field == environmental.q70_get_on_stool %}
                               <td align="center" width="80%" bgcolor="CCCCC"><B>Comportamento de Risco</B> </td></tr><tr>
@@ -400,14 +668,16 @@
                       {% if field != violence.need_investigation_violence %}
                           <tr>
                           {% if field == violence.q79_afraid_close_person %}
-                              <td class="example Text3" https://www.google.com/search?q=pgcc&oq=pgcc&aqs=chrome..69i57j0l5.1791j0j7&sourceid=chrome&ie=UTF-8WIDTH="10%" align="center" rowspan="8" BGCOLOR="#FFFFCC">
-                                  <span><B>VIOLÊNCIA</B></s0pan></td>
+                              <td class="example Text3" WIDTH="10%" align="center" rowspan="8" BGCOLOR="#FFFFCC">
+                                  <span><B>VIOLÊNCIA</B></span></td>
                           {% endif %}
                           <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                           {% if field == violence.q79_afraid_close_person %}
-                              <td class="example Text3" WIDTH="10%" align="center" rowspan="8" BGCOLOR="#FFFFCC">
+                              <td WIDTH="10%" align="center" rowspan="8" BGCOLOR="#FFFFCC">
                                   <span><B>
-                                  Pontuação Máxima( 8 ):<br> {{ violence.need_investigation_violence.label_tag }}
+                                  Pontuação Máxima(8)<br>
+                                  <input type="text" name="c11" ID="id_c11" size="2" readonly><input type="button" value="Calc" onclick="calcular(79,86,document.getElementById('id_c11'))"> <br>
+                                  {{ violence.need_investigation_violence.label_tag }}<br>
                                   {{ violence.need_investigation_violence }}  </B></span></td>
                           {% endif %}
                           </tr>
@@ -442,9 +712,11 @@
                           {% endif %}
                           <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                           {% if field == falls.q87_falls_last_year %}
-                              <td class="example Text3" WIDTH="10%" align="center" rowspan="19" BGCOLOR="#FFBBFF">
-                                  <span><B>Pontuação Máxima( 8 ):<br> {{ falls.need_investigation_falls.label_tag }}
-                                      {{ falls.need_investigation_falls }}  </B></span></td>
+                              <td WIDTH="10%" align="center" rowspan="19" BGCOLOR="#FFBBFF">
+                                  <span><B>Pontuação Máxima(16)<br>
+                                  <input type="text" name="c12" ID="id_c12" size="2" readonly><input type="button" value="Calc" onclick="calcular(87,102,document.getElementById('id_c12'))"> <br>
+                                  {{ falls.need_investigation_falls.label_tag }}<br>
+                                  {{ falls.need_investigation_falls }}  </B></span></td>
                           {% endif %}
                           </tr>
                       {% endif %}

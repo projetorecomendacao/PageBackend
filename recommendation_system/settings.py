@@ -97,19 +97,9 @@ WSGI_APPLICATION = 'recommendation_system.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),, Consolas, DejaVu Sans Mono, monospace
 #     }
 # }
-if 'RDS_DB_NAME' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
-        }
-    }
-else:
-    DATABASES = {
+
+
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'active-aging',
@@ -118,7 +108,7 @@ else:
             'HOST': 'localhost',
             'PORT': '5432',
         }
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -156,7 +146,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "statics")
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -182,3 +177,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'RlJXpzctTjd9BncZJrdK7ShZ'
 
 LOGIN_REDIRECT_URL = '/teste/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())

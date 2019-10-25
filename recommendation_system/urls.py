@@ -38,7 +38,7 @@ from experts_section.api.viewsets import ExpertViewSet, ExpertiseViewSet
 from health_section.api.viewsets import DiseasesViewSet, TherapeuticClassViewSet, HealthProblemsViewSet,\
     MedicinesViewSet, FracturesViewSet
 from drinks_section.api.viewsets import DrinksViewSet, IngestedDrinksViewSet
-from page_section.views import testar, abas, grava_page, grava_demanda
+from page_section.views import testar, abas, grava_page, grava_demanda, testa_grafico
 from page_section import views as page_view
 from drinks_section.api.viewsets import *
 
@@ -113,7 +113,7 @@ router.register(r'medicines', MedicinesViewSet, base_name='medicines')
 router.register(r'fractures', FracturesViewSet, base_name='fractures')
 
 # drinks_section
-router.register(r'drinks', DrinksViewSet, base_name='drinks')    
+router.register(r'drinks', DrinksViewSet, base_name='drinks')
 router.register(r'ingestedDrinks',IngestedDrinksViewSet, base_name='ingestedDrinks')
 
 urlpatterns = [
@@ -125,8 +125,9 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('account/', include('django.contrib.auth.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('abas', abas,name='abas'),
-    path('grava_page', grava_page,name='grava_page'),
-    path('grava_demanda', grava_demanda,name='grava_demanda'),
-
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('abas',abas,name='abas'),
+    path('grava_page',grava_page,name='grava_page'),
+    path('grava_demanda',grava_demanda,name='grava_demanda'),
+    path('testa_grafico',testa_grafico,name='testa_grafico'),
+#    path('page/', PageViewSet, name='page'),
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

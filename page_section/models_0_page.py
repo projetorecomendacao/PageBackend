@@ -13,7 +13,7 @@ class Page (models.Model):
     #Serviço ou instituição
     service = models.CharField('Serviço/instituição',max_length=60)
     #Data Entrada no serviçoptimize
-    entrance = models.DateField('Data de Entrada no Serviço',null=True)
+    entrance = models.DateField('Data de Entrada no Serviço',null=True,blank=True)
     #Entrevistado
     interviewed = models.CharField('Pessoa entrevistada:', max_length=20)
     #Entrevistador

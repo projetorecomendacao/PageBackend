@@ -94,3 +94,7 @@ class FallsViewSet(ModelViewSet):
 class PageViewSet (ModelViewSet):
     queryset = Page.objects.all()
     serializer_class = PageSerializer
+
+    def create(self, request, *args, **kwargs):
+
+        pass
