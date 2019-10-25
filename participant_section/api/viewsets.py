@@ -23,8 +23,7 @@ class ParticipantViewSet(ModelViewSet):
         return Expert.objects.get(email=self.request.user.email).contacts
 
     def create(self, request, *args, **kwargs):
-        participant = Participant.objects.filter(email=self.request.data.get('email'))
-        print(request.data)
+        participant = Participant.objects.filter(p00_email=self.request.data.get('p00_email'))
         if participant.exists():
             participant = participant.first()
             Expert.objects.get(email=self.request.user.email).contacts.add(participant)

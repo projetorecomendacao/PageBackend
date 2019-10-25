@@ -6,7 +6,7 @@ from page_section.messages import Options
 class Participant(models.Model):
     p00_email = models.CharField("Email da Google", null=True, blank=True, max_length=80)
     p01_name = models.CharField('Nome:', max_length=50)
-    p02_adress = models.CharField("Endereço",max_length=80 )
+    p02_address = models.CharField("Endereço",max_length=80 )
     p03_communication = models.CharField('Meios de Entrar em contato',max_length=100)
     p04_birth_date = models.DateField('Data de Nascimento')
     p05_age = models.IntegerField('Idade Atual')

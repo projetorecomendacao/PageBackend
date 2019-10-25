@@ -117,16 +117,16 @@ router.register(r'drinks', DrinksViewSet, base_name='drinks')
 router.register(r'ingestedDrinks',IngestedDrinksViewSet, base_name='ingestedDrinks')
 
 urlpatterns = [
-#    path('', include(router.urls)),
-    path('',auth_views.LoginView.as_view(template_name='registration/login.html'), name="vazio"),
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('teste/', testar,name='testar'),
     path('auth/', include('rest_framework_social_oauth2.urls')),
+    path('home/', auth_views.LoginView.as_view(template_name='registration/login.html'), name="vazio"),
+    path('teste/', testar,name='testar'),
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-#    path('account/', include('django.contrib.auth.urls')),
+    path('account/', include('django.contrib.auth.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('abas',abas,name='abas'),
-    path('grava_page',grava_page,name='grava_page'),
-    path('grava_demanda',grava_demanda,name='grava_demanda'),
+    path('abas', abas,name='abas'),
+    path('grava_page', grava_page,name='grava_page'),
+    path('grava_demanda', grava_demanda,name='grava_demanda'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
