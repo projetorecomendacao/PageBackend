@@ -1,5 +1,6 @@
 from rest_framework import status
 from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -9,7 +10,7 @@ from participant_section.api.serializers import ParticipantSerializer, IncomeSer
     ReligionSerializer, ParticipantSituationSerializer
 from participant_section.models import Participant, Income, ParticipantSocialMedia, MaritalStatus, Schooling, \
     ProfessionalsActivities, Religion, ParticipantSituation
-from utils.api.serializer import IsExpert
+from utils.api.serializer import IsExpert, CustomModelViewSet
 
 
 class ParticipantViewSet(ModelViewSet):
@@ -82,9 +83,16 @@ class ReligionViewSet(ModelViewSet):
     search_fields = ('description',)
 
 
-class ParticipantSituationViewSet(ModelViewSet):
+class ParticipantSituationViewSet(CustomModelViewSet):
     queryset = ParticipantSituation.objects.all()
     serializer_class = ParticipantSituationSerializer
     # filter_backends = (SearchFilter,)
     # search_fields = ('', )
+    permission_classes_by_action = {
+        'create': [IsAuthenticated]
+    }
+
+    def create(self, request, *args, **kwargs):
+        print(request.data)
+        return super().create(request, *args, **kwargs)
 

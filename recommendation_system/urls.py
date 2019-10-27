@@ -87,7 +87,7 @@ router.register(r'marital_status', MaritalStatusViewSet, base_name='DA_attitudes
 router.register(r'schooling', SchoolingViewSet, base_name='DA_attitudes')
 router.register(r'professionals_activities', ProfessionalsActivitiesViewSet, base_name='DA_attitudes')
 router.register(r'religions', ReligionViewSet, base_name='DA_attitudes')
-router.register(r'participants_situations', ParticipantSituationViewSet, base_name='DA_attitudes')
+router.register(r'participant_situations', ParticipantSituationViewSet, base_name='DA_attitudes')
 
 # reviews_section
 router.register(r'offers', OfferViewSet, base_name='Offers')
