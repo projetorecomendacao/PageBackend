@@ -89,10 +89,7 @@ class ParticipantSituationViewSet(CustomModelViewSet):
     # filter_backends = (SearchFilter,)
     # search_fields = ('', )
     permission_classes_by_action = {
-        'create': [IsAuthenticated]
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
     }
-
-    def create(self, request, *args, **kwargs):
-        print(request.data)
-        return super().create(request, *args, **kwargs)
 

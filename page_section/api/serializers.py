@@ -26,7 +26,7 @@ class DepressionSerializer (ModelSerializer):
 
 class PsychologicalAspectsSerializer (ModelSerializer):
     class Meta:
-        model = PsychologicalAspects,
+        model = PsychologicalAspects
         fields = '__all__'
 
 
@@ -52,6 +52,7 @@ class MalnutritionSerializer(ModelSerializer):
     class Meta:
         model = Malnutrition
         fields = '__all__'
+
 
 class CardiovascularFactorsSerializer(ModelSerializer):
     class Meta:

@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from page_section.models_1_psicologico import NegativeAttitudesAging, CognitionDeficit, Depression, PsychologicalAspects
 from page_section.models_2_Biologicos import BiologicalAspects, SensoryDeficit, FunctionalDisability, Malnutrition, CardiovascularFactors, MisuseMedications
@@ -9,26 +10,43 @@ from page_section.api.serializers import NegativeAttitudesAgingSerializer, Cogni
     FunctionalDisabilitySerializer, MalnutritionSerializer, CardiovascularFactorsSerializer,\
     MisuseMedicationsSerializer, SocialAspectsSerializer, LowSocialSupportSerializer, EnvironmentalProblemsSerializer,\
     ViolenceSerializer, MultidisciplinaryDomainSerializer, FallsSerializer, PageSerializer
+from utils.api.serializer import CustomModelViewSet, IsExpert
 
 
-class NegativeAttitudesAgingViewSet(ModelViewSet):
+class NegativeAttitudesAgingViewSet(CustomModelViewSet):
     queryset = NegativeAttitudesAging.objects.all()
     serializer_class = NegativeAttitudesAgingSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class CognitionDeficitViewSet(ModelViewSet):
+class CognitionDeficitViewSet(CustomModelViewSet):
     queryset = CognitionDeficit.objects.all()
     serializer_class = CognitionDeficitSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class DepressionViewSet(ModelViewSet):
+class DepressionViewSet(CustomModelViewSet):
     queryset = Depression.objects.all()
     serializer_class = DepressionSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class PsychologicalAspectsViewSet(ModelViewSet):
+class PsychologicalAspectsViewSet(CustomModelViewSet):
     queryset = PsychologicalAspects.objects.all()
     serializer_class = PsychologicalAspectsSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
 class BiologicalAspectsViewSet(ModelViewSet):
