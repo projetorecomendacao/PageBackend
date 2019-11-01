@@ -49,34 +49,58 @@ class PsychologicalAspectsViewSet(CustomModelViewSet):
     }
 
 
-class BiologicalAspectsViewSet(ModelViewSet):
+class BiologicalAspectsViewSet(CustomModelViewSet):
     queryset = BiologicalAspects.objects.all()
     serializer_class = BiologicalAspectsSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class SensoryDeficitViewSet(ModelViewSet):
+class SensoryDeficitViewSet(CustomModelViewSet):
     queryset = SensoryDeficit.objects.all()
     serializer_class = SensoryDeficitSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class FunctionalDisabilityViewSet(ModelViewSet):
+class FunctionalDisabilityViewSet(CustomModelViewSet):
     queryset = FunctionalDisability.objects.all()
     serializer_class = FunctionalDisabilitySerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class MalnutritionViewSet(ModelViewSet):
+class MalnutritionViewSet(CustomModelViewSet):
     queryset = Malnutrition.objects.all()
     serializer_class = MalnutritionSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class CardiovascularFactorsViewSet(ModelViewSet):
+class CardiovascularFactorsViewSet(CustomModelViewSet):
     queryset = CardiovascularFactors.objects.all()
     serializer_class = CardiovascularFactorsSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class MisuseMedicationsViewSet(ModelViewSet):
+class MisuseMedicationsViewSet(CustomModelViewSet):
     queryset = MisuseMedications.objects.all()
     serializer_class = MisuseMedicationsSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
 class SocialAspectsViewSet(ModelViewSet):
