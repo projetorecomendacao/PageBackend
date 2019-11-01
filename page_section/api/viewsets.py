@@ -103,24 +103,40 @@ class MisuseMedicationsViewSet(CustomModelViewSet):
     }
 
 
-class SocialAspectsViewSet(ModelViewSet):
+class SocialAspectsViewSet(CustomModelViewSet):
     queryset = SocialAspects.objects.all()
     serializer_class = SocialAspectsSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class LowSocialSupportViewSet(ModelViewSet):
+class LowSocialSupportViewSet(CustomModelViewSet):
     queryset = LowSocialSupport.objects.all()
     serializer_class = LowSocialSupportSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class EnvironmentalProblemsViewSet(ModelViewSet):
+class EnvironmentalProblemsViewSet(CustomModelViewSet):
     queryset = EnvironmentalProblems.objects.all()
     serializer_class = EnvironmentalProblemsSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class ViolenceViewSet(ModelViewSet):
+class ViolenceViewSet(CustomModelViewSet):
     queryset = Violence.objects.all()
     serializer_class = ViolenceSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
 class MultidisciplinaryDomainViewSet(ModelViewSet):
