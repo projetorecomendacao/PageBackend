@@ -1,4 +1,6 @@
 from rest_framework.serializers import ModelSerializer
+
+from experts_section.models import Expert
 from page_section.models_1_psicologico import NegativeAttitudesAging, CognitionDeficit, Depression, PsychologicalAspects
 from page_section.models_2_Biologicos import BiologicalAspects, SensoryDeficit, FunctionalDisability, Malnutrition, CardiovascularFactors, MisuseMedications
 from page_section.models_3_sociais import SocialAspects, LowSocialSupport, EnvironmentalProblems, Violence
@@ -106,4 +108,3 @@ class PageSerializer (ModelSerializer):
     class Meta:
         model = Page
         fields = '__all__'
-        depth = 1

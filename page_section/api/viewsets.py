@@ -1,5 +1,7 @@
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
+from rest_framework import status
+
+from experts_section.models import Expert
 from page_section.models_1_psicologico import NegativeAttitudesAging, CognitionDeficit, Depression, PsychologicalAspects
 from page_section.models_2_Biologicos import BiologicalAspects, SensoryDeficit, FunctionalDisability, Malnutrition, CardiovascularFactors, MisuseMedications
 from page_section.models_3_sociais import SocialAspects, LowSocialSupport, EnvironmentalProblems, Violence
@@ -139,20 +141,28 @@ class ViolenceViewSet(CustomModelViewSet):
     }
 
 
-class MultidisciplinaryDomainViewSet(ModelViewSet):
+class MultidisciplinaryDomainViewSet(CustomModelViewSet):
     queryset = MultidisciplinaryDomain.objects.all()
     serializer_class = MultidisciplinaryDomainSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class FallsViewSet(ModelViewSet):
+class FallsViewSet(CustomModelViewSet):
     queryset = Falls.objects.all()
     serializer_class = FallsSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
 
 
-class PageViewSet (ModelViewSet):
+class PageViewSet (CustomModelViewSet):
     queryset = Page.objects.all()
     serializer_class = PageSerializer
-
-    def create(self, request, *args, **kwargs):
-
-        pass
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }

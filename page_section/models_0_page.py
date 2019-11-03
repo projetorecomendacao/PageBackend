@@ -1,5 +1,5 @@
 from django.db import models
-from experts_section.models import Gerontologist
+from experts_section.models import Gerontologist, Expert
 from .messages import *
 from participant_section.models import Participant, ParticipantSituation
 from recommender_section.models import RecommendedActivitiesOffers, RecommendedActivities
@@ -25,7 +25,7 @@ class Page (models.Model):
     #Data da ùltima atualização
     updated_at = models.DateTimeField('Atualizado em: ', auto_now = True, null= True)
     #Gerontólogo Responsável
-    gerontologist = models.ForeignKey(Gerontologist, on_delete=models.CASCADE, verbose_name='Gerontologista Resposável')
+    gerontologist = models.ForeignKey(Expert, on_delete=models.CASCADE, verbose_name='Gerontologista Resposável')
     #Participante
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE, null=True, verbose_name = 'Participante')
     #Dados do Participante no Momento da criação do Page
