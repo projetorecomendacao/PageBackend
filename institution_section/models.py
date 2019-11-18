@@ -1,4 +1,5 @@
 from django.db import models
+from activities_section.models import Activity
 
 
 class Address(models.Model):
@@ -67,3 +68,23 @@ class Contact(Professional):
 
     class Meta:
         ordering = ['id']
+
+class Offers(models.Model):
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    activitie = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    contact = models.ManyToManyField(Contact)
+    responsible = models.ManyToManyField(Responsible)
+    instructor = models.ManyToManyField(Instructor)
+    date_begin = models.DateField()
+    date_end = models.DateField()
+    schedule = models.CharField(max_length=100)
+    cost = models.CharField(max_length=100)
+    genre_goals = models.CharField(max_length=1)
+    ambience = models.CharField(max_length=1)
+    active_aging = models.CharField(max_length=1)
+    motivation = models.TextField()
+    people_class = models.IntegerField()
+    loe_income = models.CharField(max_length=1)
+    partnership = models.TextField()
+    home_care = models.CharField(max_length=1)
+    requisites = models.TextField()
