@@ -5,7 +5,7 @@ chardet
 configparser
 defusedxml
 dj-database-url
-Django
+Django==2.2.7
 django-bootstrap-form
 django-braces
 django-cors-headers
