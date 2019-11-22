@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -150,6 +150,239 @@
         respostas[101]=document.getElementById("id_q101_psychotropic_medications_use");
         respostas[102]=document.getElementById("id_q102_has_diseases");
     }
+    var verifica = new Array(69);
+    var verifica_ms = new Array(69);
+    function encheVetorErro(){
+        verifica[0]=document.getElementById("id_service");
+        verifica[1]=document.getElementById("id_entrance");
+        verifica[2]=document.getElementById("id_interviewed");
+        verifica[3]=document.getElementById("id_interviewer");
+        verifica[4]=document.getElementById("id_avaliation_date");
+        verifica[5]=document.getElementById("id_p00_email");
+        verifica[6]=document.getElementById("id_p01_name");
+        verifica[7]=document.getElementById("id_p02_adress");
+        verifica[8]=document.getElementById("id_p03_communication");
+        verifica[9]=document.getElementById("id_p04_birth_date");
+        verifica[10]=document.getElementById("id_p05_age");
+        verifica[11]=document.getElementById("id_p06_gender");
+        verifica[12]=document.getElementById("id_p20_profile_photo_URL");
+        verifica[13]=document.getElementById("id_p07_marital_status");
+        verifica[14]=document.getElementById("id_p08_schooling");
+        verifica[15]=document.getElementById("id_p09_study_time");
+        verifica[16]=document.getElementById("id_p10_is_retired");
+        verifica[17]=document.getElementById("id_p10_retired_profession");
+        verifica[18]=document.getElementById("id_p10_actual_profession");
+        verifica[19]=document.getElementById("id_p11_retire_more_time_activity");
+        verifica[20]=document.getElementById("id_p12_is_working_professionals_activities");
+        verifica[21]=document.getElementById("id_p12_professional_activite");
+        verifica[22]=document.getElementById("id_p13_income_I");
+        verifica[23]=document.getElementById("id_p13_income_F");
+        verifica[24]=document.getElementById("id_p14_lives_with");
+        verifica[25]=document.getElementById("id_p15_have_religion");
+        verifica[26]=document.getElementById("id_p15_religion");
+        verifica[27]=document.getElementById("id_p16_Health_self_report");
+        verifica[28]=document.getElementById("id_p20_weight");
+        verifica[29]=document.getElementById("id_p20_height");
+        verifica[30]=document.getElementById("id_p20_IMC");
+        verifica[31]=document.getElementById("id_p30_ride_with");
+        verifica[32]=document.getElementById("id_q4_visospatial_ability_score");
+        verifica[33]=document.getElementById("id_q7_age_self_perception");
+        verifica[34]=document.getElementById("id_q7_age_self_perception_why");
+        verifica[35]=document.getElementById("id_q7_age_self_perception_analyze");
+        verifica[36]=document.getElementById("id_q8_aging_positive_points");
+        verifica[37]=document.getElementById("id_q8_aging_negative_points");
+        verifica[38]=document.getElementById("id_comments_psico");
+        verifica[39]=document.getElementById("id_q40_alcohol_Ingested_last_week_amount");
+        verifica[40]=document.getElementById("id_q42_diseases_last_5_years_l");
+        verifica[41]=document.getElementById("id_q43_health_problems_h");
+        verifica[42]=document.getElementById("id_q44_amount_diagnostics");
+        verifica[43]=document.getElementById("id_q45_medicines");
+        verifica[44]=document.getElementById("id_comments_bio");
+        verifica[45]=document.getElementById("id_q54_brothers");
+        verifica[46]=document.getElementById("id_q54_children");
+        verifica[47]=document.getElementById("id_q54_gran_children");
+        verifica[48]=document.getElementById("id_comments_social");
+        verifica[49]=document.getElementById("id_q87_amount_falls_last_year");
+        verifica[50]=document.getElementById("id_q88_fractures_due_to_falls_list");
+        verifica[51]=document.getElementById("id_q89_fractures_list");
+        verifica[52]=document.getElementById("id_comments_multi");
+        verifica[53]=document.getElementById("id_c1");
+        verifica[54]=document.getElementById("id_c2");
+        verifica[55]=document.getElementById("id_c3");
+        verifica[56]=document.getElementById("id_c4");
+        verifica[57]=document.getElementById("id_c5");
+        verifica[58]=document.getElementById("id_c6");
+        verifica[59]=document.getElementById("id_c7");
+        verifica[60]=document.getElementById("id_c8");
+        verifica[61]=document.getElementById("id_c9");
+        verifica[62]=document.getElementById("id_c10");
+        verifica[63]=document.getElementById("id_c11");
+        verifica[64]=document.getElementById("id_c12");
+        verifica[65]=document.getElementById("id_q2_memory_test_score");
+        verifica[66]=document.getElementById("id_q3_language_function_attention_score");
+        verifica[67]=document.getElementById("id_q5_praxia_score");
+        verifica[68]=document.getElementById("id_q6_memory_test_score");
+
+        verifica_ms[0]="Nome do Serviço - Cabeçalho";
+        verifica_ms[1]="Data de entrada no serviço - Cabeçalho";
+        verifica_ms[2]="Pessoa Entrevistada - Cabeçalho";
+        verifica_ms[3]="Nome do Entrevistador - Cabeçalho";
+        verifica_ms[4]="Data da Avaliação - Cabeçalho";
+        verifica_ms[5]="E-mail - Aba Participante";
+        verifica_ms[6]="Nome do Participante - Aba Participante";
+        verifica_ms[7]="Endereço do Participante - Aba Participante";
+        verifica_ms[8]="Meio de comunicação - Aba Participante";
+        verifica_ms[9]="Data de Nascimento - Aba Participante";
+        verifica_ms[10]="Idade Atual - Aba Participante";
+        verifica_ms[11]="Gênero do Participante - Aba Participante";
+        verifica_ms[12]="Foto do Participante - Aba Participante";
+        verifica_ms[13]="Estado Civil do Participante - Aba Participante";
+        verifica_ms[14]="Escolaridade do Participante - Aba Participante";
+        verifica_ms[15]="Tempo de Estudo do Participante - Aba Participante";
+        verifica_ms[16]="Se o participante é aposentado - Aba Participante";
+        verifica_ms[17]="Profissão de aposentadoria - Aba Participante";
+        verifica_ms[18]="Profissão Atual do Participante - Aba Participante";
+        verifica_ms[19]="Por qual profissão o Participante é aposentado - Aba Participante";
+        verifica_ms[20]="Se o Participante exerce atividade remunerada - Aba Participante";
+        verifica_ms[21]="Atividade Remunerada exercida pelo Participante - Aba Participante";
+        verifica_ms[22]="Renda Individual Participante - Aba Participante";
+        verifica_ms[23]="Renada Familiar Participante - Aba Participante";
+        verifica_ms[24]="Pessoas com quem o Participante Mora - Aba Participante";
+        verifica_ms[25]="Se o Participante tem religião - Aba Participante";
+        verifica_ms[26]="Religião do Participante - Aba Participante";
+        verifica_ms[27]="Auto relato de saúde do Participante - Aba Participante";
+        verifica_ms[28]="Peso do Participante - Aba Participante";
+        verifica_ms[29]="Altura do Participante - Aba Participante";
+        verifica_ms[30]="IMC do Participante - Aba Participante";
+        verifica_ms[31]="Pessoas com as quais o participante pega carona - Aba Participante";
+        verifica_ms[32]="4.Habilidade visuoespacial - Pontuação - Aba Psico";
+        verifica_ms[33]="7. Que idade o(a) senhor(a) sente ter? - Aba Psico";
+        verifica_ms[34]="7. Por quê? Aba Psico";
+        verifica_ms[35]="id_q7_age_self_perception_analyze";
+        verifica_ms[36]="8. Aspectos Positivos Envelhecimento - Aba Psico";
+        verifica_ms[37]="8. Pontos Negativos do Envelhecimento - Aba Psico";
+        verifica_ms[38]="Observações Aspectos Psicológicos - Aba Psico";
+        verifica_ms[39]="40. Quantidade de Álcool Ingerido - Aba Bio";
+        verifica_ms[40]="42. L) Outra? - Aba Bio";
+        verifica_ms[41]="43. H) Outro? - Aba Bio";
+        verifica_ms[42]="44. Quantidade de Diagnóstico de Doenças - Aba Bio";
+        verifica_ms[43]="45. Registro dos medicamentos - Aba Bio";
+        verifica_ms[44]="Observações sobre os aspectos Biológicos - Aba Bio";
+        verifica_ms[45]="54. Quantidade de Irmãos - Aba Social";
+        verifica_ms[46]="54. Quantidade de Filhos - Aba Social";
+        verifica_ms[47]="54. Quantidade de Netos - Aba Social";
+        verifica_ms[48]="Observações sobre os aspectos Sociais";
+        verifica_ms[49]="87. Quantidade de Quedas - Aba Multi";
+        verifica_ms[50]="88. Quantidade de Fraturas - Aba Multi";
+        verifica_ms[51]="89. Lista de Fraturas - Aba Multi";
+        verifica_ms[52]="Observações sobre o aspecto Multidimensional";
+        verifica_ms[53]="Calcular Domínio Déficit Cognitivo - Aba Psico";
+        verifica_ms[54]="Calcular Domínio Atitudes Negativas em Relação ao envelhecimento - Aba Psico";
+        verifica_ms[55]="Calcular Domínio Depressão - Aba Psico";
+        verifica_ms[56]="Calcular Domínio Déficit Sensorial - Aba Bio";
+        verifica_ms[57]="Calcular Domínio Incapacidade Funcional - Aba Bio";
+        verifica_ms[58]="Calcular Domínio Desnutrição - Aba Bio";
+        verifica_ms[59]="Calcular Domínio Doenças Cardiovasculares - Aba Bio";
+        verifica_ms[60]="Calcular Domínio Uso Inadequado de Medicamentos - Aba Bio";
+        verifica_ms[61]="Calcular Domínio Baixo Suporte Social - Aba Social";
+        verifica_ms[62]="Calcular Domínio Problemas Ambientais - Aba Social";
+        verifica_ms[63]="Calcular Domínio Violência - Aba Social";
+        verifica_ms[64]="Calcular Domínio Quedas - Aba Multi";
+        verifica_ms[65]="2.Memória - Pontuação - Aba Psico";
+        verifica_ms[66]="3.Linguagem, função executiva e atenção - Pontuação - Aba Psico";
+        verifica_ms[67]="5.Praxia - Pontuação - Aba Psico";
+        verifica_ms[68]="6.Memória - Pontuação - Aba Psico";
+    }
+
+    function tudoCerto(){
+        if(verifica[0] == null){
+            encheVetorErro();
+        }
+        for(conta=0; conta < verifica.length; conta++){
+            if (verifica[conta].value == ""){
+                alert("Campo Não Preenchido: " + verifica_ms[conta]);
+                //verifica[conta].focus();
+                return false;
+            }
+        }
+        if(!CheckDate(verifica[1])){
+            alert("Digite a data no formato Dia/Mês/Ano no campo Data de Entrada - Cabeçalho");
+	        verifica[1].focus()
+            return false;
+        }
+        if(!CheckDate(verifica[4])){
+            alert("Digite a data no formato Dia/Mês/Ano no campo Data de Avaliação - Cabeçalho");
+	        verifica[4].focus()
+            return false;
+        }
+        if(!CheckDate(verifica[9])){
+            alert("Digite a data no formato Dia/Mês/Ano no campo Data de Nascimento - Aba Participante");
+	        verifica[9].focus()
+            return false;
+        }
+        valor = parseInt(verifica[32].value)
+        if (valor< 0 || valor > 4){
+            alert("Campo com valor fora do limite permitido: " + verifica_ms[32]);
+            return false;
+        }
+
+        valor = parseInt(verifica[65].value)
+        if (valor< 0 || valor > 7){
+            alert("Campo com valor fora do limite permitido: " + verifica_ms[65]);
+            return false;
+        }
+
+        valor = parseInt(verifica[66].value)
+        if (valor< 0 || valor > 100){
+            alert("Campo com valor fora do limite permitido: " + verifica_ms[66]);
+            return false;
+        }
+
+        valor = parseInt(verifica[67].value)
+        if (valor< 0 || valor > 3){
+            alert("Campo com valor fora do limite permitido: " + verifica_ms[67]);
+            return false;
+        }
+
+        valor = parseInt(verifica[68].value)
+        if (valor< 0 || valor > 7){
+            alert("Campo com valor fora do limite permitido: " + verifica_ms[68]);
+            return false;
+        }
+
+        calcular(1,6,document.getElementById('id_c1'));
+        calcular(7,8,document.getElementById('id_c2'));
+        calcular(9,14,document.getElementById('id_c3'));
+        calcular(15,19,document.getElementById('id_c4'));
+        calcular(20,25,document.getElementById('id_c5'));
+        calcular(26,32,document.getElementById('id_c6'));
+        calcular(33,41,document.getElementById('id_c7'));
+        calcular(46,53,document.getElementById('id_c8'));
+        calcular(55,62,document.getElementById('id_c9'));
+        calculaAmbiente();
+        calcular(79,86,document.getElementById('id_c11'));
+        calcularMulti();
+        return true;
+    }
+
+    function CheckDate(pObj) {
+          var expReg = /^((0[1-9]|[12]\d)\/(0[1-9]|1[0-2])|30\/(0[13-9]|1[0-2])|31\/(0[13578]|1[02]))\/(19|20)?\d{2}$/;
+          if ( !pObj.value.match(expReg))
+              return false;
+          var dia = parseInt(pObj.value.substring(0,2));
+          var mes = parseInt(pObj.value.substring(3,5));
+          var ano = parseInt(pObj.value.substring(6,10));
+          if (dia > 31 || dia < 1)
+             return false;
+          if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30)
+             return false;
+          if ( mes == 2 && (ano % 4) != 0 &&  dia > 28)
+              return false;
+          if ( mes == 2 && (ano % 4) == 0 &&  dia > 29)
+              return false;
+          return true;
+    }
+
     var certo = new Array(103)
     certo[1]="S";
     certo[2]="S";
@@ -188,8 +421,8 @@
     certo[35]="N";
     certo[36]="N";
     certo[37]="N";
-    certo[38]="N";
-    certo[39]="N";
+    certo[38]="S";
+    certo[39]="S";
     certo[40]="N";
     certo[41]="N";
     certo[42]="N";
@@ -197,9 +430,9 @@
     certo[44]="N";
     certo[45]="N";
     certo[46]="N";
-    certo[47]="N";
-    certo[48]="N";
-    certo[49]="N";
+    certo[47]="S";
+    certo[48]="S";
+    certo[49]="S";
     certo[50]="N";
     certo[51]="N";
     certo[52]="N";
@@ -265,6 +498,52 @@
             }
         }
         ele.value=conta;
+    }
+    function calculaIMC(){
+        a = parseFloat(document.getElementById("id_p20_weight").value)
+        b = parseFloat(document.getElementById("id_p20_height").value)
+        document.getElementById("id_p20_IMC").value = a / (b*b)
+    }
+    function calculaAmbiente(){
+        calcular(63,78,document.getElementById('id_c10'));
+        calcular(63,69,document.getElementById('id_c10_i'));
+        calcular(70,72,document.getElementById('id_c10_r'));
+        calcular(73,78,document.getElementById('id_c10_e'));
+    }
+
+    function calcularMulti(){
+        if (respostas[0] == null){
+            encheVetor();
+        }
+        if (parseInt(document.getElementById("id_p05_age").value) > 75) {
+            respostas[92].value = 'S';
+        } else {
+            respostas[92].value = 'N';
+        }
+        if (document.getElementById("id_p06_gender").value == 'F') {
+            respostas[93].value = 'S';
+        } else {
+            respostas[93].value = 'N';
+        }
+        if (parseInt(document.getElementById("id_c5").value) < 4) {
+            respostas[95].value = 'S';
+         }else{
+            respostas[95].value = 'N';
+        }
+        respostas[96].value = respostas[15].value
+        if (respostas[38].value == 'N'){
+            respostas[99].value = 'S';
+        }else{
+            respostas[99].value = 'N';
+        }
+        if (respostas[3].value == 'N'){
+            respostas[94].value = 'S';
+        }else{
+            respostas[94].value = 'N';
+        }
+        respostas[100].value = document.getElementById("id_q42_diseases_last_5_years_c").value
+
+        calcular(87,102,document.getElementById('id_c12'))
     }
   </script>
 
@@ -332,16 +611,20 @@
               <tr>
                   <td  bgcolor="silver" align="center"><h2>PARTICIPANTE</h2></td>
               </tr>
-                  {% for field in participant %}
-                        <tr>
-                          <TD width="100%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
-                          </tr>
-                    {% endfor %}
-                    {% for field in participant_situation %}
-                        <tr>
-                          <TD width="100%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
-                         </tr>
-                    {% endfor %}
+              {% for field in participant %}
+                <tr>
+                   <TD width="100%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                </tr>
+              {% endfor %}
+              {% for field in participant_situation %}
+                 <tr>
+                    <TD width="100%" valign="middle">{{ field.label_tag }}  {{field}}
+                    {% if field == participant_situation.p20_IMC %}
+                        <input type="button" value="Calc" onclick="calculaIMC()">
+                    {% endif %}
+                    </TD>
+                 </tr>
+              {% endfor %}
           </table>
         </div> <!--PARTICIPANTE !-->
 
@@ -350,91 +633,90 @@
 
         <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--PSICOLÓGICOS !-->
 
-          <table border="2" width="100%">
-              <tr>
-                  <td colspan="3" bgcolor="#0099FF" align="center"><h2>RELACIONADOS A ASPECTOS PSICOLÓGICOS</h2></td>
-              </tr>
-              {% for field in cognition %}
-                   {% if field != cognition.max_score_cognition %}
-                      {% if field != cognition.need_investigation_cognition %}
-                          <tr>
-                          {% if field == cognition.q1_memory_good_like_before %}
-                              <td class="example Text3" WIDTH="10%" align="center" rowspan="7" BGCOLOR="#3399CC">
-                                  <span><B>DÉFICIT<br>COGNITIVO</B></span></td>
-                          {% endif %}
-                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
-                          {% if field == cognition.q1_memory_good_like_before %}
-                              <td WIDTH="10%" align="center" rowspan="7" BGCOLOR="#3399CC">
-                                  <B>Pontuação Máxima(6)<br>
-                                     <input type="text" name="c1" ID="id_c1" size="2" readonly><input type="button" value="Calc" onclick="calcular(1,6,document.getElementById('id_c1'))"> <br>
-                                  {{ cognition.need_investigation_cognition.label_tag }} <br>
-                                  {{ cognition.need_investigation_cognition }}  </B>
-
-
-                              </td>
-                          {% endif %}
-                          </tr>
-                      {% endif %}
-                   {% endif %}
-              {% endfor %}
-
-               <TR><TD COLSPAN="3" BGCOLOR="#0099FF"></TD> </TR>
-
-              {% for field in negative %}
-                  {% if field != negative.max_score_negative %}
-                      {% if field != negative.need_investigation_negative %}
-                          <tr>
-                          {% if field == negative.q7_age_self_perception %}
-                              <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
-                                  <span><B>ATITUDES
-                                  NEGATIVAS EM RELAÇÃO AO<br>PROCESSO DE ENVELHECIMENTO</B></span></td>
-                          {% endif %}
-                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
-                          {% if field == negative.q7_age_self_perception %}
-                              <td WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
-                                  <span><B>
-                                  Pontuação Máxima(2)<br>
-                                  <input type="text" name="c2" ID="id_c2" size="2" readonly><input type="button" value="Calc" onclick="calcular(7,8,document.getElementById('id_c2'))"> <br>
-                                  {{ negative.need_investigation_negative.label_tag }}<br>
-                                  {{ negative.need_investigation_negative }}  </B></span></td>
-                          {% endif %}
-                          </tr>
-                      {% endif %}
-                  {% endif %}
-              {% endfor %}
-
-               <TR><TD COLSPAN="3" BGCOLOR="#0099FF"></TD> </TR>
-
-              {% for field in depression %}
-                  {% if field != depression.max_score_depression %}
-                      {% if field != depression.need_investigation_depression %}
-                          <tr>
-                          {% if field == depression.q9_satisfied_with_life %}
-                              <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
-                                  <span><B>DEPRESSÃO</B></span></td>
-                          {% endif %}
-                          <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
-                          {% if field == depression.q9_satisfied_with_life %}
-                              <td WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
-                                  <span><B>
-                                  Pontuação Máxima(6)<br>
-                                  <input type="text" name="c3" ID="id_c3" size="2" readonly><input type="button" value="Calc" onclick="calcular(9,14,document.getElementById('id_c3'))"> <br>
-                                  {{ depression.need_investigation_depression.label_tag }}<br>
-                                  {{ depression.need_investigation_depression }}  </B></span></td>
-                          {% endif %}
-                          </tr>
-                      {% endif %}
-                  {% endif %}
-              {% endfor %}
-              <tr>  <td colspan="3" width="100%" BGCOLOR="#0099FF" ALIGN="CENTER"><B> OBSERVAÇÕES SOBRE O BLOCO PSICOLÓGICO </B> </td></tr>
-              <tr>  <td colspan="3" width="100%">  {{ psychological.comments_psico }}  </td> </tr>
-               <TR><TD COLSPAN="3" BGCOLOR="#0099FF"></TD> </TR>
-          </table>
-
-        </div> <!--PSICOLÓGICOS !-->
+            <table border="2" width="100%">
+                <tr>
+                    <td colspan="3" bgcolor="#0099FF" align="center"><h2>RELACIONADOS A ASPECTOS PSICOLÓGICOS</h2></td>
+                </tr>
+                {% for field in cognition %}
+                     {% if field != cognition.max_score_cognition %}
+                        {% if field != cognition.need_investigation_cognition %}
+                            <tr>
+                            {% if field == cognition.q1_memory_good_like_before %}
+                                <td class="example Text3" WIDTH="10%" align="center" rowspan="11" BGCOLOR="#3399CC">
+                                    <span><B>DÉFICIT<br>COGNITIVO</B></span></td>
+                            {% endif %}
+                            <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                            {% if field == cognition.q1_memory_good_like_before %}
+                                <td WIDTH="10%" align="center" rowspan="11" BGCOLOR="#3399CC">
+                                    <B>Pontuação Máxima(6)<br>
+                                       <input type="text" name="c1" ID="id_c1" size="2" readonly><input type="button" value="Calc" onclick="calcular(1,6,document.getElementById('id_c1'))"> <br>
+                                    {{ cognition.need_investigation_cognition.label_tag }} <br>
+                                    {{ cognition.need_investigation_cognition }}  </B>
+  
+  
+                                </td>
+                            {% endif %}
+                            </tr>
+                        {% endif %}
+                     {% endif %}
+                {% endfor %}
+  
+                 <TR><TD COLSPAN="3" BGCOLOR="#0099FF"></TD> </TR>
+  
+                {% for field in negative %}
+                    {% if field != negative.max_score_negative %}
+                        {% if field != negative.need_investigation_negative %}
+                            <tr>
+                            {% if field == negative.q7_age_self_perception %}
+                                <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                                    <span><B>ATITUDES
+                                    NEGATIVAS EM RELAÇÃO AO<br>PROCESSO DE ENVELHECIMENTO</B></span></td>
+                            {% endif %}
+                            <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                            {% if field == negative.q7_age_self_perception %}
+                                <td WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                                    <span><B>
+                                    Pontuação Máxima(2)<br>
+                                    <input type="text" name="c2" ID="id_c2" size="2" readonly><input type="button" value="Calc" onclick="calcular(7,8,document.getElementById('id_c2'))"> <br>
+                                    {{ negative.need_investigation_negative.label_tag }}<br>
+                                    {{ negative.need_investigation_negative }}  </B></span></td>
+                            {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+  
+                 <TR><TD COLSPAN="3" BGCOLOR="#0099FF"></TD> </TR>
+  
+                {% for field in depression %}
+                    {% if field != depression.max_score_depression %}
+                        {% if field != depression.need_investigation_depression %}
+                            <tr>
+                            {% if field == depression.q9_satisfied_with_life %}
+                                <td class="example Text3" WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                                    <span><B>DEPRESSÃO</B></span></td>
+                            {% endif %}
+                            <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
+                            {% if field == depression.q9_satisfied_with_life %}
+                                <td WIDTH="10%" align="center" rowspan="6" BGCOLOR="#3399CC">
+                                    <span><B>
+                                    Pontuação Máxima(6)<br>
+                                    <input type="text" name="c3" ID="id_c3" size="2" readonly><input type="button" value="Calc" onclick="calcular(9,14,document.getElementById('id_c3'))"> <br>
+                                    {{ depression.need_investigation_depression.label_tag }}<br>
+                                    {{ depression.need_investigation_depression }}  </B></span></td>
+                            {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                <tr>  <td colspan="3" width="100%" BGCOLOR="#0099FF" ALIGN="CENTER"><B> OBSERVAÇÕES SOBRE O BLOCO PSICOLÓGICO </B> </td></tr>
+                <tr>  <td colspan="3" width="100%">  {{ psychological.comments_psico }}  </td> </tr>
+                 <TR><TD COLSPAN="3" BGCOLOR="#0099FF"></TD> </TR>
+            </table>
+  
+          </div> <!--PSICOLÓGICOS !-->
 
         <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--BIOLÓGICOS !-->
-        </table>
             <table border="2" width="100%">
             <tr>
                 <td colspan="3" bgcolor="#33CC99" align="center"><h2>RELACIONADOS A ASPECTOS BIOLÓGICOS</h2></td>
@@ -641,19 +923,20 @@
                           {% if field == environmental.q63_estable_furniture %}
                               <td class="example Text3" WIDTH="10%" align="center" rowspan="19" BGCOLOR="#FFFFCC">
                                   <span><B>PROBLEMAS AMBIENTAIS </B></span></td>
-                              <td align="center" width="80%" bgcolor="CCCCC"><B>Ambiente Interno</B> </td>
+                              <td align="center" width="80%" bgcolor="CCCCC"><B>Ambiente Interno </B><input type="text" name="c10_i" ID="id_c10_i" size="2" readonly> </td>
                               <td WIDTH0="10%" align="center" rowspan="19" BGCOLOR="#FFFFCC">
                                   <span><B>
                                   Pontuação Máxima(16)<br>
-                                  <input type="text" name="c10" ID="id_c10" size="2" readonly><input type="button" value="Calc" onclick="calcular(63,78,document.getElementById('id_c10'))"> <br>
+                                  <input type="text" name="c10" ID="id_c10" size="2" readonly><br><input type="button" value="Calc" onclick="calculaAmbiente()"> <br>
                                   {{ environmental.need_investigation_env.label_tag }}<br>
-                                  {{ environmental.need_investigation_env }}  </B></span></td></tr><tr>
+                                  {{ environmental.need_investigation_env }}  </B> </span><br><br>
+                              </td></tr><tr>
                           {% endif %}
                           {% if field == environmental.q70_get_on_stool %}
-                              <td align="center" width="80%" bgcolor="CCCCC"><B>Comportamento de Risco</B> </td></tr><tr>
+                              <td align="center" width="80%" bgcolor="CCCCC"><B>Comportamento de Risco </B><input type="text" name="c10_r" ID="id_c10_r" size="2" readonly> </td></tr><tr>
                           {% endif %}
                           {% if field == environmental.q73_manicure_sidewalks %}
-                              <td align="center" width="80%" bgcolor="CCCCC"><B>Ambiente Externo</B> </td></tr><tr>
+                              <td align="center" width="80%" bgcolor="CCCCC"><B>Ambiente Externo </B><input type="text" name="c10_e" ID="id_c10_e" size="2" readonly> </td></tr><tr>
                           {% endif %}
                           <TD width="80%" valign="middle">{{ field.label_tag }}  {{field}}</TD>
                           </tr>
@@ -714,7 +997,7 @@
                           {% if field == falls.q87_falls_last_year %}
                               <td WIDTH="10%" align="center" rowspan="19" BGCOLOR="#FFBBFF">
                                   <span><B>Pontuação Máxima(16)<br>
-                                  <input type="text" name="c12" ID="id_c12" size="2" readonly><input type="button" value="Calc" onclick="calcular(87,102,document.getElementById('id_c12'))"> <br>
+                                  <input type="text" name="c12" ID="id_c12" size="2" readonly><input type="button" value="Calc" onclick="calcularMulti()"> <br>
                                   {{ falls.need_investigation_falls.label_tag }}<br>
                                   {{ falls.need_investigation_falls }}  </B></span></td>
                           {% endif %}
@@ -732,7 +1015,7 @@
       </div>
     </div>
     <br>
-    <center>  <input type="submit" value="Gravar"> </center>
+    <center>  <input type="submit" value="Gravar" onclick="return tudoCerto()"> </center>
   </form>
   {% else %}
   <h1>Fudeu !!!!!!!</h1>

@@ -3,12 +3,16 @@ from .messages import Options
 # Begin psychological aspects
 class CognitionDeficit (models.Model):
     q1_memory_good_like_before = models.CharField(Options.questions[1],max_length=1,default="N",choices=Options.CHOICES)
-    q2_memory_test = models.CharField(Options.questions[2],max_length=1,default="N",choices=Options.CHOICES)
-    q3_language_function_attention = models.CharField(Options.questions[3], max_length=1, default="N", choices=Options.CHOICES)
+    q2_memory_test = models.CharField(Options.questions[2][0],max_length=1,default="N",choices=Options.CHOICES)
+    q2_memory_test_score = models.IntegerField(Options.questions[2][1], null=True, blank=True)
+    q3_language_function_attention = models.CharField(Options.questions[3][0], max_length=1, default="N", choices=Options.CHOICES)
+    q3_language_function_attention_score = models.IntegerField(Options.questions[3][1], default=0)
     q4_visospatial_ability = models.CharField(Options.questions[4][0], max_length=1, default="N", choices=Options.CHOICES)
     q4_visospatial_ability_score = models.IntegerField(Options.questions[4][1], default=0)
-    q5_praxia = models.CharField(Options.questions[5], max_length=1,default="N",choices=Options.CHOICES)
-    q6_memory_test = models.CharField(Options.questions[6], max_length=1,default="N",choices=Options.CHOICES)
+    q5_praxia = models.CharField(Options.questions[5][0], max_length=1,default="N",choices=Options.CHOICES)
+    q5_praxia_score = models.IntegerField(Options.questions[5][1], default=0)
+    q6_memory_test = models.CharField(Options.questions[6][0], max_length=1,default="N",choices=Options.CHOICES)
+    q6_memory_test_score = models.IntegerField(Options.questions[6][1], default=0)
     need_investigation_cognition = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
     max_score_cognition = models.IntegerField(default=6)
 

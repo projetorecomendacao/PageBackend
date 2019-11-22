@@ -1,4 +1,15 @@
 class Options():
+        INTERVIEW = [
+            ["Participante", "Participante"],
+            ["Cuidador Formal", "Cuidador Formal"],
+            ["Familiar", "Familiar"]
+        ]
+
+        GENDER = [
+            ["M", "Masculino"],
+            ["F", "Feminino"]
+        ]
+
         CHOICES = [
             ["S", "Sim"],
             ["N", "Não"]
@@ -26,20 +37,28 @@ class Options():
 
         questions = ["questões"]
         questions.insert(1, "1. O(A) senhor(a) considera que sua memória é tão boa quanto antes?")
-        questions.insert(2, "2. Memória")
-        questions.insert(3, "3. Linguagem, função executiva e atenção")
+        q02 = ["2. Memória"]
+        q02.insert(1,"2. Memória - Pontuação: (0 a 7)")
+        questions.insert(2,q02)
+        q03 = ["3. Linguagem, função executiva e atenção"]
+        q03.insert(1,"3. Linguagem, função executiva e atenção - Pontuação: (0 a 100)")
+        questions.insert(3, q03)
         q04 = ["4. Habilidade visuoespacial"]
-        q04.insert(1,"4. Habilidade visuoespacial - Pontuação:")
+        q04.insert(1,"4. Habilidade visuoespacial - Pontuação: (0 a 4)")
         questions.insert(4,q04)
-        questions.insert(5, "5. Praxia")
-        questions.insert(6, "6. Memória")
+        q05 = ["5. Praxia"]
+        q05.insert(1,"5. Praxia - Pontuação: (0 a 3)")
+        questions.insert(5, q05)
+        q06 = ["6. Memória"]
+        q06.insert(1,"6. Memória - Pontuação: (0 a 7)")
+        questions.insert(6, q06)
         q07 = ["7. Que idade o(a) senhor(a) sente ter?"]
         q07.insert(1, "Por quê?")
         q07.insert(2, "O(a) idoso(a) sente-se mais velho do que realmente é?")
         questions.insert(7, q07)
-        q08 = ["É perceptível uma visão mais negativa da velhice]?"]
-        q08.insert(1,"Aspectos Positivo do Envelhecimento")
-        q08.insert(2,"Aspectos Negativos do Envelhecimento")
+        q08 = ["8. É perceptível uma visão mais negativa da velhice]?"]
+        q08.insert(1,"8. Aspectos Positivo do Envelhecimento")
+        q08.insert(2,"8. Aspectos Negativos do Envelhecimento")
         questions.insert(8, q08)
         questions.insert(9, "9. De modo geral o(a) senhor(a) está satisfeito com a vida?")
         questions.insert(10, "10. O(A) senhor(a) se sente triste com frequência?")
@@ -59,26 +78,26 @@ class Options():
         questions.insert(23, "23. O(A) senhor(a) necessita de ajuda para Usar o telefone?")
         questions.insert(24, "24. O(A) senhor(a) necessita de ajuda para Vestir-se?")
         questions.insert(25, "25. O(A) senhor(a) necessita de ajuda para Tomar banho?")
-        questions.insert(26, "26. O(A) senhor(a) que está desnutrido?")
+        questions.insert(26, "26. O(A) senhor(a) acredita que está desnutrido?")
         questions.insert(27, "27. O(A) senhor(a) tem lesões na região bucal ou algum outro problema que provoque dificuldades de \
                    mastigação?")
         questions.insert(28, "28. O(A) senhor(a) faz menos de três refeições por dia?")
         questions.insert(29, "29. Nos últimos 3 meses, o(a) senhor(a) Diminuiu sua ingesta alimentar sem motivo?")
         questions.insert(30, "30. Nos últimos 3 meses, o(a) senhor(a) Perdeu peso sem motivo aparente?")
-        questions.insert(31, "31. Passou por algum estresse psicológico, doença aguda ou internações?")
+        questions.insert(31, "31. Nos últimos 3 meses passou por algum estresse psicológico, doença aguda ou internações?")
         questions.insert(32, "32. Índice de Massa Corporal (peso[kg]/ estatura[m2]) =  kg/m2) igual ou menor que 22 kg/m2?")
         questions.insert(33, "33. O(A) senhor(a) tem histórico familiar (1º grau) de DCV (infarto, derrama e/ou angina) ?")
         q34 = ["34. O(a) senhor(a) tem hipertensão arterial descontrolada? [Pontuar como sim quando PA auto referida for \
                    superior a 140/90 mmHg ou caso o(a) idoso(a) não saiba informar.]"]
-        q34.insert(1,"Desconhece os valores da PA?")
+        q34.insert(1,"34. Desconhece os valores da PA?")
         questions.insert(34, q34)
         q35=["35. O(A) senhor(a) tem diabetes? Se sim, está descontrolada? [Pontuar como sim quando glicemia em jejum \
            verificada em último exame for superior a 100 mg/dL, respectivamente, ou caso o(a) idoso(a) não saiba informar]."]
-        q35.insert(1,"Desconhece os valores de glicemia?" )
+        q35.insert(1,"35. Desconhece os valores de glicemia?" )
         questions.insert(35,q35)
         q36=["36. O(A) senhor(a) tem colesterol alterado? [Pontuar como sim quando CT e HDL forem verificados em último \
                    exame como superior a 200 mg/dL e 60mg/dL, respectivamente, ou caso o(a) idoso(a) não saiba informar]."]
-        q36.insert(1,"Desconhece os valores de CT e HDL?")
+        q36.insert(1,"36. Desconhece os valores de CT e HDL?")
         questions.insert(36,q36)
         questions.insert(37, "37. O(A) senhor(a) fuma ou é ex-fumante?")
         questions.insert(38, "38. O(A) senhor(a) pratica mais de 150 minutos de exercícios físicos por semana?")
@@ -87,7 +106,7 @@ class Options():
                    referências] Homens: Mais do que 14 doses de destilado (350 ml), 7 taças de vinho (2 litros) ou 14 latas\
                    de cerveja (5 litros) Mulheres: Mais do que 7 doses de destilado (175 ml), 3 e ½ taças de vinho (1 litro)\
                    ou 7 latas de cerveja (2,5 litros)"]
-        q40.insert(1,"Quantidade de Alcool Ingerido")
+        q40.insert(1,"40. Quantidade de Alcool Ingerido")
         questions.insert(40,q40)
         questions.insert(41, "41. IMC para obesidade: ≥27 Kg/m2 [Verificar na questão 18]")
         q42 = ["42. Nos últimos 5 anos, algum médico ou outro profissional de saúde já disse que o(a) senhor(a) tem:"]
@@ -131,12 +150,12 @@ class Options():
         questions.insert(53, "53. Cálculo do risco para reações adversas. [Verifique as respostas das questões 30 e 38. Circule e cruze\
                    as informações na tabela abaixo. Em seguida, verifique os registros da questão 31 e assinale ao lado se \
                    o(a) idoso(a) utiliza uma quantidade de medicamentos superior ao valor indicado na tabela] ")
-        q54=["O(A) senhor(a) tem: cônjuge?"]
-        q54.insert(1,"O(A) senhor(a) tem: Mãe?" )
-        q54.insert(2,"O(A) senhor(a) tem: Pai?" )
-        q54.insert(3,"O(A) senhor(a) tem quantos irmãos?" )
-        q54.insert(4,"O(A) senhor(a) tem quantos filhos?" )
-        q54.insert(5,"O(A) senhor(a) tem quantos netos?" )
+        q54=["54. O(A) senhor(a) tem: cônjuge?"]
+        q54.insert(1,"54. O(A) senhor(a) tem: Mãe?" )
+        q54.insert(2,"54. O(A) senhor(a) tem: Pai?" )
+        q54.insert(3,"54. O(A) senhor(a) tem quantos irmãos?" )
+        q54.insert(4,"54. O(A) senhor(a) tem quantos filhos?" )
+        q54.insert(5,"54. O(A) senhor(a) tem quantos netos?" )
         questions.insert(54,q54)
         questions.insert(55, "55. O(A) senhor(a) encontra familiares e/ou amigos com frequência?")
         questions.insert(56, "56. O(A) senhor(a) participa de decisões importantes da sua família?")
@@ -150,10 +169,10 @@ class Options():
         questions.insert(63, "63. Na casa do(a) senhor(a):[Ambiente interno] Os móveis são estáveis?")
         questions.insert(64, "64. Na casa do(a) senhor(a): Há objetos e/ou tapetes soltos nas áreas de circulação?")
         questions.insert(65, "65. Na casa do(a) senhor(a): O piso é escorregadio (ex. encerado, molhado)?")
-        questions.insert(66, "66. Na casa do(a) senhor(a): As escadas possuem corrimão em ambos os lados?")
-        questions.insert(67, "67. Na casa do(a) senhor(a): As escadas/ degraus são iluminados adequadamente")
+        questions.insert(66, "66. Na casa do(a) senhor(a): As escadas possuem corrimão em ambos os lados? (Colocar sim se a casa não tive escadas)")
+        questions.insert(67, "67. Na casa do(a) senhor(a): As escadas/ degraus são iluminados adequadamente? (Colocar sim se a casa não tive escadas)")
         questions.insert(68, "68. Na casa do(a) senhor(a): Os degraus são adequados (tamanho, rebordos, largura e \
-                   padronagem, etc)?")
+                   padronagem, etc)? (Colocar sim se a casa não tive escadas)")
         questions.insert(69, "69. Na casa do(a) senhor(a): Há tapetes antiderrapantes (fora e dentro box)?")
         questions.insert(70, "70. O(A) senhor(a) costuma: Subir em banquetas ou cadeiras para alcançar \
                    objetos altos?")
@@ -179,7 +198,7 @@ class Options():
         questions.insert(85, "85. Alguém do seu convívio já tocou o corpo do(a) senhor(a) sem o seu consentimento?")
         questions.insert(86, "86. O(A) senhor(a) está deixando de cuidar da sua própria saúde e/ou segurança?")
         q87 =["87. O(A) senhor(a) sofreu alguma queda nos últimos 12 meses?" ]
-        q87.insert(1,"Se sofreu quedas, quantas?  [Se não, pontue também a resposta “não” na próxima questão e vá \
+        q87.insert(1,"87. Se sofreu quedas, quantas?  [Se não, pontue também a resposta “não” na próxima questão e vá \
                       para a questão 90] [Se não, pule as próximas duas questões].")
         questions.insert(87, q87)
         q88 = ["88. O(A) senhor(a) sofreu alguma fratura decorrente destas quedas?"]
@@ -220,11 +239,11 @@ class Options():
         INCOME =[
             ["BPC","BPC"],
             ["Até um salário mínimo","Até um salário mínimo"],
-            ["mais de 1 a 2 salários mínimos", "mais de 1 a 2 salários mínimos"],
-            ["mais de 2 a 3 salários mínimos", "mais de 2 a 3 salários mínimos"],
-            ["mais de 3 a 4 salários mínimos", "mais de 3 a 4 salários mínimos"],
-            ["mais de 4 a 5 salários mínimos", "mais de 4 a 5 salários mínimos"],
-            ["mais de 5 a 10 salários mínimos", "mais de 5 a 10 salários mínimos"],
+            ["Entre 1 e 2 salários mínimos", "Entre 1 e 2 salários mínimos"],
+            ["Entre 2 e 3 salários mínimos", "Entre 2 e 3 salários mínimos"],
+            ["Entre 3 e 4 salários mínimos", "Entre 3 e 4 salários mínimos"],
+            ["Entre 4 e 5 salários mínimos", "Entre 4 e 5 salários mínimos"],
+            ["Entre 5 e 10 salários mínimos", "Entre 5 e 10 salários mínimos"],
             ["mais de 10 salários mínimos", "mais de 10 salários mínimos"]
         ]
 
@@ -259,7 +278,4 @@ class Options():
             ["outros", "outros"],
         ]
 
-        GENDER =[
-                    ["M","Masculino"],
-                    ["F","Feminino"],
-        ]
+

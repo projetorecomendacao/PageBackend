@@ -5,6 +5,11 @@
         <title>Title</title>
         <script src="/static/js/RGraph/libraries/RGraph.common.core.js"></script>
         <script src="/static/js/RGraph/libraries/RGraph.rose.js"></script>
+        <script src="/static/js/RGraph/libraries/RGraph.common.dynamic.js"></script>
+        <script src="/static/js/RGraph/libraries/RGraph.common.tooltips.js"></script>
+        <script src="/static/js/RGraph/libraries/RGraph.common.effects.js"></script>
+        <script src="/static/js/RGraph/libraries/RGraph.radar.js"></script>
+        
 
         <style type="text/css">
             .example.Text3 span, .example.Text3 {
@@ -13,7 +18,7 @@
                 -ms-writing-mode: vertical-rl;
             }
 
-            body{font-family:Calibri, Tahoma, Arial}</head>
+            body{font-family:Calibri, Tahoma, Arial}
 
             .TabControl{ width:100%; overflow:hidden; height:100%}
             .TabControl #header{ width:100%; border: solid 1px; overflow:hidden; cursor:hand}
@@ -24,13 +29,13 @@
             .ativa{width:200px; height:60px; border:solid 1 px; border-radius:5px 5px 0 0;text-align:center; padding-top:5px; background:#27408B;}
             .ativa span, .selected span{color:#FF0000}
             .TabControl #content{background:#FFFFFF}
-            .TabControl .conteudo{width:100%;  background:#FFFFFF; display:none; height:100/%;color:#000000}
+            .TabControl .conteudo{width:100%;  background:#FFFFFF; display:none; height:100%;color:#000000}
             .selected{width:200px; height:60px; border:solid 1 px; border-radius:5px 5px 0 0;text-align:center; padding-top:5px; background:#27408B}
         </style>
 
 
 
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function(){
@@ -60,12 +65,12 @@
                 <td colspan="2" >Participante: {{ page.p01_name }}</td>
             </tr>
             <tr>
-                <td  width='42%'>Entrada no Serviço: {{ page.p01_name }}</td>
-                <td  width='42%'>Pessoa entrevistada: {{ page.p01_name }}</td>
+                <td  width='42%'>Entrada no Serviço: {{ page.entrance }}</td>
+                <td  width='42%'>Pessoa entrevistada: {{ page.interviewed}}</td>
             </tr>
             <tr>
-                <td>Entrevistador: {{ page.p01_name }}</td>
-                <td>Data da Avaliação: {{ page.p01_name }}</td>
+                <td>Entrevistador: {{ page.interviewer}}</td>
+                <td>Data da Avaliação: {{ page.avaliation_date}}</td>
             </tr>
         </table>
         <br>
@@ -74,7 +79,7 @@
                 <ul class="abas">
                     <li>
                         <div class="aba" style="background-color:orange">
-                            <span>ESCORES</span>
+                            <span>RECOMENDAÇÕES</span>
                         </div>
                     </li>
                     <li>
@@ -89,12 +94,12 @@
                     </li>
                     <li>
                         <div class="aba" style="background-color:silver">
-                            <span>AVALIAÇÃO E PLANEJAMENTO</span>
+                            <span>ESCORES</span>
                         </div>
                     </li>
                     <li>
                         <div class="aba" style="background-color:#FF22FF">
-                            <span>ATIVIDADES RECOMENDADAS</span>
+                            <span>AVALIAÇÃO E PLANEJAMENTO</span>
                         </div>
                     </li>
                 </ul>
@@ -107,6 +112,222 @@
 
         <div id="content">
             <div class="conteudo"> <!--ESCORES !-->
+                {% for field,field2 in offerings.items %}
+                    <center>
+                        <table border="2" width="100%">
+                            <tr>
+                                <td colspan=3 width="25%" align="center"> Atividade: {{ field2.Desc }} - Score: {{ field2.Scor }}</td>
+                            </tr>
+                            <tr>
+                                <td align='left' colspan=2>Benefícios: {{ field2.Bene }}</td>
+                                <td rowspan="10" align="center">
+                                    <canvas id= '{{ field }}' width="400" height="300">
+                                        [No canvas support]
+                                    </canvas>
+                                    <script>
+                                        // Create and configure the Radar chart so that it's not filled and
+                                        // only has the labels on the north axis. The text size has been
+                                        // slightly increased.
+                                        new RGraph.Radar({
+                                            id: '{{ field }}',
+                                            data: [
+                                                {{ field2.Pala }},
+                                                {{ patient.Pala }}
+                                            ],
+                                            options: {
+                                                backgroundCirclesPoly: true,
+                                                backgroundCirclesSpacing: 30,
+                                                colors: ['transparent'],
+                                                axesColor: 'transparent',
+                                                highlights: true,
+                                                colorsStroke: ['red', 'green'],
+                                                linewidth: 3,
+                                                labels: ['Déficit Cognitivo', 'At. Neg. Env.', 'Depressão','Def. Sensorial','Inc. Funcional','Desnutrição','Doenças Cardio','Uso Ina. Med.','Baixo Sup Social','Prob. Amb.','Violência','Quedas'],
+                                                labelsAxes: '',
+                                                textSize: 8
+                                            }
+                                        }).trace();
+                                    </script>
+                                </td>
+                            </tr>        
+                            <tr>
+                                <td align='left' colspan="2">Restrições: {{ field2.Rest }}</td>
+                            </tr>
+                            <tr>
+                                <td>Voltada ao Envelhecimento ativo? {{ field2.Acti }}</td>
+                                <td>Tipo de atividade: {{ field2.Type }}</td>
+                            </tr>
+                            <tr>
+                                <td>Horários: {{ field2.Sche }}</td>
+                                <td>Duração: {{ field2.Time }}</td>
+                            </tr>
+                            <tr>
+                                <td>Grupo ou individual? {{ field2.Grou }} </td>
+                                <td>Custo: {{ field2.Cost }}</td>
+                            </tr>
+                            <tr>
+                                <td>Baixa Renda: {{ field2.LowP }}</td>
+                                <td>Parceria: {{ field2.Part }}</td>
+                            </tr>
+                            <tr>
+                                <td>Local: {{ field2.Loca }}</td>
+                                <td>Ambiente Interno ou Externo? {{ field2.Enve }}</td>
+                            </tr>
+                            <tr>
+                                <td>Distância: {{ field2.Dist }}</td>
+                                <td>Tempo deslocamento tranporte público: {{ field2.PuTr }} </td>
+                            </tr>
+                    
+                            <tr>
+                                <td align='left'>O paciente deve fazer esta atividade? <input type=radio name='aceito1' checked="true" value='N'>Não <input type=radio name='aceito1' value='S'>Sim </td>
+                                <td align='left'>Com relação ao paciente a atividade é: <select name="nota" >
+                                                                            <option value="1" selected="true">ruim</option>
+                                                                            <option value="2">regular</option>
+                                                                            <option value="3">boa</option>
+                                                                            <option value="4">ótima</option>
+                                                                            <option value="5">excelente</option>
+                                                                        </select> 
+                                </td>
+                            </tr>        
+                            <tr>
+                                <td align='center' colspan="2">Análise especialista<br> <textarea rows=4 cols=80></textarea></td>
+                            </tr>    
+                        </table>
+                    </center>   
+                    <br><br>
+                {% endfor %}        
+
+            </div> <!--ESCORES !-->
+
+
+            <div class='conteudo' style = 'overflow: auto; background-color:#FFFFFF'> <!--CONTRIBUIÇÃO POR DOMÍNIO !-->
+                <canvas id="cvs" width="900" height="600" style="position: center;">  [No canvas support]</canvas>
+                <br>
+                <table width="100%" border="2">
+                    <tr>
+                        <td>1.Déficit Cognitivo</td>
+                        <td>2.Domínio Atitudes Negativas em Relação ao envelhecimento</td>
+                        <td>3.Domínio Depressão</td>
+                        <td>4.Domínio Déficit Sensorial</td>
+                    </tr><tr>
+                        <td>5.Domínio Incapacidade Funcional</td>
+                        <td>6.Domínio Desnutrição</td>
+                        <td>7.Domínio Doenças Cardiovasculares</td>
+                        <td>8.Domínio Uso Inadequado de Medicamentos</td>
+                    </tr><tr>
+                        <td>9.Domínio Baixo Suporte Social</td>
+                        <td>10.Domínio Problemas Ambientais</td>
+                        <td>11.Domínio Violência</td>
+                        <td>12.Domínio Quedas</td>
+                    </tr>
+                </table>
+
+
+                <script>
+                    // This is a stacked 3D Rose chart. The data is the same as a regular stacked
+                    // Rose chart and looks just like the data that you'd pass to a grouped or
+                    // stacked Bar chart.
+                    new RGraph.Rose({
+                        id: 'cvs',
+                        data: [{{ page2.v1 }},{{ page2.v2 }},{{ page2.v3 }},{{ page2.v4 }},{{ page2.v5 }},{{ page2.v6 }},{{ page2.v7 }},{{ page2.v8 }},{{ page2.v9 }},{{ page2.v10 }},{{ page2.v11 }},{{ page2.v12 }}],
+                        options: {
+                            colorsStroke: 'rgba(0,0,0,0)',
+                            margin: 4,
+                            variant: 'stacked3d',
+                            variantThreedDepth: 30,
+                            labelsAxes: 'n',
+                            colors: ['gradient(red:red)','gradient(red:yellow)','gradient(yellow:yellow)','gradient(yellow:green)',],
+                            tooltips: [
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard'
+                            ],
+                            //labels: ['Qualidade de Vida','Sentidos','Desnutrição','Capacidade Funcional','Depressão','Cognição','RCV','Medicamentos','Ambiente','Quedas','Violência','Vulnerbilidade','Fragilidade'],
+                            labels: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+                            textAccessible: false
+                        }
+                    }).draw().on('tooltip', function (obj)
+                    {
+                        // This is a 'tooltip' event listener. It's triggered whenever a
+                        // tooltip is shown.
+          
+                        // Get the tooltip DIV tag from the RGraph registry
+                        var tooltip = RGraph.Registry.get('tooltip');
+          
+                        // Add the numerical value, using the sequentialised data and the tooltip index,
+                        // to the tooltip DIV tag
+                        tooltip.innerHTML += ': <b>' + obj.data_seq[tooltip.__index__] + '%</b>';
+          
+                        // Adding the extra text above means that the width of the tooltip has to be
+                        // increased too - so do that here.
+                        tooltip.style.width = parseInt(tooltip.style.width) + 30 + 'px';
+                    });
+                </script>
+
+
+
+            </div> <!--CONTRIBUIÇÃO POR DOMÍNIO !-->
+
+            <div class="conteudo" style="overflow: auto;background-color:#FFFFFF;margin-left: 300px"> <!--CONTRIBUIÇÃO POR DIMENSÃO !-->
+                <br><br>
+                <canvas id="cvs2" width="900" height="600" style="float: auto">  [No canvas support]</canvas>
+
+                <script>
+                    // This is a stacked 3D Rose chart. The data is the same as a regular stacked
+                    // Rose chart and looks just like the data that you'd pass to a grouped or
+                    // stacked Bar chart.
+                    new RGraph.Rose({
+                        id: 'cvs2',
+                        data: [{{ page2.v_socia}},{{ page2.v_multi }},{{ page2.v_psico }},{{ page2.v_biolo }}],
+                        options: {
+                            colorsStroke: 'rgba(0,0,0,0)',
+                            margin: 20,
+                            variant: 'stacked3d',
+                            variantThreedDepth: 30,
+                            labelsAxes: 'n',
+                            colors: ['gradient(red:red)','gradient(red:yellow)','gradient(yellow:yellow)','gradient(yellow:green)',],
+                            tooltips: [
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard',
+                                'Wilf','Harry','Gerrard'
+                            ],
+                            //labels: ['Qualidade de Vida','Sentidos','Desnutrição','Capacidade Funcional','Depressão','Cognição','RCV','Medicamentos','Ambiente','Quedas','Violência','Vulnerbilidade','Fragilidade'],
+                            labels: ['Social','Quedas','Psicológico','Biológicos'],
+                            textAccessible: false
+                        }
+                    }).draw().on('tooltip', function (obj)
+                    {
+                        // This is a 'tooltip' event listener. It's triggered whenever a
+                        // tooltip is shown.
+          
+                        // Get the tooltip DIV tag from the RGraph registry
+                        var tooltip = RGraph.Registry.get('tooltip');
+          
+                        // Add the numerical value, using the sequentialised data and the tooltip index,
+                        // to the tooltip DIV tag
+                        tooltip.innerHTML += ': <b>' + obj.data_seq[tooltip.__index__] + '%</b>';
+          
+                        // Adding the extra text above means that the width of the tooltip has to be
+                        // increased too - so do that here.
+                        tooltip.style.width = parseInt(tooltip.style.width) + 30 + 'px';
+                    });
+                </script>
+
+
+            </div> <!--CONTRIBUIÇÃO POR DIMENSÃO !-->
+
+            <div class="conteudo" style='overflow: auto'> <!-- AVALIAÇÃO E PLANEJAMENTO !-->
+
                 <br><br>
                 <table border="2" width="100%">
                     <tr>
@@ -147,20 +368,13 @@
                         {% endif %}
                     </tr>
                 </table>
-            </div> <!--ESCORES !-->
 
 
-            <div class='conteudo' style = 'overflow: auto; background-color:#FFFFFF; margin-left: 300px'> <!--CONTRIBUIÇÃO POR DOMÍNIO !-->
-                <br><br>
-                <canvas id="cvs" width="900" height="600" style="float: auto">  [No canvas support]</canvas>
-            </div> <!--CONTRIBUIÇÃO POR DOMÍNIO !-->
 
-            <div class="conteudo" style="overflow: auto;background-color:#FFFFFF;margin-left: 300px"> <!--CONTRIBUIÇÃO POR DIMENSÃO !-->
-                <br><br>
-                <canvas id="cvs2" width="900" height="600" style="float: auto">  [No canvas support]</canvas>
-            </div> <!--CONTRIBUIÇÃO POR DIMENSÃO !-->
+            </div> <!--AVALIAÇÃO E PLANEJAMENTO !-->
+            <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--ANÁLISE ATIVIDADES RECOMENDADAS !-->
 
-            <div class="conteudo" style='overflow: auto'> <!-- AVALIAÇÃO E PLANEJAMENTO !-->
+            
                 <table border="2" width="100%">
                     <tr>
                         <td  bgcolor="silver" align="center"><h2>AVALIAÇÃO DO GERONTÓLOGO</h2></td>
@@ -199,164 +413,19 @@
                         <td  align="center"><br><textarea rows="10" cols="80"></textarea><br></td>
                     </tr>
                 </table>
-            </div> <!--AVALIAÇÃO E PLANEJAMENTO !-->
-            <div class="conteudo" style="overflow: auto;background-color:#FFFFFF"> <!--ANÁLISE ATIVIDADES RECOMENDADAS !-->
-                <table border="2" width="100%">
-                    <tr>
-                        <td colspan="6" bgcolor="#FF22FF" align="center"><h2>ATIVIDADES RECOMENDADAS - DISPONIVEIS</h2></td>
-                    </tr>
-                    <tr>
-                        <td width='15%' align='center'><H3>Atividade</H3></td>
-                        <td width='20%' align='center'><H3>Descrição</H3></td>
-                        <td width='10%' align='center'><H3>Score</H3></td>
-                        <td width='10%' align='center'><H3>Aceito?</H3></td>
-                        <td width='10%' align='center'><H3>Nota Especialista</H3></td>
-                        <td width='35%' align='center'><H3>Análise especialista</H3></td>
-                    </tr>
-                    <tr>
-                        <td align='left'><a href>Natação</a></td>
-                        <td align='left'>Atividade individual ou em grupo na piscina</td>
-                        <td align='center'><a href="">5</a></td>
-                        <td align='center'><input type=radio name='aceito1' value='N'>N <input type=radio name='aceito1' value='S'>S </td>
-                        <td align='center'>
-                            <select name="nota" >
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </td>
-                        <td align='left'><textarea rows=3 cols=60></textarea></td>
-                    </tr>
-                </table>
-                <br><br>
-                <table border="2" width="100%">
-                    <tr>
-                        <td colspan="6" bgcolor="#FF22FF" align="center"><h2>ATIVIDADES RECOMENDADAS - NÃO DISPONIVEIS</h2></td>
-                    </tr>
-                    <tr>
-                        <td width='15%' align='center'><H3>Atividade</H3></td>
-                        <td width='20%' align='center'><H3>Descrição</H3></td>
-                        <td width='10%' align='center'><H3>Score</H3></td>
-                        <td width='10%' align='center'><H3>Aceito?</H3></td>
-                        <td width='10%' align='center'><H3>Nota Especialista</H3></td>
-                        <td width='35%' align='center'><H3>Análise especialista</H3></td>
-                    </tr>
-                    <tr>
-                        <td align='left'><a href>Natação</a></td>
-                        <td align='left'>Atividade individual ou em grupo na piscina</td>
-                        <td align='center'><a href="">5</a></td>
-                        <td align='center'><input type=radio name='aceito1' value='N'>N <input type=radio name='aceito1' value='S'>S </td>
-                        <td align='center'>
-                            <select name="nota" >
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </td>
-                        <td align='left'><textarea rows=3 cols=60></textarea></td>
-                    </tr>
-                </table>
+         
+
+
+
             </div> <!--ANÁLISE ATIVIDADES RECOMENDADAS !-->
         </div>
         <br>
         <center>  <input type="submit" value="Gravar"> </center>
       </form>
 
-      <script>
-          // This is a stacked 3D Rose chart. The data is the same as a regular stacked
-          // Rose chart and looks just like the data that you'd pass to a grouped or
-          // stacked Bar chart.
-          new RGraph.Rose({
-              id: 'cvs',
-              data: [{{ page2.v1 }},{{ page2.v2 }},{{ page2.v3 }},{{ page2.v4 }},{{ page2.v5 }},{{ page2.v6 }},{{ page2.v7 }},{{ page2.v8 }},{{ page2.v9 }},{{ page2.v10 }},{{ page2.v11 }},{{ page2.v12 }}],
-              options: {
-                  colorsStroke: 'rgba(0,0,0,0)',
-                  margin: 4,
-                  variant: 'stacked3d',
-                  variantThreedDepth: 30,
-                  labelsAxes: 'n',
-                  colors: ['gradient(red:red)','gradient(red:yellow)','gradient(yellow:yellow)','gradient(yellow:green)',],
-                  tooltips: [
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard'
-                  ],
-                  //labels: ['Qualidade de Vida','Sentidos','Desnutrição','Capacidade Funcional','Depressão','Cognição','RCV','Medicamentos','Ambiente','Quedas','Violência','Vulnerbilidade','Fragilidade'],
-                  labels: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-                  textAccessible: false
-              }
-          }).draw().on('tooltip', function (obj)
-          {
-              // This is a 'tooltip' event listener. It's triggered whenever a
-              // tooltip is shown.
 
-              // Get the tooltip DIV tag from the RGraph registry
-              var tooltip = RGraph.Registry.get('tooltip');
 
-              // Add the numerical value, using the sequentialised data and the tooltip index,
-              // to the tooltip DIV tag
-              tooltip.innerHTML += ': <b>' + obj.data_seq[tooltip.__index__] + '%</b>';
 
-              // Adding the extra text above means that the width of the tooltip has to be
-              // increased too - so do that here.
-              tooltip.style.width = parseInt(tooltip.style.width) + 30 + 'px';
-          });
-      </script>
-
-      <script>
-          // This is a stacked 3D Rose chart. The data is the same as a regular stacked
-          // Rose chart and looks just like the data that you'd pass to a grouped or
-          // stacked Bar chart.
-          new RGraph.Rose({
-              id: 'cvs2',
-              data: [{{ page2.v_socia}},{{ page2.v_multi }},{{ page2.v_psico }},{{ page2.v_biolo }}],
-              options: {
-                  colorsStroke: 'rgba(0,0,0,0)',
-                  margin: 20,
-                  variant: 'stacked3d',
-                  variantThreedDepth: 30,
-                  labelsAxes: 'n',
-                  colors: ['gradient(red:red)','gradient(red:yellow)','gradient(yellow:yellow)','gradient(yellow:green)',],
-                  tooltips: [
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard',
-                      'Wilf','Harry','Gerrard'
-                  ],
-                  //labels: ['Qualidade de Vida','Sentidos','Desnutrição','Capacidade Funcional','Depressão','Cognição','RCV','Medicamentos','Ambiente','Quedas','Violência','Vulnerbilidade','Fragilidade'],
-                  labels: ['Social','Quedas','Psicológico','Biológicos'],
-                  textAccessible: false
-              }
-          }).draw().on('tooltip', function (obj)
-          {
-              // This is a 'tooltip' event listener. It's triggered whenever a
-              // tooltip is shown.
-
-              // Get the tooltip DIV tag from the RGraph registry
-              var tooltip = RGraph.Registry.get('tooltip');
-
-              // Add the numerical value, using the sequentialised data and the tooltip index,
-              // to the tooltip DIV tag
-              tooltip.innerHTML += ': <b>' + obj.data_seq[tooltip.__index__] + '%</b>';
-
-              // Adding the extra text above means that the width of the tooltip has to be
-              // increased too - so do that here.
-              tooltip.style.width = parseInt(tooltip.style.width) + 30 + 'px';
-          });
-      </script>
 
       {% else %}
          <h1>Não autorizado !!!!!!!</h1>

@@ -39,3 +39,6 @@ sqlparse
 urllib3
 whitenoise
 wrapt
+numpy
+matplotlib
+shapely

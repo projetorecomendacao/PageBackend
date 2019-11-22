@@ -15,7 +15,7 @@ class Page (models.Model):
     #Data Entrada no serviçoptimize
     entrance = models.DateField('Data de Entrada no Serviço',null=True,blank=True)
     #Entrevistado
-    interviewed = models.CharField('Pessoa entrevistada:', max_length=20)
+    interviewed = models.CharField('Pessoa entrevistada:', max_length=20, choices=Options.INTERVIEW)
     #Entrevistador
     interviewer = models.CharField('Nome do Entrevistador:',max_length=30)
     #Data que foi feita a avaliação

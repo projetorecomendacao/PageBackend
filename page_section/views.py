@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from experts_section.models import Gerontologist
+from experts_section.models import Gerontologist, Expert
 from .forms import *
 from datetime import datetime
+from .lista_atividades import ListaAtividades
+from .recommender import Recommender
 
 
 
@@ -48,6 +50,21 @@ def monta_vet(q,m):
     pos = int((100/m*qi)/10)
     return lista[pos]
 
+def cria_vet(obj):
+    pala = '[' + str(obj['Cognition']) + ',' + \
+            str(obj['Attitude']) + ',' + \
+            str(obj['Depression']) + ',' + \
+            str(obj['Sensorial']) + ',' + \
+            str(obj['Functional']) + ',' + \
+            str(obj['Nutrition']) + ',' + \
+            str(obj['Cardiovascular']) + ',' + \
+            str(obj['Prescriptions']) + ',' + \
+            str(obj['SocialSupport']) + ',' +  \
+            str(obj['Environment']) + ',' + \
+            str(obj['Violence']) + ',' + \
+            str(obj['Falls']) + ']'
+    return pala
+
 def grava_page(request):
     data = request.POST
     cria_page(data)
@@ -80,8 +97,44 @@ def grava_page(request):
         'v_socia': monta_vet(socia, 32),
         'v_multi': monta_vet(multi, 16)
     }
+
+    patient = {
+        'PatientID': '1',
+        'PatientName': data['p01_name'],
+        'Cognition': int((100/6)*int(data['c1'])),
+        'Attitude': int((100/2)*int(data['c2'])),
+        'Depression': int((100/6)*int(data['c3'])),
+        'Sensorial': int((100/5)*int(data['c4'])),
+        'Functional': int((100/6)*int(data['c5'])),
+        'Nutrition': int((100/7)*int(data['c6'])),
+        'Cardiovascular': int((100/9)*int(data['c7'])),
+        'Prescriptions': int((100/9)*int(data['c8'])),
+        'SocialSupport': int((100/8)*int(data['c9'])),
+        'Environment': int((100/16)*int(data['c10'])),
+        'Violence': int((100/8)*int(data['c11'])),        
+        'Falls': int((100/16)*int(data['c12'])),
+    }
+
+    patient['Pala'] = cria_vet(patient)
+
+    offerings = ListaAtividades.offerings
+    threshold = -5.0
+    o = Recommender(offerings, threshold)
+    volta = {}
+    # sample call for the scorer method
+    print('Recommended offerings for the patient {0}:'.format(patient['PatientID']))
+    for (offerID, score) in o.scorer(patient):
+        dic_loc = offerings[int(offerID)-1]
+        dic_loc["Scor"] = score
+        dic_loc["Pala"] = cria_vet(dic_loc)
+        volta['ofe' + str(offerID)] = dic_loc
+        print('-- {0} (with matching score of {1:4.2f})'.format(offerID, score))
+
+    #print(volta)
+    #print(patient)
+
     demandMapForm = DemandMapForm()
-    return render(request,'demandas_tab.html',{'page': data ,'mapa': demandMapForm,'page2': data2})
+    return render(request,'demandas_tab.html',{'page': data ,'mapa': demandMapForm,'page2': data2, 'offerings' : volta, 'patient' : patient})
 
 def grava_demanda(request):
     data= request.POST
@@ -309,13 +362,13 @@ def cria_page(dados):
                                                                     p10_actual_profession = dados['p10_actual_profession'],
                                                                     p11_retire_more_time_activity = dados['p11_retire_more_time_activity'],
                                                                     p12_is_working_professionals_activities = dados['p12_is_working_professionals_activities'],
-                                                                    p12_professional_activite = dados['p12_professional_activite'],
+                                                                    p12_professional_activities = dados['p12_professional_activities'],
                                                                     p13_income_I = dados['p13_income_I'],
                                                                     p13_income_F = dados['p13_income_F'],
                                                                     p14_lives_with = dados['p14_lives_with'],
-                                                                    p15_have_religion = dados['p15_have_religion'],
+                                                                    p15_has_religion = dados['p15_has_religion'],
                                                                     p15_religion = dados['p15_religion'],
-                                                                    p16_Health_self_report = dados['p16_Health_self_report'],
+                                                                    p16_health_self_report = dados['p16_health_self_report'],
                                                                     p20_weight = dados['p20_weight'],
                                                                     p20_height = dados['p20_height'],
                                                                     p20_IMC = dados['p20_IMC'],
@@ -325,7 +378,7 @@ def cria_page(dados):
 
     participant_ = Participant.objects.create(  p00_email = dados['p00_email'],
                                                 p01_name = dados['p01_name'],
-                                                p02_adress = dados['p02_adress'],
+                                                p02_address = dados['p02_address'],
                                                 p03_communication = dados['p03_communication'],
                                                 p04_birth_date = datetime.strptime(dados['p04_birth_date'],'%d/%m/%Y'),
                                                 p05_age = dados['p05_age'],
@@ -333,7 +386,7 @@ def cria_page(dados):
                                                 p20_profile_photo_URL = dados['p20_profile_photo_URL']
                                               )
 
-    gerontologist_ = Gerontologist.objects.get(id=1)
+    gerontologist_ = Expert.objects.get(id=1)
 
  #   participant__= Participant.objects.get(id=1)
  #   participanteSituation_ = ParticipantSituation.objects.get(id=1)

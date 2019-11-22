@@ -10,7 +10,7 @@ class Participant(models.Model):
     p03_communication = models.CharField('Meios de Entrar em contato', max_length=100)
     p04_birth_date = models.DateField('Data de Nascimento')
     p05_age = models.IntegerField('Idade Atual')
-    p06_gender = models.CharField('Gênero:', max_length=1, )
+    p06_gender = models.CharField('Gênero:', max_length=1, choices=Options.GENDER)
     p20_profile_photo_URL = models.ImageField(upload_to='profile_photos', null=True)
 
 
@@ -86,7 +86,12 @@ class ParticipantSituation (models.Model):
     p20_weight = models.FloatField("Peso", null=True, blank=True)
     p20_height = models.FloatField("Altura", null=True, blank=True)
     p20_IMC = models.FloatField("IMC", null=True, blank=True)
+    p30_car = models.CharField("Possui Carro?",max_length=1, default="N", choices=Options.CHOICES)
+    p30_bus = models.CharField("Utiliza tranporte público?",max_length=1, default="N", choices=Options.CHOICES)
+    p30_uber = models.CharField("Utiliza transporte por aplicativo ou taxi?", max_length=1, default="N", choices=Options.CHOICES)
+    p30_ride = models.CharField("Costuma pegar carona?", max_length=1, default="N", choices=Options.CHOICES)
     p30_ride_with = models.TextField("Pessoas com a qual pega carona", null=True, blank=True)
+    p31_comments = models.TextField("Comentários sobre o Participante", null=True, blank=True)
 
     class Meta:
         ordering = ['id']
