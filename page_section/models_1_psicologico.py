@@ -78,7 +78,7 @@ class PsychologicalAspects (models.Model):
     cognition_deficit = models.OneToOneField(CognitionDeficit, on_delete=models.CASCADE, null=True,verbose_name='Déficit Cognitivo')
     negative_attitudes_aging = models.OneToOneField(NegativeAttitudesAging, on_delete=models.CASCADE, null=True ,verbose_name='Atitude Negativa em Relação ao Envelhecimento')
     depression = models.OneToOneField(Depression,  on_delete=models.CASCADE, null=True,verbose_name='Depressão')
-    comments_psico = models.TextField("Observações sobre o bloco Psicológico")
+    comments_psico = models.TextField("Observações sobre o bloco Psicológico", null=True)
     max_score_psico = models.IntegerField('Pontuação Máxima',default=14)
 
     def investigate(self):

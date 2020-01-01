@@ -159,10 +159,16 @@ class FallsViewSet(CustomModelViewSet):
     }
 
 
+# TODO - When deleting a page, the aspects altogether with participant_situation and so on must be deleted as well
 class PageViewSet (CustomModelViewSet):
-    queryset = Page.objects.all()
     serializer_class = PageSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
-        'partial_update': [IsExpert]
+        'partial_update': [IsExpert],
+        'destroy': [IsExpert]
     }
+
+    def get_queryset(self):
+        gerontologist = Expert.objects.get(email=self.request.user.email)
+        return Page.objects.filter(gerontologist=gerontologist)
+
