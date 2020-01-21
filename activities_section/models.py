@@ -1,42 +1,36 @@
 from django.db import models
 
 
-class Characteristic(models.Model):
+class Detail(models.Model):
     description = models.CharField(max_length=50)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['description']
 
 
-class Benefit(models.Model):
-    description = models.CharField(max_length=50)
-
-    class Meta:
-        ordering = ['id']
+class Characteristic(Detail):
+    pass
 
 
-class Restriction(models.Model):
-    description = models.CharField(max_length=50)
-
-    class Meta:
-        ordering = ['id']
+class Benefit(Detail):
+    pass
 
 
-class Type (models.Model):
-    description = models.CharField(max_length=50)
+class Restriction(Detail):
+    pass
 
-    class Meta:
-        ordering = ['id']
+
+class Type (Detail):
+    pass
 
 
 class Activity(models.Model):
     description = models.CharField(max_length=50)
 
-    characteristic = models.ManyToManyField(Characteristic, related_name='activities')
-    benefit = models.ManyToManyField(Benefit, related_name='activities')
-    restriction = models.ManyToManyField(Restriction, related_name='activities')
-
-    type = models.ManyToManyField(Type, related_name='activities')
+    characteristic = models.ManyToManyField(Characteristic, blank=True, related_name='activities')
+    benefit = models.ManyToManyField(Benefit, blank=True, related_name='activities')
+    restriction = models.ManyToManyField(Restriction, blank=True, related_name='activities')
+    type = models.ManyToManyField(Type, blank=True, related_name='activities')
 
     class Meta:
         ordering = ['id']
