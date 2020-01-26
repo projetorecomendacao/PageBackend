@@ -65,3 +65,24 @@ class ActivityViewSet(CustomModelViewSet):
         'destroy': [IsExpert]
     }
     depth = 1
+
+    def partial_update(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        if 'characteristic' in request.data:
+            for id in request.data['characteristic']:
+                instance.characteristic.add(id)
+
+        if 'benefit' in request.data:
+            for id in request.data['benefit']:
+                instance.benefit.add(id)
+
+        if 'restriction' in request.data:
+            for id in request.data['restriction']:
+                instance.restriction.add(id)
+
+        if 'type' in request.data:
+            for id in request.data['type']:
+                instance.type.add(id)
+
+        return super().partial_update(request, *args, **kwargs)
