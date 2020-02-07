@@ -1,5 +1,4 @@
 from rest_framework.filters import SearchFilter
-from rest_framework.viewsets import ModelViewSet
 from activities_section.models import Characteristic, Benefit, Restriction, Type, Activity
 from activities_section.api.serializers import CharacteristicSerializer, BenefitSerializer,\
     RestrictionSerializer, TypeSerializer, ActivitySerializer

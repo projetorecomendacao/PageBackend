@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -25,7 +26,10 @@ class Type (Detail):
 
 
 class Activity(models.Model):
-    description = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+    description = models.TextField()
+    image = models.URLField(null=True, blank=True)
+    author = models.ForeignKey(User, models.CASCADE, related_name='activities', null=True, blank=True)
 
     characteristic = models.ManyToManyField(Characteristic, blank=True, related_name='activities')
     benefit = models.ManyToManyField(Benefit, blank=True, related_name='activities')
