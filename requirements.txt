@@ -30,3 +30,4 @@ django-cors-headers
 django-bootstrap-form
 django-widget-tweaks
 matplotlib
+gunicorn
