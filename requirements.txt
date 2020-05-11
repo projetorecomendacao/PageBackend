@@ -27,3 +27,5 @@ django-oauth-toolkit
 social-auth-app-django
 django-rest-framework-social-oauth2
 django-cors-headers
+django-bootstrap-form
+django-widget-tweaks
