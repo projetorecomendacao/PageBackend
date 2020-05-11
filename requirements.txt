@@ -12,10 +12,8 @@ numpy==1.16.5
 olefile==0.46
 Pillow==5.4.1
 psycopg2==2.8.4
-PyBluez==0.22
 pycrypto==2.6.1
 pycryptodomex==3.6.1
-PyGObject==3.32.0
 pytz==2018.9
 pyxdg==0.25
 SecretStorage==2.3.1
