@@ -8,6 +8,7 @@ class SensoryDeficit(models.Model):
     q18_senses_problems = models.CharField(Options.questions[18], max_length=1, default="N", choices=Options.CHOICES)
     q19_interaction_problems = models.CharField(Options.questions[19], max_length=1, default="N", choices=Options.CHOICES)
     need_investigation_sensory = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    score: models.IntegerField(null=True)
     max_score_sensory = models.IntegerField(default=6)
 
     def investigate(self):
@@ -18,8 +19,7 @@ class SensoryDeficit(models.Model):
         verbose_name = 'Déficit Sensorial'
         verbose_name_plural = 'Déficit Sensorial'
 
-    def score(self):
-        pass
+
 
 
 class FunctionalDisability (models.Model):
@@ -45,13 +45,18 @@ class FunctionalDisability (models.Model):
 
 
 class Malnutrition (models.Model):
-    d26_yourself_malnourished = models.CharField(Options.questions[26], max_length=1, default="N", choices=Options.CHOICES)
-    d27_chewing_mouth_problems = models.CharField(Options.questions[27], max_length=1, default="N", choices=Options.CHOICES)
-    d28_less3_meal_daily = models.CharField(Options.questions[28], max_length=1, default="N", choices=Options.CHOICES)
-    d29_decreases_amount_food = models.CharField(Options.questions[29], max_length=1, default="N", choices=Options.CHOICES)
-    d30_lost_weight_no_reason = models.CharField(Options.questions[30], max_length=15, default="N", choices=Options.LOSTWEIGHT)
-    d31_stress_illness_hospitalization = models.CharField(Options.questions[31], max_length=1, default="N", choices=Options.CHOICES)
+    q26_yourself_malnourished = models.CharField(Options.questions[26], max_length=1, default="N", choices=Options.CHOICES)
+    q27_chewing_mouth_problems = models.CharField(Options.questions[27], max_length=1, default="N", choices=Options.CHOICES)
+    q28_less3_meal_daily = models.CharField(Options.questions[28], max_length=1, default="N", choices=Options.CHOICES)
+    q29_decreases_amount_food = models.CharField(Options.questions[29], max_length=1, default="N", choices=Options.CHOICES)
+    q30_lost_weight_no_reason = models.CharField(Options.questions[30], max_length=15, default="N", choices=Options.LOSTWEIGHT)
+    q30_lost_weight_no_reason_amount = models.CharField(max_length=20, null=True)    
+    q31_stress_illness_hospitalization = models.CharField(Options.questions[31], max_length=1, default="N", choices=Options.CHOICES)
+    q31_stress = models.CharField(max_length=1, default="N", choices=Options.CHOICES)
+    q31_illnes = models.CharField(max_length=1, default="N", choices=Options.CHOICES)
+    q31_hospital = models.CharField(max_length=1, default="N", choices=Options.CHOICES)
     q32_bmi_less22 = models.CharField(Options.questions[32], max_length=1, default="N", choices=Options.CHOICES)  # Usar cálculo de BMI do participante
+    score: models.IntegerField(null=True)
     need_investigation_malnutrition = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
     max_score_malnutrition = models.IntegerField('Pontuação Máxima',default=6)
 
@@ -62,9 +67,6 @@ class Malnutrition (models.Model):
         ordering = ['id']
         verbose_name = 'Desnutrição'
         verbose_name_plural = 'Desnutrição'
-
-    def score(self):
-        pass
 
 
 class CardiovascularFactors (models.Model):
@@ -82,6 +84,7 @@ class CardiovascularFactors (models.Model):
     q40_alcohol_Ingested_last_week_amount = models.TextField(Options.questions[40][1],null=True,blank=True)
     q41_bmi_obesity = models.CharField(Options.questions[41], max_length=1, default="N", choices=Options.CHOICES)  # Usar cálculo do BMI de participante
     need_investigation_cardio = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    score: models.IntegerField(null=True)
     max_score_cardio = models.IntegerField('Pontuação Máxima',default=9)
 
     def investigate(self):
@@ -92,8 +95,7 @@ class CardiovascularFactors (models.Model):
         verbose_name = 'Doenças Cardiovasculares (DCV)'
         verbose_name_plural = 'Doenças Cardiovasculares (DCV)'
 
-    def score(self):
-        pass
+
 
 
 class MisuseMedications (models.Model):

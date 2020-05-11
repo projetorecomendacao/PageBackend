@@ -83,6 +83,7 @@ class Violence (models.Model):
     q86_dont_take_care_health = models.CharField(Options.questions[86], max_length=1, default="N", choices=Options.CHOICES)
     need_investigation_violence = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
     max_score_violence = models.IntegerField(default=8)
+    score = models.IntegerField (null=True)
 
     def investigate(self):
         pass

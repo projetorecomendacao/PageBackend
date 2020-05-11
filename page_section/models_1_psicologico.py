@@ -7,13 +7,19 @@ class CognitionDeficit (models.Model):
     q2_memory_test_score = models.IntegerField(Options.questions[2][1], null=True, blank=True)
     q3_language_function_attention = models.CharField(Options.questions[3][0], max_length=1, default="N", choices=Options.CHOICES)
     q3_language_function_attention_score = models.IntegerField(Options.questions[3][1], default=0)
+    q3_language_function_attention_15 = models.TextField(null=True)
+    q3_language_function_attention_30 = models.TextField(null=True)
+    q3_language_function_attention_45 = models.TextField(null=True)
+    q3_language_function_attention_60 = models.TextField(null=True)
     q4_visospatial_ability = models.CharField(Options.questions[4][0], max_length=1, default="N", choices=Options.CHOICES)
     q4_visospatial_ability_score = models.IntegerField(Options.questions[4][1], default=0)
     q5_praxia = models.CharField(Options.questions[5][0], max_length=1,default="N",choices=Options.CHOICES)
     q5_praxia_score = models.IntegerField(Options.questions[5][1], default=0)
     q6_memory_test = models.CharField(Options.questions[6][0], max_length=1,default="N",choices=Options.CHOICES)
     q6_memory_test_score = models.IntegerField(Options.questions[6][1], default=0)
+
     need_investigation_cognition = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    score_cognition = models.TextField(null=True,default=0)
     max_score_cognition = models.IntegerField(default=6)
 
 
@@ -46,6 +52,7 @@ class NegativeAttitudesAging (models.Model):
     q8_aging_analyse = models.CharField(Options.questions[8][0], max_length=1, default="N", choices=Options.CHOICES)
     need_investigation_negative = models.CharField(Options.need_investigation_question, max_length=1,default="N",choices=Options.CHOICES)
     max_score_negative = models.IntegerField(default=2)
+    score = models.IntegerField (null=True)
 
     def investigate(self):
         pass
@@ -65,6 +72,7 @@ class Depression (models.Model):
     q14_concentration_problem = models.CharField(Options.questions[14],max_length=1, default="N",choices=Options.CHOICES)
     need_investigation_depression = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
     max_score_depression = models.IntegerField(default=6)
+    score = models.IntegerField(null=True)
 
     def investigate(self):
         pass
