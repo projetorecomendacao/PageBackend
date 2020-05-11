@@ -24,3 +24,4 @@ sqlparse==0.2.4
 django_heroku
 djangorestframework
 django-oauth-toolkit
+social-auth-app-django
