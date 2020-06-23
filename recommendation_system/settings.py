@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'participant_section',
     'drinks_section',
     'recommender_section',
+    'page_usp_section'
 ]
 
 MIDDLEWARE = [
@@ -109,16 +110,16 @@ if 'RDS_DB_NAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
-    DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': 'active-aging',
-                'USER': 'postgres',
-                'PASSWORD': 'postgres',
-                'HOST': 'localhost',
-                'PORT': '5432',
-            }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'active-aging',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
