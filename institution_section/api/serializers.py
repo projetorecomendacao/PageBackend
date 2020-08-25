@@ -1,25 +1,46 @@
 from rest_framework.serializers import ModelSerializer
-from institution_section.models import Address, Contact, Location, Professional, Instructor, Responsible, Institution
+from institution_section.models import Cidade, Address, Locals, Professional, \
+     Institution, AssistanceModality, WebAddress, Offers, Capacity
+
+class AssistanceModalitySerializer(ModelSerializer):
+    class Meta:
+        model = AssistanceModality
+        fields = '__all__'
+
+
+class WebAddressSerializer(ModelSerializer):
+    class Meta:
+        model = WebAddress
+        fields = '__all__'
+
+
+class OffersSerializer(ModelSerializer):
+    class Meta:
+        model = Offers
+        fields = '__all__'
+
+
+class CapacitySerializer(ModelSerializer):
+    class Meta:
+        model = Capacity
+        fields = '__all__'
+
+
+class CidadeSerializer(ModelSerializer):
+    class Meta:
+        model = Cidade
+        fields = '__all__'
 
 
 class AddressSerializer(ModelSerializer):
     class Meta:
         model = Address
-        # all address attributes plus location and institution that are linked to address through an one to one
-        # relation.
-        fields = '__all__'
-        # fields = ('address', 'number', 'district', 'cep', 'latitude', 'longitude', 'locations', 'institution')
-
-
-class ContactSerializer(ModelSerializer):
-    class Meta:
-        model = Contact
         fields = '__all__'
 
 
-class LocationSerializer(ModelSerializer):
+class LocalsSerializer(ModelSerializer):
     class Meta:
-        model = Location
+        model = Locals
         fields = '__all__'
 
 
@@ -29,22 +50,8 @@ class ProfessionalSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class InstructorSerializer(ModelSerializer):
-    class Meta:
-        model = Instructor
-        fields = '__all__'
-
-
-class ResponsibleSerializer(ModelSerializer):
-    class Meta:
-        model = Responsible
-        fields = '__all__'
-
-
 class InstitutionSerializer(ModelSerializer):
     class Meta:
         model = Institution
-        # all institution attributes plus contacts and locations that are linked to institution through an one to one
-        # relation.
         fields = '__all__'
-        # fields = ('name', 'communication', 'address', 'contacts', 'locations')
+

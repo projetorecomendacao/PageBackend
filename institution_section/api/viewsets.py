@@ -1,54 +1,54 @@
 from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import ModelViewSet
-from institution_section.models import Address, Contact, Location, Professional, Instructor, Responsible, Institution
-from institution_section.api.serializers import AddressSerializer, ContactSerializer, LocationSerializer,\
-    ProfessionalSerializer, InstructorSerializer, ResponsibleSerializer, InstitutionSerializer
+from institution_section.models import Cidade, Address, Locals, Professional, \
+     Institution, AssistanceModality, WebAddress, Offers, Capacity
+from institution_section.api.serializers import CidadeSerializer, AddressSerializer, \
+     LocalsSerializer, ProfessionalSerializer, InstitutionSerializer, \
+     AssistanceModalitySerializer, WebAddressSerializer, OffersSerializer, CapacitySerializer
+from utils.api.serializer import CustomModelViewSet, IsExpert
+
+class AssistanceModalityViewSet(ModelViewSet):
+    queryset = AssistanceModality.objects.all()
+    serializer_class = AssistanceModalitySerializer
+
+
+class WebAddressViewSet(ModelViewSet):
+    queryset = WebAddress.objects.all()
+    serializer_class = WebAddressSerializer
+
+
+class OffersViewSet(ModelViewSet):
+    queryset = Offers.objects.all()
+    serializer_class = OffersSerializer
+
+
+class CapacityViewSet(ModelViewSet):
+    queryset = Capacity.objects.all()
+    serializer_class = CapacitySerializer
+
+
+class CidadeViewSet(ModelViewSet):
+    queryset = Cidade.objects.all()
+    serializer_class = CidadeSerializer
+    permission_classes = [IsExpert]
 
 
 class AddressViewSet(ModelViewSet):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
-    filter_backends = (SearchFilter,)
-    search_fields = ('address', 'district', 'cep')
 
 
-class ContactViewSet(ModelViewSet):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
-    # filter_backends = (SearchFilter,)
-    # search_fields = ('description',)
-
-
-class LocationViewSet(ModelViewSet):
-    queryset = Location.objects.all()
-    serializer_class = LocationSerializer
-    filter_backends = (SearchFilter,)
-    search_fields = ('name', 'communication', 'parking')
+class LocalsViewSet(ModelViewSet):
+    queryset = Locals.objects.all()
+    serializer_class = LocalsSerializer
 
 
 class ProfessionalViewSet(ModelViewSet):
     queryset = Professional.objects.all()
     serializer_class = ProfessionalSerializer
-    filter_backends = (SearchFilter,)
-    search_fields = ('name', 'communication', 'parking')
-
-
-class InstructorViewSet(ModelViewSet):
-    queryset = Instructor.objects.all()
-    serializer_class = InstructorSerializer
-    filter_backends = (SearchFilter,)
-    search_fields = ('name', 'communication', 'formation')
-
-
-class ResponsibleViewSet(ModelViewSet):
-    queryset = Responsible.objects.all()
-    serializer_class = ResponsibleSerializer
-    filter_backends = (SearchFilter,)
-    search_fields = ('name', 'communication')  # , 'area')
 
 
 class InstitutionViewSet(ModelViewSet):
     queryset = Institution.objects.all()
     serializer_class = InstitutionSerializer
-    filter_backends = (SearchFilter,)
-    search_fields = ('name', 'communication')
+

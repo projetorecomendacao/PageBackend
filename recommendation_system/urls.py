@@ -22,8 +22,9 @@ from rest_framework import routers
 
 from activities_section.api.viewsets import CharacteristicViewSet, BenefitViewSet, RestrictionViewSet, TypeViewSet, \
     ActivityViewSet
-from institution_section.api.viewsets import AddressViewSet, ContactViewSet, LocationViewSet, InstructorViewSet, \
-    ResponsibleViewSet, InstitutionViewSet
+from institution_section.api.viewsets import CidadeViewSet, AddressViewSet, \
+     LocalsViewSet, ProfessionalViewSet, InstitutionViewSet, \
+     AssistanceModalityViewSet, WebAddressViewSet, OffersViewSet, CapacityViewSet
 from page_section.api.viewsets import  NegativeAttitudesAgingViewSet, CognitionDeficitViewSet, DepressionViewSet,\
     PsychologicalAspectsViewSet, BiologicalAspectsViewSet, SensoryDeficitViewSet, FunctionalDisabilityViewSet,\
     MalnutritionViewSet, CardiovascularFactorsViewSet, MisuseMedicationsViewSet, SocialAspectsViewSet,\
@@ -32,7 +33,6 @@ from page_section.api.viewsets import  NegativeAttitudesAgingViewSet, CognitionD
 from participant_section.api.viewsets import ParticipantViewSet, IncomeViewSet, ParticipantSocialMediaViewSet, \
     MaritalStatusViewSet, SchoolingViewSet, ProfessionalsActivitiesViewSet, ReligionViewSet, ParticipantSituationViewSet
 from recommendation_system import settings
-from recommender_section.api.viewsets import OfferViewSet
 from assessment_section.api.viewsets import *
 from experts_section.api.viewsets import ExpertViewSet, ExpertiseViewSet
 from health_section.api.viewsets import DiseasesViewSet, TherapeuticClassViewSet, HealthProblemsViewSet,\
@@ -45,6 +45,18 @@ from drinks_section.api.viewsets import *
 
 router = routers.DefaultRouter()
 
+# institution_section
+router.register(r'cidades', CidadeViewSet, basename='Cidade')
+router.register(r'addresses', AddressViewSet, basename='Address')
+router.register(r'locals', LocalsViewSet, basename='Location')
+router.register(r'professionals', ProfessionalViewSet, basename='Location')
+router.register(r'institutions', InstitutionViewSet, basename='Institution')
+router.register(r'assitancemodality', AssistanceModalityViewSet, basename='Assistance')
+router.register(r'webaddress', WebAddressViewSet, basename='WebAddress')
+router.register(r'offers', OffersViewSet, basename='Offers')
+router.register(r'capacity', CapacityViewSet, basename='Capacity')
+
+
 # activities_section
 router.register(r'characteristics', CharacteristicViewSet, basename='Characteristic')
 router.register(r'benefits', BenefitViewSet, basename='Benefit')
@@ -52,13 +64,6 @@ router.register(r'restrictions', RestrictionViewSet, basename='Restriction')
 router.register(r'types', TypeViewSet, basename='Type')
 router.register(r'activities', ActivityViewSet, basename='Activity')
 
-# institution_section
-router.register(r'addresses', AddressViewSet, basename='Address')
-router.register(r'institutions', InstitutionViewSet, basename='Institution')
-router.register(r'locations', LocationViewSet, basename='Location')
-router.register(r'contacts', ContactViewSet, basename='Contact')
-router.register(r'instructors', InstructorViewSet, basename='Instructor')
-router.register(r'responsibles', ResponsibleViewSet, basename='Responsible')
 
 # page_section
 router.register(r'negativeAttitudesAging', NegativeAttitudesAgingViewSet, basename='negativeAttitudesAging')
@@ -89,8 +94,6 @@ router.register(r'professionals_activities', ProfessionalsActivitiesViewSet, bas
 router.register(r'religions', ReligionViewSet, basename='DA_attitudes')
 router.register(r'participant_situations', ParticipantSituationViewSet, basename='DA_attitudes')
 
-# reviews_section
-router.register(r'offers', OfferViewSet, basename='Offers')
 
 # assessment_section    path('grava_page',grava_page,name='grava_page'),
 router.register(r'demands_problems', DemandsProblemsViewSet, basename='demands_problems')

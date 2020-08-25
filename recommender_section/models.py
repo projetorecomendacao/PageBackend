@@ -1,19 +1,19 @@
 from django.db import models
 from activities_section.models import Activity
-from institution_section.models import Location, Institution
+from institution_section.models import Offers
 
 
-class Offers(models.Model):
-    begin_date = models.DateField()
-    end_date = models.DateField()
-    schedules = models.CharField(max_length=50)
-    cost = models.CharField(max_length=30)
-    institution = models.ForeignKey(Institution, on_delete=models.DO_NOTHING, related_name='offers1', blank=True, null=True)
-    locations = models.ForeignKey(Location, on_delete=models.DO_NOTHING, related_name='offers2', blank=True, null=True)
-    activities = models.ForeignKey(Activity, on_delete=models.DO_NOTHING, related_name='offers3', blank=True, null=True)
-
-    class Meta:
-        ordering = ['id']
+#class Offers(models.Model):
+#    begin_date = models.DateField()
+#    end_date = models.DateField()
+#    schedules = models.CharField(max_length=50)
+#    cost = models.CharField(max_length=30)
+#    institution = models.ForeignKey(Institution, on_delete=models.DO_NOTHING, related_name='offers1', blank=True, null=True)
+#    locations = models.ForeignKey(Location, on_delete=models.DO_NOTHING, related_name='offers2', blank=True, null=True)
+#    activities = models.ForeignKey(Activity, on_delete=models.DO_NOTHING, related_name='offers3', blank=True, null=True)
+#
+#    class Meta:
+#        ordering = ['id']
 
 
 class RecommendedActivitiesOffers(models.Model):
