@@ -31,3 +31,4 @@ django-bootstrap-form
 django-widget-tweaks
 matplotlib
 gunicorn
+django-extensions
