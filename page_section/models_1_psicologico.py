@@ -17,14 +17,10 @@ class CognitionDeficit (models.Model):
     q5_praxia_score = models.IntegerField(Options.questions[5][1], default=0)
     q6_memory_test = models.CharField(Options.questions[6][0], max_length=1,default="N",choices=Options.CHOICES)
     q6_memory_test_score = models.IntegerField(Options.questions[6][1], default=0)
-
     need_investigation_cognition = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    score_cognition = models.TextField(null=True,default=0)
     max_score_cognition = models.IntegerField(default=6)
+    score = models.IntegerField(null=True,default=0)
 
-
-    def score(self):
-        pass
 
     def investigate(self):
         pass

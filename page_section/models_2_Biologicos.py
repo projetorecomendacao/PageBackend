@@ -8,7 +8,7 @@ class SensoryDeficit(models.Model):
     q18_senses_problems = models.CharField(Options.questions[18], max_length=1, default="N", choices=Options.CHOICES)
     q19_interaction_problems = models.CharField(Options.questions[19], max_length=1, default="N", choices=Options.CHOICES)
     need_investigation_sensory = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    score: models.IntegerField(null=True)
+    score = models.IntegerField(null=True)
     max_score_sensory = models.IntegerField(default=6)
 
     def investigate(self):
@@ -30,6 +30,7 @@ class FunctionalDisability (models.Model):
     q24_dress_up = models.CharField(Options.questions[24],  max_length=1, default="N", choices=Options.CHOICES)
     q25TakeShower = models.CharField(Options.questions[25],  max_length=1, default="N", choices=Options.CHOICES)
     need_investigation_functional = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    score = models.IntegerField(null=True)
     max_score_functional = models.IntegerField('Pontuação Máxima',default=6)
 
     def investigate(self):
@@ -40,8 +41,6 @@ class FunctionalDisability (models.Model):
         verbose_name = 'Incapacidade Funcional'
         verbose_name_plural = 'Incapacidade Funcional'
 
-    def score(self):
-        pass
 
 
 class Malnutrition (models.Model):
@@ -56,7 +55,7 @@ class Malnutrition (models.Model):
     q31_illnes = models.CharField(max_length=1, default="N", choices=Options.CHOICES)
     q31_hospital = models.CharField(max_length=1, default="N", choices=Options.CHOICES)
     q32_bmi_less22 = models.CharField(Options.questions[32], max_length=1, default="N", choices=Options.CHOICES)  # Usar cálculo de BMI do participante
-    score: models.IntegerField(null=True)
+    score = models.IntegerField(null=True)
     need_investigation_malnutrition = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
     max_score_malnutrition = models.IntegerField('Pontuação Máxima',default=6)
 
@@ -84,7 +83,7 @@ class CardiovascularFactors (models.Model):
     q40_alcohol_Ingested_last_week_amount = models.TextField(Options.questions[40][1],null=True,blank=True)
     q41_bmi_obesity = models.CharField(Options.questions[41], max_length=1, default="N", choices=Options.CHOICES)  # Usar cálculo do BMI de participante
     need_investigation_cardio = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    score: models.IntegerField(null=True)
+    score = models.IntegerField(null=True)
     max_score_cardio = models.IntegerField('Pontuação Máxima',default=9)
 
     def investigate(self):
@@ -132,6 +131,7 @@ class MisuseMedications (models.Model):
     q52_inappropriate_medication = models.CharField(Options.questions[52], max_length=1, default="N", choices=Options.CHOICES)
     q53_risk_adverse_reaction = models.CharField(Options.questions[53], max_length=1, default="N", choices=Options.CHOICES)
     need_investigation_misuse = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    score = models.IntegerField(null=True)
     max_score_misuse = models.IntegerField('Pontuação Máxima',default=9)
 
     def investigate(self):
@@ -141,9 +141,6 @@ class MisuseMedications (models.Model):
         ordering = ['id']
         verbose_name = 'Uso Inadequado de Medicamentos'
         verbose_name_plural = 'Uso Inadequado de Medicamentos'
-
-    def score(self):
-        pass
 
 
 class BiologicalAspects (models.Model):

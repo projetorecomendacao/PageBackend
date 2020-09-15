@@ -62,8 +62,8 @@ class ReassessmentControl (models.Model):
         ordering = ['id']
 
 class DemandMap(models.Model):
-    created_at = models.DateField()
-    updated_at = models.DateField()
+    created_at = models.DateField(null=True)
+    updated_at = models.DateField(null=True)
     dm3_unmet_demands = models.TextField('O(a) idoso(a) apresenta outras demandas não contempladas no mapa? Se sim, especificar:',null=True)
     gerontologist_assessment =  models.TextField('Avaliação do Gerontólogo',null=True)
     demands_problems = models.TextField('Demandas/Problemas',null=True)

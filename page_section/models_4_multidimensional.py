@@ -22,7 +22,8 @@ class Falls (models.Model):
     q101_psychotropic_medications_use = models.CharField(Options.questions[101], max_length=1, default="N", choices=Options.CHOICES)
     q102_has_diseases = models.CharField(Options.questions[102], max_length=1, default="N", choices=Options.CHOICES)
     need_investigation_falls = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
-    max_score_falls = models.IntegerField(default=8)
+    score = models.IntegerField(null=True)
+    max_score_falls = models.IntegerField(default=16)
 
     def investigate(self):
         pass
@@ -31,9 +32,6 @@ class Falls (models.Model):
         ordering = ['id']
         verbose_name = 'Quedas'
         verbose_name_plural = 'Quedas'
-
-    def score(self):
-        pass
 
 
 class MultidisciplinaryDomain (models.Model):

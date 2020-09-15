@@ -108,3 +108,5 @@ class PageSerializer (ModelSerializer):
     class Meta:
         model = Page
         fields = '__all__'
+
+

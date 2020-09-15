@@ -2,7 +2,6 @@ from django.db import models
 from experts_section.models import Gerontologist, Expert
 from .messages import *
 from participant_section.models import Participant, ParticipantSituation
-from recommender_section.models import RecommendedActivitiesOffers, RecommendedActivities
 from assessment_section.models import DemandMap
 from .models_1_psicologico import PsychologicalAspects
 from .models_2_Biologicos import BiologicalAspects
@@ -43,12 +42,6 @@ class Page(models.Model):
                                                    verbose_name='Domínio Multidisciplinar')
     # Mapa de Demandas
     demandMap = models.OneToOneField(DemandMap, on_delete=models.CASCADE, null=True, verbose_name='Mapa de Demandas')
-    # Atividades Recomendadas
-    recommendedActivities = models.ForeignKey(RecommendedActivities, null=True, verbose_name="Atividades Recomendadas",
-                                              on_delete=models.CASCADE)
-    recommendedActivitiesOffers = models.ForeignKey(RecommendedActivitiesOffers, null=True,
-                                                    verbose_name="Atividades Ofertadas Recomendadas",
-                                                    on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']

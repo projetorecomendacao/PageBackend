@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from recommender_section.models import *
+
+admin.site.register(RecommendedActivities)
+admin.site.register(RecommendedActivitiesOffers)

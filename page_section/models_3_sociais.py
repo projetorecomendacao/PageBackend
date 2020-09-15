@@ -17,6 +17,7 @@ class LowSocialSupport (models.Model):
     q61_participate_social_events = models.CharField(Options.questions[61], max_length=1, default="N", choices=Options.CHOICES)
     q62_regulary_healt_services = models.CharField(Options.questions[62], max_length=1, default="N", choices=Options.CHOICES)
     need_investigation_low = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    score = models.TextField(null=True,default=0)
     max_score_low = models.IntegerField(default=9)
 
     def investigate(self):
@@ -26,10 +27,6 @@ class LowSocialSupport (models.Model):
         ordering = ['id']
         verbose_name = 'Baixo Suporte Social'
         verbose_name_plural = 'Baixo Suporte Social'
-
-    def score(self):
-        pass
-
 
 class EnvironmentalProblems (models.Model):
     # Internal environment
@@ -55,12 +52,10 @@ class EnvironmentalProblems (models.Model):
     q78_safety = models.CharField(Options.questions[78], max_length=1, default="N", choices=Options.CHOICES)
 
     need_investigation_env = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
+    score = models.TextField(null=True,default=0)
     max_score_env = models.IntegerField(default=16)
 
     def investigate(self):
-        pass
-
-    def score(self):
         pass
 
     def calcular(self):
@@ -83,7 +78,8 @@ class Violence (models.Model):
     q86_dont_take_care_health = models.CharField(Options.questions[86], max_length=1, default="N", choices=Options.CHOICES)
     need_investigation_violence = models.CharField(Options.need_investigation_question,max_length=1, default="N",choices=Options.CHOICES)
     max_score_violence = models.IntegerField(default=8)
-    score = models.IntegerField (null=True)
+    score = models.TextField(null=True,default=0)
+
 
     def investigate(self):
         pass
@@ -93,8 +89,6 @@ class Violence (models.Model):
         verbose_name = 'Violência'
         verbose_name_plural = 'Violência'
 
-    def score(self):
-        pass
 
 
 class SocialAspects (models.Model):

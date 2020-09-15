@@ -86,7 +86,7 @@ class ParticipantSituation (models.Model):
     p15_religion = models.CharField('Religião', max_length=30, null=True, blank=True)
     #Acompanhamento de Saúde
     #p16_health_monitoring = models.ManyToManyField(HealthMonitoring, verbose_name="Acompanhamento de Saúde")
-    p16_health_monitoring = models.TextField('Acompanhamento de saúde', null=True)
+    p16_health_self_report = models.TextField('Acompanhamento de saúde', null=True)
     p20_weight = models.FloatField("Peso", null=True, blank=True)
     p20_height = models.FloatField("Altura", null=True, blank=True)
     p20_IMC = models.FloatField("IMC", null=True, blank=True)

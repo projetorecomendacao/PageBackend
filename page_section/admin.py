@@ -23,5 +23,5 @@ admin.site.register(Violence)
 admin.site.register(SocialAspects)
 admin.site.register(Falls)
 admin.site.register(MultidisciplinaryDomain)
-admin.site.register(RecommendedActivities)
+
 
