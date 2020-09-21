@@ -244,7 +244,8 @@ class Options():
             ["Entre 3 e 4 salários mínimos", "Entre 3 e 4 salários mínimos"],
             ["Entre 4 e 5 salários mínimos", "Entre 4 e 5 salários mínimos"],
             ["Entre 5 e 10 salários mínimos", "Entre 5 e 10 salários mínimos"],
-            ["mais de 10 salários mínimos", "mais de 10 salários mínimos"]
+            ["mais de 10 salários mínimos", "mais de 10 salários mínimos"],
+            ["prefere não informar", "prefere não informar"]
         ]
 
         MARITALSTATUS =[

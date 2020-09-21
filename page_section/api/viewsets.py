@@ -530,3 +530,32 @@ class PageViewSet (CustomModelViewSet):
             'multidisciplinaryDomain' : multidisciplinaryDomain_.pk,
             'demandMap' : demand_map_.pk})
 
+    def retrieve(self, request, pk=None):
+        print (pk)
+        page_ = Page.objects.get(id = pk)
+        psi = PsychologicalAspects.objects.get(pk = page_.psychologicalAspects.pk)
+        dados= CognitionDeficit.objects.get(id = psi.cognition_deficit.pk)
+        
+        cognitionDeficit = {
+            'id' : dados.pk,
+            'q1_memory_good_like_before' : dados.q1_memory_good_like_before,
+            'q2_memory_test' : dados.q2_memory_test,
+            'q2_memory_test_score' : dados.q2_memory_test_score,
+            'q3_language_function_attention' : dados.q3_language_function_attention,
+            'q3_language_function_attention_score' : dados.q3_language_function_attention_score,
+            'q3_language_function_attention_15' : dados.q3_language_function_attention_15,
+            'q3_language_function_attention_30' : dados.q3_language_function_attention_30,
+            'q3_language_function_attention_45' : dados.q3_language_function_attention_45,
+            'q3_language_function_attention_60' : dados.q3_language_function_attention_60,
+            'q4_visospatial_ability' : dados.q4_visospatial_ability,
+            'q4_visospatial_ability_score' : dados.q4_visospatial_ability_score,
+            'q5_praxia' : dados.q5_praxia,
+            'q5_praxia_score' : dados.q5_praxia_score,
+            'q6_memory_test' : dados.q6_memory_test,
+            'q6_memory_test_score' : dados.q6_memory_test_score,
+            'need_investigation_cognition' : dados.need_investigation_cognition,
+            'score' : dados.score,
+            'max_score_cognition' : 6
+        }
+
+        return Response ({'teste':{'cp01': 'teste','cp02' : 'teste2'}, 'teste2' : {'cp03': 'teste3','cp04' : 'teste4'}, 'cognitionDeficit' : cognitionDeficit })

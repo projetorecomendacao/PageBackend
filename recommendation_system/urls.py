@@ -41,6 +41,12 @@ from drinks_section.api.viewsets import DrinksViewSet, IngestedDrinksViewSet
 from page_section.views import testar, abas, grava_page, grava_demanda, testa_grafico
 from page_section import views as page_view
 from drinks_section.api.viewsets import *
+from page_usp_section.api.viewsets import  NegativeAttitudesAgingViewSetUsp, CognitionDeficitViewSetUsp, DepressionViewSetUsp,\
+    PsychologicalAspectsViewSetUsp, BiologicalAspectsViewSetUsp, SensoryDeficitViewSetUsp, FunctionalDisabilityViewSetUsp,\
+    MalnutritionViewSetUsp, CardiovascularFactorsViewSetUsp, MisuseMedicationsViewSetUsp, SocialAspectsViewSetUsp,\
+    LowSocialSupportViewSetUsp, EnvironmentalProblemsViewSetUsp, ViolenceViewSetUsp, MultidisciplinaryDomainViewSetUsp,\
+    FallsViewSetUsp, PageViewSetUsp
+
 
 
 router = routers.DefaultRouter()
@@ -118,6 +124,26 @@ router.register(r'fractures', FracturesViewSet, basename='fractures')
 # drinks_section
 router.register(r'drinks', DrinksViewSet, basename='drinks')
 router.register(r'ingestedDrinks',IngestedDrinksViewSet, basename='ingestedDrinks')
+
+# page_section_USP
+router.register(r'negativeAttitudesAgingUsp', NegativeAttitudesAgingViewSetUsp, basename='negativeAttitudesAgingUsp')
+router.register(r'cognitionDeficitUsp', CognitionDeficitViewSetUsp, basename='cognitionDeficitUsp')
+router.register(r'depressionUsp', DepressionViewSetUsp, basename='depressionUsp')
+router.register(r'psychologicalAspectsUsp', PsychologicalAspectsViewSetUsp, basename='psychologicalAspectsUsp')
+router.register(r'biologicalAspectsUsp', BiologicalAspectsViewSetUsp, basename='biologicalAspectsUsp')
+router.register(r'sensoryDeficitUsp', SensoryDeficitViewSetUsp, basename='sensoryDeficitUsp')
+router.register(r'functionalDisabilityUsp', FunctionalDisabilityViewSetUsp, basename='functionalDisabilityUsp')
+router.register(r'malnutritionUsp', MalnutritionViewSetUsp, basename='malnutritionUsp')
+router.register(r'cardiovascularFactorsUsp', CardiovascularFactorsViewSetUsp, basename='cardiovascularFactorsUsp')
+router.register(r'misuseMedicationsUsp', MisuseMedicationsViewSetUsp, basename='misuseMedicationsUsp')
+router.register(r'socialAspectsUsp', SocialAspectsViewSetUsp, basename='socialAspectsUsp')
+router.register(r'lowSocialSupportUsp', LowSocialSupportViewSetUsp, basename='lowSocialSupportUsp')
+router.register(r'environmentalProblemsUsp', EnvironmentalProblemsViewSetUsp, basename='environmentalProblemsUsp')
+router.register(r'violenceUsp', ViolenceViewSetUsp, basename='violenceUsp')
+router.register(r'multidisciplinaryDomainUsp', MultidisciplinaryDomainViewSetUsp, basename='multidisciplinaryDomainUsp')
+router.register(r'fallsUsp', FallsViewSetUsp, basename='fallsUsp')
+router.register(r'pageUsp', PageViewSetUsp, basename='pageUsp')
+
 
 urlpatterns = [
     path('', include(router.urls)),

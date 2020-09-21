@@ -15,7 +15,7 @@ from page_usp_section.api.serializers import NegativeAttitudesAgingUspSerializer
 from utils.api.serializer import CustomModelViewSet, IsExpert
 
 
-class NegativeAttitudesAgingViewSet(CustomModelViewSet):
+class NegativeAttitudesAgingViewSetUsp(CustomModelViewSet):
     queryset = NegativeAttitudesAgingUsp.objects.all()
     Serializer_class = NegativeAttitudesAgingUspSerializer
     permission_classes_by_action = {
@@ -24,7 +24,7 @@ class NegativeAttitudesAgingViewSet(CustomModelViewSet):
     }
 
 
-class CognitionDeficitViewSet(CustomModelViewSet):
+class CognitionDeficitViewSetUsp(CustomModelViewSet):
     queryset = CognitionDeficitUsp.objects.all()
     Serializer_class = CognitionDeficitUspSerializer
     permission_classes_by_action = {
@@ -33,7 +33,7 @@ class CognitionDeficitViewSet(CustomModelViewSet):
     }
 
 
-class DepressionViewSet(CustomModelViewSet):
+class DepressionViewSetUsp(CustomModelViewSet):
     queryset = DepressionUsp.objects.all()
     Serializer_class = DepressionUspSerializer
     permission_classes_by_action = {
@@ -42,7 +42,7 @@ class DepressionViewSet(CustomModelViewSet):
     }
 
 
-class PsychologicalAspectsViewSet(CustomModelViewSet):
+class PsychologicalAspectsViewSetUsp(CustomModelViewSet):
     queryset = PsychologicalAspectsUsp.objects.all()
     Serializer_class = PsychologicalAspectsUspSerializer
     permission_classes_by_action = {
@@ -51,7 +51,7 @@ class PsychologicalAspectsViewSet(CustomModelViewSet):
     }
 
 
-class BiologicalAspectsViewSet(CustomModelViewSet):
+class BiologicalAspectsViewSetUsp(CustomModelViewSet):
     queryset = BiologicalAspectsUsp.objects.all()
     Serializer_class = BiologicalAspectsUspSerializer
     permission_classes_by_action = {
@@ -60,7 +60,7 @@ class BiologicalAspectsViewSet(CustomModelViewSet):
     }
 
 
-class SensoryDeficitViewSet(CustomModelViewSet):
+class SensoryDeficitViewSetUsp(CustomModelViewSet):
     queryset = SensoryDeficitUsp.objects.all()
     Serializer_class = SensoryDeficitUspSerializer
     permission_classes_by_action = {
@@ -69,7 +69,7 @@ class SensoryDeficitViewSet(CustomModelViewSet):
     }
 
 
-class FunctionalDisabilityViewSet(CustomModelViewSet):
+class FunctionalDisabilityViewSetUsp(CustomModelViewSet):
     queryset = FunctionalDisabilityUsp.objects.all()
     Serializer_class = FunctionalDisabilityUspSerializer
     permission_classes_by_action = {
@@ -78,7 +78,7 @@ class FunctionalDisabilityViewSet(CustomModelViewSet):
     }
 
 
-class MalnutritionViewSet(CustomModelViewSet):
+class MalnutritionViewSetUsp(CustomModelViewSet):
     queryset = MalnutritionUsp.objects.all()
     Serializer_class = MalnutritionUspSerializer
     permission_classes_by_action = {
@@ -87,7 +87,7 @@ class MalnutritionViewSet(CustomModelViewSet):
     }
 
 
-class CardiovascularFactorsViewSet(CustomModelViewSet):
+class CardiovascularFactorsViewSetUsp(CustomModelViewSet):
     queryset = CardiovascularFactorsUsp.objects.all()
     Serializer_class = CardiovascularFactorsUspSerializer
     permission_classes_by_action = {
@@ -96,7 +96,7 @@ class CardiovascularFactorsViewSet(CustomModelViewSet):
     }
 
 
-class MisuseMedicationsViewSet(CustomModelViewSet):
+class MisuseMedicationsViewSetUsp(CustomModelViewSet):
     queryset = MisuseMedicationsUsp.objects.all()
     Serializer_class = MisuseMedicationsUspSerializer
     permission_classes_by_action = {
@@ -105,7 +105,7 @@ class MisuseMedicationsViewSet(CustomModelViewSet):
     }
 
 
-class SocialAspectsViewSet(CustomModelViewSet):
+class SocialAspectsViewSetUsp(CustomModelViewSet):
     queryset = SocialAspectsUsp.objects.all()
     Serializer_class = SocialAspectsUspSerializer
     permission_classes_by_action = {
@@ -114,7 +114,7 @@ class SocialAspectsViewSet(CustomModelViewSet):
     }
 
 
-class LowSocialSupportViewSet(CustomModelViewSet):
+class LowSocialSupportViewSetUsp(CustomModelViewSet):
     queryset = LowSocialSupportUsp.objects.all()
     Serializer_class = LowSocialSupportUspSerializer
     permission_classes_by_action = {
@@ -123,7 +123,7 @@ class LowSocialSupportViewSet(CustomModelViewSet):
     }
 
 
-class EnvironmentalProblemsViewSet(CustomModelViewSet):
+class EnvironmentalProblemsViewSetUsp(CustomModelViewSet):
     queryset = EnvironmentalProblemsUsp.objects.all()
     Serializer_class = EnvironmentalProblemsUspSerializer
     permission_classes_by_action = {
@@ -132,7 +132,7 @@ class EnvironmentalProblemsViewSet(CustomModelViewSet):
     }
 
 
-class ViolenceViewSet(CustomModelViewSet):
+class ViolenceViewSetUsp(CustomModelViewSet):
     queryset = ViolenceUsp.objects.all()
     Serializer_class = ViolenceUspSerializer
     permission_classes_by_action = {
@@ -141,7 +141,7 @@ class ViolenceViewSet(CustomModelViewSet):
     }
 
 
-class MultidisciplinaryDomainViewSet(CustomModelViewSet):
+class MultidisciplinaryDomainViewSetUsp(CustomModelViewSet):
     queryset = MultidisciplinaryDomainUsp.objects.all()
     Serializer_class = MultidisciplinaryDomainUspSerializer
     permission_classes_by_action = {
@@ -150,7 +150,7 @@ class MultidisciplinaryDomainViewSet(CustomModelViewSet):
     }
 
 
-class FallsViewSet(CustomModelViewSet):
+class FallsViewSetUsp(CustomModelViewSet):
     queryset = FallsUsp.objects.all()
     Serializer_class = FallsUspSerializer
     permission_classes_by_action = {
@@ -159,7 +159,7 @@ class FallsViewSet(CustomModelViewSet):
     }
 
 
-class PageViewSet (CustomModelViewSet):
+class PageViewSetUsp(CustomModelViewSet):
     queryset = PageUsp.objects.all()
     Serializer_class = PageUspSerializer
     permission_classes_by_action = {
