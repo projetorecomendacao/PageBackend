@@ -17,7 +17,7 @@ from utils.api.serializer import CustomModelViewSet, IsExpert
 
 class NegativeAttitudesAgingViewSetUsp(CustomModelViewSet):
     queryset = NegativeAttitudesAgingUsp.objects.all()
-    Serializer_class = NegativeAttitudesAgingUspSerializer
+    serializer_class = NegativeAttitudesAgingUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -26,7 +26,7 @@ class NegativeAttitudesAgingViewSetUsp(CustomModelViewSet):
 
 class CognitionDeficitViewSetUsp(CustomModelViewSet):
     queryset = CognitionDeficitUsp.objects.all()
-    Serializer_class = CognitionDeficitUspSerializer
+    serializer_class = CognitionDeficitUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -35,7 +35,7 @@ class CognitionDeficitViewSetUsp(CustomModelViewSet):
 
 class DepressionViewSetUsp(CustomModelViewSet):
     queryset = DepressionUsp.objects.all()
-    Serializer_class = DepressionUspSerializer
+    serializer_class = DepressionUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -44,7 +44,7 @@ class DepressionViewSetUsp(CustomModelViewSet):
 
 class PsychologicalAspectsViewSetUsp(CustomModelViewSet):
     queryset = PsychologicalAspectsUsp.objects.all()
-    Serializer_class = PsychologicalAspectsUspSerializer
+    serializer_class = PsychologicalAspectsUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -53,7 +53,7 @@ class PsychologicalAspectsViewSetUsp(CustomModelViewSet):
 
 class BiologicalAspectsViewSetUsp(CustomModelViewSet):
     queryset = BiologicalAspectsUsp.objects.all()
-    Serializer_class = BiologicalAspectsUspSerializer
+    serializer_class = BiologicalAspectsUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -62,7 +62,7 @@ class BiologicalAspectsViewSetUsp(CustomModelViewSet):
 
 class SensoryDeficitViewSetUsp(CustomModelViewSet):
     queryset = SensoryDeficitUsp.objects.all()
-    Serializer_class = SensoryDeficitUspSerializer
+    serializer_class = SensoryDeficitUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -71,7 +71,7 @@ class SensoryDeficitViewSetUsp(CustomModelViewSet):
 
 class FunctionalDisabilityViewSetUsp(CustomModelViewSet):
     queryset = FunctionalDisabilityUsp.objects.all()
-    Serializer_class = FunctionalDisabilityUspSerializer
+    serializer_class = FunctionalDisabilityUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -80,7 +80,7 @@ class FunctionalDisabilityViewSetUsp(CustomModelViewSet):
 
 class MalnutritionViewSetUsp(CustomModelViewSet):
     queryset = MalnutritionUsp.objects.all()
-    Serializer_class = MalnutritionUspSerializer
+    serializer_class = MalnutritionUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -89,7 +89,7 @@ class MalnutritionViewSetUsp(CustomModelViewSet):
 
 class CardiovascularFactorsViewSetUsp(CustomModelViewSet):
     queryset = CardiovascularFactorsUsp.objects.all()
-    Serializer_class = CardiovascularFactorsUspSerializer
+    serializer_class = CardiovascularFactorsUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -98,7 +98,7 @@ class CardiovascularFactorsViewSetUsp(CustomModelViewSet):
 
 class MisuseMedicationsViewSetUsp(CustomModelViewSet):
     queryset = MisuseMedicationsUsp.objects.all()
-    Serializer_class = MisuseMedicationsUspSerializer
+    serializer_class = MisuseMedicationsUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -107,7 +107,7 @@ class MisuseMedicationsViewSetUsp(CustomModelViewSet):
 
 class SocialAspectsViewSetUsp(CustomModelViewSet):
     queryset = SocialAspectsUsp.objects.all()
-    Serializer_class = SocialAspectsUspSerializer
+    serializer_class = SocialAspectsUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -116,7 +116,7 @@ class SocialAspectsViewSetUsp(CustomModelViewSet):
 
 class LowSocialSupportViewSetUsp(CustomModelViewSet):
     queryset = LowSocialSupportUsp.objects.all()
-    Serializer_class = LowSocialSupportUspSerializer
+    serializer_class = LowSocialSupportUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -125,7 +125,7 @@ class LowSocialSupportViewSetUsp(CustomModelViewSet):
 
 class EnvironmentalProblemsViewSetUsp(CustomModelViewSet):
     queryset = EnvironmentalProblemsUsp.objects.all()
-    Serializer_class = EnvironmentalProblemsUspSerializer
+    serializer_class = EnvironmentalProblemsUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -134,7 +134,7 @@ class EnvironmentalProblemsViewSetUsp(CustomModelViewSet):
 
 class ViolenceViewSetUsp(CustomModelViewSet):
     queryset = ViolenceUsp.objects.all()
-    Serializer_class = ViolenceUspSerializer
+    serializer_class = ViolenceUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -143,7 +143,7 @@ class ViolenceViewSetUsp(CustomModelViewSet):
 
 class MultidisciplinaryDomainViewSetUsp(CustomModelViewSet):
     queryset = MultidisciplinaryDomainUsp.objects.all()
-    Serializer_class = MultidisciplinaryDomainUspSerializer
+    serializer_class = MultidisciplinaryDomainUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -152,7 +152,7 @@ class MultidisciplinaryDomainViewSetUsp(CustomModelViewSet):
 
 class FallsViewSetUsp(CustomModelViewSet):
     queryset = FallsUsp.objects.all()
-    Serializer_class = FallsUspSerializer
+    serializer_class = FallsUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]
@@ -161,7 +161,7 @@ class FallsViewSetUsp(CustomModelViewSet):
 
 class PageViewSetUsp(CustomModelViewSet):
     queryset = PageUsp.objects.all()
-    Serializer_class = PageUspSerializer
+    serializer_class = PageUspSerializer
     permission_classes_by_action = {
         'create': [IsExpert],
         'partial_update': [IsExpert]

@@ -8,9 +8,9 @@ class SensoryDeficitUsp(models.Model):
     q21_hearing_problems = models.CharField(OptionsUsp.questions[16],  max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q22_taste_problems = models.CharField(OptionsUsp.questions[17],  max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q23_do_activities_problems = models.CharField(OptionsUsp.questions[18], max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    sensory_obs = models.TextField("Observações")
-    need_investigation_sensory = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
-    max_score_sensory = models.IntegerField(default=6)
+    comments = models.TextField("Observações",null=True)
+    need_investigation = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
+    max_score = models.IntegerField(default=6)
     score = models.IntegerField(null=True)
 
     def investigate(self):
@@ -29,9 +29,9 @@ class FunctionalDisabilityUsp (models.Model):
     q27UseTelephone = models.CharField(OptionsUsp.questions[23],  max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q28_dress_up = models.CharField(OptionsUsp.questions[24],  max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q29TakeShower = models.CharField(OptionsUsp.questions[25],  max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    functional_disability_obs = models.TextField("Observações",null=True)
-    need_investigation_functional = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
-    max_score_functional = models.IntegerField('Pontuação Máxima',default=6)
+    comments = models.TextField("Observações",null=True)
+    need_investigation = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
+    max_score = models.IntegerField(default=6)
     score = models.IntegerField(null=True)
 
     def investigate(self):
@@ -53,9 +53,9 @@ class MalnutritionUsp (models.Model):
     height = models.FloatField("Altura")
     imc = models.FloatField("IMC")
     q35_bmi_less22 = models.CharField(OptionsUsp.questions[35], max_length=1, default="N", choices=OptionsUsp.CHOICES)  # Usar cálculo de BMI do participante
-    malnutrition_obs = models.TextField("Observações", null=True)
-    need_investigation_malnutrition = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
-    max_score_malnutrition = models.IntegerField('Pontuação Máxima',default=6)
+    comments = models.TextField("Observações",null=True)
+    need_investigation = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
+    max_score = models.IntegerField(default=6)
     score = models.IntegerField(null=True)
 
     def investigate(self):
@@ -81,9 +81,9 @@ class CardiovascularFactorsUsp (models.Model):
     q42_practise_exercises_time = models.CharField(OptionsUsp.questions[42][3], max_length=50)
     q42_practice_exercises = models.CharField(OptionsUsp.questions[42][4], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q43_bmi_obesity = models.CharField(OptionsUsp.questions[41], max_length=1, default="N", choices=OptionsUsp.CHOICES)  # Usar cálculo do BMI de participante
-    cardiovascular_obs = models.TextField("Observação")
-    need_investigation_cardio = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
-    max_score_cardio = models.IntegerField('Pontuação Máxima',default=9)
+    comments = models.TextField("Observações",null=True)
+    need_investigation = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
+    max_score = models.IntegerField(default=6)
     score = models.IntegerField(null=True)
 
     def investigate(self):
@@ -133,9 +133,9 @@ class MisuseMedicationsUsp (models.Model):
     q52_self_medication = models.CharField(OptionsUsp.questions[51], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q53_inappropriate_medication = models.CharField(OptionsUsp.questions[52], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q54_risk_adverse_reaction = models.CharField(OptionsUsp.questions[53], max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    misuse_medications_obs = models.TextField("Observações", null=True)
-    need_investigation_misuse = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
-    max_score_misuse = models.IntegerField('Pontuação Máxima',default=9)
+    comments = models.TextField("Observações",null=True)
+    need_investigation = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
+    max_score = models.IntegerField(default=6)
     score = models.IntegerField(null=True)
 
     def investigate(self):
@@ -153,8 +153,8 @@ class BiologicalAspectsUsp (models.Model):
     malNutrition = models.OneToOneField(MalnutritionUsp, on_delete=models.CASCADE)
     cardiovascularFactors = models.OneToOneField(CardiovascularFactorsUsp, on_delete=models.CASCADE)
     misuseMedications = models.OneToOneField(MisuseMedicationsUsp, on_delete= models.CASCADE)
-    comments_bio = models.TextField('Observações Sobre o Bloco Biológico')
-    max_score_bio = models.IntegerField('Pontuação Máxima',default=36)
+    comments = models.TextField('Observações Sobre o Bloco Biológico')
+    max_score = models.IntegerField('Pontuação Máxima',default=36)
     score = models.IntegerField(null=True)
 
     def investigate(self):

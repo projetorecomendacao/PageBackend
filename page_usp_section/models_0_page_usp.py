@@ -51,8 +51,8 @@ class PageUsp (models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = 'Page'
-        verbose_name_plural = 'Page'
+        verbose_name = 'PageUsp'
+        verbose_name_plural = 'PageUsp'
 
     def scores(self):
         pass

@@ -18,9 +18,10 @@ class LowSocialSupportUsp (models.Model):
     q61_someone_to_have_fun = models.CharField(OptionsUsp.questions[60], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q62_participate_social_events = models.CharField(OptionsUsp.questions[61], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q63_regulary_healt_services = models.CharField(OptionsUsp.questions[62], max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    low_social_support_obs = models.TextField("Observações: ", null= True)
-    need_investigation_low = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
-    max_score_low = models.IntegerField(default=9)
+    comments = models.TextField("Observações",null=True)
+    need_investigation = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
+    max_score = models.IntegerField(default=6)
+    score = models.IntegerField(null=True)
 
     def investigate(self):
         pass
@@ -43,9 +44,10 @@ class ViolenceUsp (models.Model):
     q69_someone_used_money = models.CharField(OptionsUsp.questions[84], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q70_touched_without_permission = models.CharField(OptionsUsp.questions[85], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q71_dont_take_care_health = models.CharField(OptionsUsp.questions[86], max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    violence_obs = models.TextField("Observações", null=True)
-    need_investigation_violence = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
-    max_score_violence = models.IntegerField(default=8)
+    comments = models.TextField("Observações",null=True)
+    need_investigation = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
+    max_score = models.IntegerField(default=6)
+    score = models.IntegerField(null=True)
 
     def investigate(self):
         pass
@@ -81,9 +83,10 @@ class EnvironmentalProblemsUsp (models.Model):
     q85_ease_plasewalking = models.CharField(OptionsUsp.questions[76], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q86_fun_access = models.CharField(OptionsUsp.questions[77], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q87_safety = models.CharField(OptionsUsp.questions[78], max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    environmental_obs = models.TextField("Observações",null=True)
-    need_investigation_env = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
-    max_score_env = models.IntegerField(default=16)
+    comments = models.TextField("Observações",null=True)
+    need_investigation = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
+    max_score = models.IntegerField(default=6)
+    score = models.IntegerField(null=True)
 
     def investigate(self):
         pass
@@ -105,8 +108,8 @@ class SocialAspectsUsp (models.Model):
     lowSocialSupport = models.OneToOneField(LowSocialSupportUsp, on_delete=models.CASCADE, null=True)
     environmentalProblems = models.OneToOneField(EnvironmentalProblemsUsp, on_delete=models.CASCADE, null=True)
     violence = models.OneToOneField(ViolenceUsp, on_delete=models.CASCADE, null=True)
-    comments_social = models.TextField('Observações Sobre o Bloco Social')
-    maxScore_social = models.IntegerField('Pontuação Máxima',default=32)
+    comments = models.TextField('Observações Sobre o Bloco Social')
+    maxScore = models.IntegerField('Pontuação Máxima',default=32)
 
     def investigate(self):
         pass
