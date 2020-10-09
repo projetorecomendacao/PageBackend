@@ -11,24 +11,21 @@ from .models_3_sociais_usp import SocialAspectsUsp
 from .models_4_multidimensional_usp import MultidisciplinaryDomainUsp
 
 
-
-
-
 class PageUsp (models.Model):
     #Serviço ou instituição
     service = models.CharField('Serviço/instituição',max_length=60)
     #Data Entrada no serviçoptimize
     entrance = models.DateField('Data de Entrada no Serviço',null=True,blank=True)
     #Entrevistado
-    interviewed = models.CharField('Pessoa entrevistada:', max_length=20, choices=OptionsUsp.INTERVIEW)
+    interviewed = models.CharField('Pessoa entrevistada:', max_length=30, choices=OptionsUsp.INTERVIEW)
     #Entrevistador
-    interviewer = models.CharField('Nome do Entrevistador:',max_length=30)
+    interviewer = models.CharField('Nome do Entrevistador:',max_length=50)
     #Data que foi feita a avaliação
     avaliation_date = models.DateField("Data da Avaliação", null=True)
     #Horário de Início
-    start_time = models.TimeField("Hora do início da avaliação: ", null=True)
+    start_time = models.CharField("Hora do início da avaliação: ", null=True, max_length=8)
     #Horário final da avaliação
-    end_time = models.TimeField("Hora do Término: ", null=True )
+    end_time = models.CharField("Hora do Término: ", null=True, max_length=8 )
     #Data da Criação
     created_at = models.DateTimeField('Criado em', auto_now_add=True, null=True)
     #Data da ùltima atualização

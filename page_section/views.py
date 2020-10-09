@@ -5,7 +5,7 @@ from experts_section.models import Gerontologist, Expert
 from .forms import *
 from datetime import datetime
 from .lista_atividades import ListaAtividades
-from .recommender import Recommender
+#from .recommender import Recommender
 
 
 
