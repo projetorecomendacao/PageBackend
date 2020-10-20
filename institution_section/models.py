@@ -1,17 +1,6 @@
 from django.db import models
 from activities_section.models import Activity
 
-
-class ContactMeans(models.Model):
-    email = models.EmailField('E-mail')
-    phone = models.CharField(max_length=14)
-    mobilePhone = models.CharField(max_length=14)
-    fax = models.CharField(max_length=14)
-
-    class Meta:
-        ordering = ['id']
-
-
 class Cidade(models.Model):
     cityName = models.CharField(max_length=50, null=True)
     state = models.CharField(max_length=50, null=True)
@@ -24,24 +13,16 @@ class Cidade(models.Model):
 class Address(models.Model):
     address = models.CharField(max_length=75)                       # logradouro
     number = models.CharField(max_length=8)
+    complement = models.CharField(max_length=50)
     district = models.CharField(max_length=60)                      # bairro
     cep = models.CharField(max_length=9)
     latitude = models.FloatField()
     longitude = models.FloatField()
     cidade = models.ForeignKey(Cidade, on_delete=models.DO_NOTHING, null=True)
+    reference = models.CharField(max_length=50)
 
     class Meta:
         ordering = ['id']
-
-
-class WebAddress (models.Model):
-    webPage = models.CharField(max_length=100)
-    facebook = models.CharField(max_length=100)
-    instagram = models.CharField(max_length=100)
-    tweeter = models.CharField(max_length=100)
-
-    class Meta:
-        ordering = ['id']    
 
 
 class ExpertiseAreas (models.Model):
@@ -50,6 +31,7 @@ class ExpertiseAreas (models.Model):
     class Meta:
         ordering = ['id'] 
 
+
 class AcademicEducation (models.Model):
     description : models.CharField(max_length=60)
 
@@ -57,14 +39,30 @@ class AcademicEducation (models.Model):
         ordering = ['id']    
 
 
+class TypeDigitalAddress(models.Model):
+    name = models.CharField(max_length=40)
+    type = models.CharField(max_length=20) # Web Page / Blog / Rede Social
+
+    class Meta:
+        ordering = ['id']
+
+
+class TypePhoneEmail(models.Model):
+    description = models.CharField(max_length=40)
+
+    class Meta:
+        ordering = ['id']
+
+
 class Professional(models.Model):
     name = models.CharField(max_length=45)
     RG = models.CharField(max_length=12, null=True)
     CPF = models.CharField(max_length=15, null=True)
-    contactMeans = models.OneToOneField(ContactMeans, on_delete= models.CASCADE, null=True)
-    webAddress = models.OneToOneField(WebAddress, on_delete= models.CASCADE, null=True)
     expertiseAreas = models.ManyToManyField(ExpertiseAreas)
     academicEducation = models.ManyToManyField(AcademicEducation)
+    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailProfessional', null=True)
+    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneProfessional', null=True)
+    webAddressList = models.ManyToManyField(TypePhoneEmail,through='WebAddressProfessional', null=True)
 
     class Meta:
         ordering = ['id']
@@ -89,7 +87,9 @@ class Institution(models.Model):
     assitence = models.ManyToManyField(AssistanceModality, through='ActingTime', null=True)
     contactMeans = models.OneToOneField (ContactMeans, on_delete=models.CASCADE, null=True)
     address = models.OneToOneField (Address, on_delete= models.CASCADE, null=True)
-    webAddress = models.OneToOneField (WebAddress, on_delete= models.CASCADE, null=True)
+    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailInstitution', null=True)
+    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneInstitution', null=True)
+    webAddressList = models.ManyToManyField(TypePhoneEmail,through='WebAddressInstitution', null=True)
 
     class Meta:
         ordering = ['id']
@@ -132,7 +132,9 @@ class Locals(models.Model):
     comments = models.TextField(null=True)
     contactMeans = models.OneToOneField (ContactMeans, on_delete=models.CASCADE)
     address = models.OneToOneField (Address, on_delete= models.CASCADE)
-    webAddress = models.OneToOneField (WebAddress, on_delete= models.CASCADE)
+    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailLocals', null=True)
+    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneLocals', null=True)
+    webAddressList = models.ManyToManyField(TypePhoneEmail,through='WebAddressLocals', null=True)
     technicalResponsible = models.ForeignKey(Professional, on_delete=models.DO_NOTHING)
  
     class Meta:
@@ -163,3 +165,90 @@ class Offers(models.Model):
     class Meta:
         ordering = ['id']
     
+
+
+
+class WebAddress (models.Model):
+    digitalAddress = models.CharField(max_length=100)
+    type = models.ForeignKey(TypeDigitalAddress)
+
+    class Meta:
+        ordering = ['id']    
+
+class WebAddressInstitution (WebAddress):
+    institution = models.ForeignKey(Institution)
+
+    class Meta:
+        ordering = ['id']    
+
+class WebAddressLocals (WebAddress):
+    local = models.ForeignKey(Locals)
+
+    class Meta:
+        ordering = ['id']    
+
+
+class WebAddressProfessional (WebAddress):
+    professional = models.ForeignKey(Locals)
+
+    class Meta:
+        ordering = ['id']    
+
+class Phone(models.Model):
+    type = models.ForeignKey(TypePhoneEmail)
+    phoneNumber = models.CharField(max_length=14)
+
+    class Meta:
+        ordering = ['id']
+
+
+class PhoneInstitution(Phone):
+    institution = models.ForeignKey(Institution)
+
+    class Meta:
+        ordering = ['id']
+
+
+class PhoneLocals(Phone):
+    local = models.ForeignKey(Locals)
+
+    class Meta:
+        ordering = ['id']
+
+
+class PhoneProfessional(Phone):
+    professional = models.ForeignKey(Professional)
+
+    class Meta:
+        ordering = ['id']
+
+
+class Email(models.Model):
+    type = models.ForeignKey(TypePhoneEmail)
+    email = models.EmailField()
+
+    class Meta:
+        ordering = ['id']
+
+
+class EmailInstitution(Email):
+    institution = models.ForeignKey(Institution)
+
+    class Meta:
+        ordering = ['id']
+
+
+class EmailLocals(Email):
+    local = models.ForeignKey(Locals)
+
+    class Meta:
+        ordering = ['id']
+
+
+class EmailProfessional(Email):
+    professional = models.ForeignKey(Professional)
+
+    class Meta:
+        ordering = ['id']
+
+
