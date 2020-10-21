@@ -60,9 +60,9 @@ class Professional(models.Model):
     CPF = models.CharField(max_length=15, null=True)
     expertiseAreas = models.ManyToManyField(ExpertiseAreas)
     academicEducation = models.ManyToManyField(AcademicEducation)
-    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailProfessional', null=True)
-    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneProfessional', null=True)
-    webAddressList = models.ManyToManyField(TypePhoneEmail,through='WebAddressProfessional', null=True)
+    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailProfessional', related_name='emails_professional')
+    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneProfessional', related_name='telefones_professional')
+    webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressProfessional', related_name="paginas_professional")
 
     class Meta:
         ordering = ['id']
@@ -84,12 +84,11 @@ class Institution(models.Model):
     targetAudience = models.TextField(max_length=50, null=True)
     ageTargetAudience = models.TextField(max_length=50, null=True)
     comments = models.TextField(null=True)
-    assitence = models.ManyToManyField(AssistanceModality, through='ActingTime', null=True)
-    contactMeans = models.OneToOneField (ContactMeans, on_delete=models.CASCADE, null=True)
+    assitence = models.ManyToManyField(AssistanceModality, through='ActingTime')
     address = models.OneToOneField (Address, on_delete= models.CASCADE, null=True)
-    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailInstitution', null=True)
-    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneInstitution', null=True)
-    webAddressList = models.ManyToManyField(TypePhoneEmail,through='WebAddressInstitution', null=True)
+    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailInstitution', related_name='emails_institution')
+    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneInstitution', related_name='telefones_instituicao')
+    webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressInstitution', related_name='paginas_instituicao')
 
     class Meta:
         ordering = ['id']
@@ -130,11 +129,10 @@ class Locals(models.Model):
     targetAudience = models.TextField(max_length=50, null=True)
     ageTargetAudience = models.TextField(max_length=50, null=True)
     comments = models.TextField(null=True)
-    contactMeans = models.OneToOneField (ContactMeans, on_delete=models.CASCADE)
     address = models.OneToOneField (Address, on_delete= models.CASCADE)
-    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailLocals', null=True)
-    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneLocals', null=True)
-    webAddressList = models.ManyToManyField(TypePhoneEmail,through='WebAddressLocals', null=True)
+    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailLocals', related_name='emails_local')
+    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneLocals', related_name='telefones_local')
+    webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressLocals', related_name='paginas_local')
     technicalResponsible = models.ForeignKey(Professional, on_delete=models.DO_NOTHING)
  
     class Meta:
@@ -143,7 +141,7 @@ class Locals(models.Model):
 
 class Offers(models.Model):
     location = models.ForeignKey(Locals, on_delete=models.DO_NOTHING)
-    activities = models.ManyToManyField(Activity)
+    activities = models.ManyToManyField(Activity,'atividades_ofertadas')
     responsibles = models.ManyToManyField(Professional, related_name="_responsibles")
     instructors = models.ManyToManyField(Professional,related_name="_instructors")
     date_begin = models.DateField()
@@ -170,32 +168,32 @@ class Offers(models.Model):
 
 class WebAddress (models.Model):
     digitalAddress = models.CharField(max_length=100)
-    type = models.ForeignKey(TypeDigitalAddress)
+    type = models.ForeignKey(TypeDigitalAddress, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']    
 
 class WebAddressInstitution (WebAddress):
-    institution = models.ForeignKey(Institution)
+    institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']    
 
 class WebAddressLocals (WebAddress):
-    local = models.ForeignKey(Locals)
+    local = models.ForeignKey(Locals, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']    
 
 
 class WebAddressProfessional (WebAddress):
-    professional = models.ForeignKey(Locals)
+    professional = models.ForeignKey(Professional, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']    
 
 class Phone(models.Model):
-    type = models.ForeignKey(TypePhoneEmail)
+    type = models.ForeignKey(TypePhoneEmail, on_delete=models.CASCADE)
     phoneNumber = models.CharField(max_length=14)
 
     class Meta:
@@ -203,28 +201,28 @@ class Phone(models.Model):
 
 
 class PhoneInstitution(Phone):
-    institution = models.ForeignKey(Institution)
+    institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']
 
 
 class PhoneLocals(Phone):
-    local = models.ForeignKey(Locals)
+    local = models.ForeignKey(Locals, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']
 
 
 class PhoneProfessional(Phone):
-    professional = models.ForeignKey(Professional)
+    professional = models.ForeignKey(Professional, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']
 
 
 class Email(models.Model):
-    type = models.ForeignKey(TypePhoneEmail)
+    type = models.ForeignKey(TypePhoneEmail, on_delete=models.CASCADE)
     email = models.EmailField()
 
     class Meta:
@@ -232,21 +230,21 @@ class Email(models.Model):
 
 
 class EmailInstitution(Email):
-    institution = models.ForeignKey(Institution)
+    institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']
 
 
 class EmailLocals(Email):
-    local = models.ForeignKey(Locals)
+    local = models.ForeignKey(Locals, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']
 
 
 class EmailProfessional(Email):
-    professional = models.ForeignKey(Professional)
+    professional = models.ForeignKey(Professional, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']

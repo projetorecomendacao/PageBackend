@@ -24,7 +24,14 @@ from activities_section.api.viewsets import CharacteristicViewSet, BenefitViewSe
     ActivityViewSet
 from institution_section.api.viewsets import CidadeViewSet, AddressViewSet, \
      LocalsViewSet, ProfessionalViewSet, InstitutionViewSet, \
-     AssistanceModalityViewSet, WebAddressViewSet, OffersViewSet, CapacityViewSet
+     AssistanceModalityViewSet, WebAddressViewSet, OffersViewSet, CapacityViewSet, \
+     ExpertiseAreasViewSet, AcademicEducationViewSet, TypeDigitalAddressViewSet, \
+     TypePhoneEmailViewSet, ActingTimeViewSet, LongaDuracaoViewSet, LocalsViewSet, \
+     OffersViewSet, WebAddressViewSet, WebAddressInstitutionViewSet, \
+     WebAddressLocalsViewSet, WebAddressProfessionalViewSet, \
+     PhoneInstitutionViewSet, PhoneLocalsViewSet, PhoneProfessionalViewSet,\
+     EmailViewSet, EmailInstitutionViewSet, EmailLocalsViewSet, EmailProfessionalViewSet
+
 from page_section.api.viewsets import  NegativeAttitudesAgingViewSet, CognitionDeficitViewSet, DepressionViewSet,\
     PsychologicalAspectsViewSet, BiologicalAspectsViewSet, SensoryDeficitViewSet, FunctionalDisabilityViewSet,\
     MalnutritionViewSet, CardiovascularFactorsViewSet, MisuseMedicationsViewSet, SocialAspectsViewSet,\
@@ -61,6 +68,22 @@ router.register(r'assitancemodality', AssistanceModalityViewSet, basename='Assis
 router.register(r'webaddress', WebAddressViewSet, basename='WebAddress')
 router.register(r'offers', OffersViewSet, basename='Offers')
 router.register(r'capacity', CapacityViewSet, basename='Capacity')
+router.register(r'expertiseareas',ExpertiseAreasViewSet, basename='ExpertiseAreas')
+router.register(r'academicaducation',AcademicEducationViewSet, basename='AcademicEducation')
+router.register(r'typeDigitaladdress',TypeDigitalAddressViewSet, basename='ypeDigitalAddress')
+router.register(r'typePhoneemail',TypePhoneEmailViewSet, basename='TypePhoneEmail')
+router.register(r'actingtime',ActingTimeViewSet, basename='ActingTime')
+router.register(r'longaduracao',LongaDuracaoViewSet, basename='LongaDuracao')
+router.register(r'webaddressinstitution',WebAddressInstitutionViewSet, basename='WebAddressInstitution')
+router.register(r'webaddresslocals',WebAddressLocalsViewSet, basename='WebAddressLocals')
+router.register(r'webaddressprofessional',WebAddressProfessionalViewSet, basename='WebAddressProfessional')
+router.register(r'phoneInstitution',PhoneInstitutionViewSet, basename='PhoneInstitution')
+router.register(r'phonelocals',PhoneLocalsViewSet, basename='PhoneLocals')
+router.register(r'phoneprofessional',PhoneProfessionalViewSet, basename='PhoneProfessional')
+router.register(r'email',EmailViewSet, basename='Email')
+router.register(r'emailinstitution',EmailInstitutionViewSet, basename='EmailInstitution')
+router.register(r'emaillocals',EmailLocalsViewSet, basename='EmailLocals')
+router.register(r'emailprofessional',EmailProfessionalViewSet, basename='EmailProfessional')
 
 
 # activities_section
