@@ -9,6 +9,9 @@ class Cidade(models.Model):
     class Meta:
         ordering = ['id']
 
+    def __str__ (self):
+        return self.cityName
+
 
 class Address(models.Model):
     address = models.CharField(max_length=75)                       # logradouro
@@ -24,6 +27,9 @@ class Address(models.Model):
     class Meta:
         ordering = ['id']
 
+    def __str__ (self):
+        return self.address + ' , ' + self.number
+
 
 class ExpertiseAreas (models.Model):
     description : models.CharField(max_length=60)
@@ -31,12 +37,19 @@ class ExpertiseAreas (models.Model):
     class Meta:
         ordering = ['id'] 
 
+    def __str__ (self):
+        return self.description
+
 
 class AcademicEducation (models.Model):
     description : models.CharField(max_length=60)
 
     class Meta:
         ordering = ['id']    
+
+    def __str__ (self):
+        return self.description
+
 
 
 class TypeDigitalAddress(models.Model):
@@ -46,12 +59,18 @@ class TypeDigitalAddress(models.Model):
     class Meta:
         ordering = ['id']
 
+    def __str__ (self):
+        return self.name
+
 
 class TypePhoneEmail(models.Model):
     description = models.CharField(max_length=40)
 
     class Meta:
         ordering = ['id']
+
+    def __str__ (self):
+        return self.description
 
 
 class Professional(models.Model):
@@ -67,6 +86,9 @@ class Professional(models.Model):
     class Meta:
         ordering = ['id']
 
+    def __str__ (self):
+        return self.name
+
 
 class AssistanceModality (models.Model):
     title = models.CharField(max_length=40)
@@ -74,6 +96,9 @@ class AssistanceModality (models.Model):
 
     class Meta:
         ordering = ['id']
+
+    def __str__ (self):
+        return self.title
 
 
 class Institution(models.Model):
@@ -93,6 +118,9 @@ class Institution(models.Model):
     class Meta:
         ordering = ['id']
 
+    def __str__ (self):
+        return self.companyName
+
 
 class ActingTime (models.Model):
     assistenceModality = models.ForeignKey(AssistanceModality, on_delete=models.CASCADE)
@@ -102,6 +130,9 @@ class ActingTime (models.Model):
 
     class Meta:
         ordering = ['id']
+
+    def __str__ (self):
+        return self.assistenceModality
 
 
 class Capacity(models.Model):
@@ -138,6 +169,10 @@ class Locals(models.Model):
     class Meta:
         ordering = ['id']
 
+    def __str__ (self):
+        return self.name
+
+
 
 class Offers(models.Model):
     location = models.ForeignKey(Locals, on_delete=models.DO_NOTHING)
@@ -162,8 +197,9 @@ class Offers(models.Model):
 
     class Meta:
         ordering = ['id']
-    
 
+    def __str__ (self):
+        return self.location
 
 
 class WebAddress (models.Model):
@@ -172,6 +208,7 @@ class WebAddress (models.Model):
 
     class Meta:
         ordering = ['id']    
+
 
 class WebAddressInstitution (WebAddress):
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)

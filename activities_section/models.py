@@ -8,6 +8,9 @@ class Detail(models.Model):
     class Meta:
         ordering = ['description']
 
+    def __str__ (self):
+        return self.description
+
 
 class Characteristic(Detail):
     pass
@@ -29,7 +32,6 @@ class Activity(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     image = models.URLField(null=True, blank=True)
-    author = models.ForeignKey(User, models.CASCADE, related_name='activities', null=True, blank=True)
 
     characteristic = models.ManyToManyField(Characteristic, blank=True, related_name='activities')
     benefit = models.ManyToManyField(Benefit, blank=True, related_name='activities')
@@ -38,4 +40,8 @@ class Activity(models.Model):
 
     class Meta:
         ordering = ['id']
+
+    def __str__ (self):
+        return self.title
+
 
