@@ -1,3 +1,4 @@
+from django.db import models
 from django.http import QueryDict
 from rest_framework import status
 from rest_framework.decorators import action
@@ -6,8 +7,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from experts_section.models import Expert, Expertise
-from experts_section.api.serializers import ExpertiseSerializer, ExpertSerializer
+from experts_section.models import Expert, Expertise, Orientador
+from experts_section.api.serializers import ExpertiseSerializer, ExpertSerializer, OrientadorSerializer
 from utils.api.serializer import CustomModelViewSet, IsExpert
 
 
@@ -47,4 +48,77 @@ class ExpertiseViewSet(ModelViewSet):
     serializer_class = ExpertiseSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('description',)
+
+
+class OrientadorViewSet(ModelViewSet):
+    queryset = Orientador.objects.all()
+    serializer_class = OrientadorSerializer
+    permission_classes = [IsExpert]
+
+    #método que verifica se existe o e-mail do aluno
+    def achaEmailAluno(self, email):
+        ori_teste = Orientador.objects.filter(
+            models.Q(orientando_email = email) | \
+            models.Q(dupla_email = email) ) 
+        if ori_teste.exists(): #Verifica se o email já está cadastrado no orientandos
+            return True
+        return False
+
+    def create(self, request, *args, **kwargs):
+        #Verifica se o email do aluno já está cadastrado
+        if self.achaEmailAluno(request.data['orientando_email']): #Verifica se o email já está cadastrado no orientandos
+            return Response({'id' : -1})
+        else:
+            #Verifica se o email da dupla já está cadastrado
+            if self.achaEmailAluno(request.data['dupla_email']):
+                return Response({'id' : -2})
+            else:
+                ori = Orientador()
+                ori.orientador = Expert.objects.get(pk=1) # Por Enquanto Vai ser todo mundo da Ruth
+                ori.orientando_email = request.data['orientando_email']
+                ori.orientando_name = request.data['orientando_name']
+                ori.dupla_name = request.data['dupla_name']
+                ori.dupla_email = request.data['dupla_email']
+                expert = Expert.objects.filter(email=request.data['orientando_email'])
+                if expert.exists():
+                    expert = expert.first()
+                    expert.name = request.data['orientando_name']
+                    expert.save()
+                    ori.orientando_id = expert
+                else:
+                    exp = Expert()
+                    exp.name = request.data['orientando_name']
+                    exp.email = request.data['orientando_email']
+                    exp.save()
+                    ori.orientando_id = exp
+                ori.save()
+                return Response({'id' : ori.pk})
+    
+
+    def update(self, request, pk=None):
+        ori = Orientador.objects.get(id = pk)
+        #Verifica se mudou o email e o novo já está cadastrado no orientandos
+        if (ori.orientando_email != request.data['orientando_email']):
+            if self.achaEmailAluno(request.data['orientando_email']): 
+                return Response({'id' : -1})
+            #Verifica se tem alguem que já usa o e-mail
+            expert = Expert.objects.filter(email=request.data['orientando_email'])
+            if expert.exists():
+                return Response({'id' : -1})
+
+        #Verifica se mudou o email e o novo já está cadastrado no orientandos
+        if (ori.dupla_email != request.data['dupla_email']):
+            if self.achaEmailAluno(request.data['dupla_email']):
+                return Response({'id' : -2})               
+
+        exp = Expert.objects.get (id = ori.orientando_id)
+        exp.name = request.data['orientando_name']
+        exp.email = request.data['orientando_email']
+        exp.save()
+        ori.orientando_email = request.data['orientando_email']
+        ori.orientando_name = request.data['orientando_name']
+        ori.dupla_name = request.data['dupla_name']
+        ori.dupla_email = request.data['dupla_email']
+        ori.save()
+        return Response({'id' : ori.pk})        
 

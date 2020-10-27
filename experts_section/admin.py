@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Gerontologist)
 admin.site.register(Expert)
 admin.site.register(Expertise)
+admin.site.register(Orientador)

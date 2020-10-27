@@ -41,7 +41,7 @@ from participant_section.api.viewsets import ParticipantViewSet, IncomeViewSet, 
     MaritalStatusViewSet, SchoolingViewSet, ProfessionalsActivitiesViewSet, ReligionViewSet, ParticipantSituationViewSet
 from recommendation_system import settings
 from assessment_section.api.viewsets import *
-from experts_section.api.viewsets import ExpertViewSet, ExpertiseViewSet
+from experts_section.api.viewsets import ExpertViewSet, ExpertiseViewSet, OrientadorViewSet
 from health_section.api.viewsets import DiseasesViewSet, TherapeuticClassViewSet, HealthProblemsViewSet,\
     MedicinesViewSet, FracturesViewSet
 from drinks_section.api.viewsets import DrinksViewSet, IngestedDrinksViewSet
@@ -133,9 +133,11 @@ router.register(r'actions_planning', ActionsPlanningViewSet, basename='assessmen
 router.register(r'actions_implementation_coordenation', ActionsImplementationCoordenationViewSet, basename='expert_assessment')
 router.register(r'reassessment_control', ReassessmentControlViewSet , basename='actions_implementation')
 router.register(r'demand_map', DemandMapViewSet , basename='actions_implementation')
+
 # experts_section
 router.register(r'expertises', ExpertiseViewSet, basename='expertise')
 router.register(r'experts', ExpertViewSet, basename='expert')
+router.register(r'orientador', OrientadorViewSet, basename='orientador')
 
 # health_section
 router.register(r'diseases', DiseasesViewSet, basename='diseases')
