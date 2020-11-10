@@ -31,38 +31,6 @@ class Address(models.Model):
         return self.address + ' , ' + self.number
 
 
-class ExpertiseAreas (models.Model):
-    description : models.CharField(max_length=60)
-
-    class Meta:
-        ordering = ['id'] 
-
-    def __str__ (self):
-        return self.description
-
-
-class AcademicEducation (models.Model):
-    description : models.CharField(max_length=60)
-
-    class Meta:
-        ordering = ['id']    
-
-    def __str__ (self):
-        return self.description
-
-
-
-class TypeDigitalAddress(models.Model):
-    name = models.CharField(max_length=40)
-    type = models.CharField(max_length=20) # Web Page / Blog / Rede Social
-
-    class Meta:
-        ordering = ['id']
-
-    def __str__ (self):
-        return self.name
-
-
 class TypePhoneEmail(models.Model):
     description = models.CharField(max_length=40)
 
@@ -73,24 +41,17 @@ class TypePhoneEmail(models.Model):
         return self.description
 
 
-class Professional(models.Model):
-    name = models.CharField(max_length=45)
-    RG = models.CharField(max_length=12, null=True)
-    CPF = models.CharField(max_length=15, null=True)
-    expertiseAreas = models.ManyToManyField(ExpertiseAreas)
-    academicEducation = models.ManyToManyField(AcademicEducation)
-    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailProfessional', related_name='emails_professional')
-    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneProfessional', related_name='telefones_professional')
-    webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressProfessional', related_name="paginas_professional")
-
+class TypeDigitalAddress(models.Model):
+    description = models.CharField(max_length=50) 
+    type = models.CharField(max_length=40) #Rede Social, blog, página web...
     class Meta:
         ordering = ['id']
 
     def __str__ (self):
-        return self.name
+        return self.description
 
 
-class AssistanceModality (models.Model):
+class AssistanceModality (models.Model): ##Área de atuação
     title = models.CharField(max_length=40)
     description = models.CharField(max_length=100)
 
@@ -100,16 +61,27 @@ class AssistanceModality (models.Model):
     def __str__ (self):
         return self.title
 
+class TargetAudience (models.Model):
+    description = models.TextField(null=True)
+
+    class Meta:
+        ordering = ['id']
+
+    def __str__ (self):
+        return self.description
+
 
 class Institution(models.Model):
     companyName = models.CharField(max_length=60,null=True)
     companyFancyName = models.CharField(max_length=60,null=True)
     CNPJ = models.TextField(max_length=17,null=True)
+    category = models.CharField(max_length=60, null= True)
+    foundedIn = models.IntegerField(default=0, null=True)
+    legalKind = models.CharField(max_length=60, null=True) # natureza legal
     objective = models.TextField(null=True)
-    targetAudience = models.TextField(max_length=50, null=True)
-    ageTargetAudience = models.TextField(max_length=50, null=True)
-    comments = models.TextField(null=True)
-    assitence = models.ManyToManyField(AssistanceModality, through='ActingTime')
+    schedules = models.TextField(null=True)
+    targetAudience = models.OneToOneField(TargetAudience, on_delete=models.DO_NOTHING, null=True)
+    assitenceModality = models.ManyToManyField(AssistanceModality, through='ActingTime')
     address = models.OneToOneField (Address, on_delete= models.CASCADE, null=True)
     emailList = models.ManyToManyField(TypePhoneEmail,through='EmailInstitution', related_name='emails_institution')
     phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneInstitution', related_name='telefones_instituicao')
@@ -157,14 +129,15 @@ class LongaDuracao(models.Model):
 class Locals(models.Model):
     name = models.CharField(max_length=45)
     objective = models.TextField(null=True)
-    targetAudience = models.TextField(max_length=50, null=True)
-    ageTargetAudience = models.TextField(max_length=50, null=True)
-    comments = models.TextField(null=True)
+    schedules = models.TextField(null=True)
+    haveParking = models.BooleanField(null=True)
+    parkingDescription = models.TextField(null=True)
+    targetAudience = models.OneToOneField(TargetAudience, on_delete=models.DO_NOTHING, null=True)
     address = models.OneToOneField (Address, on_delete= models.CASCADE)
     emailList = models.ManyToManyField(TypePhoneEmail,through='EmailLocals', related_name='emails_local')
     phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneLocals', related_name='telefones_local')
     webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressLocals', related_name='paginas_local')
-    technicalResponsible = models.ForeignKey(Professional, on_delete=models.DO_NOTHING)
+    #technicalResponsible = models.ForeignKey(Professional, on_delete=models.DO_NOTHING)
  
     class Meta:
         ordering = ['id']
@@ -173,26 +146,67 @@ class Locals(models.Model):
         return self.name
 
 
+class ExpertiseAreas (models.Model):
+    description : models.CharField(max_length=60)
+
+    class Meta:
+        ordering = ['id'] 
+
+    def __str__ (self):
+        return self.description
+
+
+class AcademicEducation (models.Model):
+    description : models.CharField(max_length=60)
+
+    class Meta:
+        ordering = ['id']    
+
+    def __str__ (self):
+        return self.description
+
+class Professional(models.Model):
+    name = models.CharField(max_length=45)
+    RG = models.CharField(max_length=12, null=True)
+    CPF = models.CharField(max_length=15, null=True)
+    expertiseAreas = models.ManyToManyField(ExpertiseAreas)
+    academicEducation = models.ManyToManyField(AcademicEducation)
+    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailProfessional', related_name='emails_professional')
+    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneProfessional', related_name='telefones_professional')
+    webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressProfessional', related_name="paginas_professional")
+
+    class Meta:
+        ordering = ['id']
+
+    def __str__ (self):
+        return self.name
+
 
 class Offers(models.Model):
     location = models.ForeignKey(Locals, on_delete=models.DO_NOTHING)
     activities = models.ManyToManyField(Activity,'atividades_ofertadas')
     responsibles = models.ManyToManyField(Professional, related_name="_responsibles")
     instructors = models.ManyToManyField(Professional,related_name="_instructors")
+    targetAudience = models.OneToOneField(TargetAudience, on_delete=models.DO_NOTHING, null=True)
+    enrollmentOpen = models.BooleanField(null=True)
     date_begin = models.DateField()
     date_end = models.DateField()
-    schedule = models.CharField(max_length=100)
+    environmentType = models.CharField(max_length=40, null=True)
+    continuosFlow = models.BooleanField(null=True)
+    schedule = models.TextField(null=True)
+    specificObjectives = models.TextField(null=True)
     cost = models.CharField(max_length=100)
-    genre_goals = models.CharField(max_length=1)
-    ambience = models.CharField(max_length=1)
-    active_aging = models.CharField(max_length=1)
+    exemption = models.CharField(max_length=100, null=True)
     motivation = models.TextField()
-    people_class = models.IntegerField()
-    loe_income = models.CharField(max_length=1)
+    requisites = models.TextField()
+
+    healthyAging = models.BooleanField(null=True)
+
     partnership = models.TextField()
     home_care = models.CharField(max_length=1)
-    requisites = models.TextField()
+
     comments = models.TextField()
+    
     capacity = models.OneToOneField (Capacity, on_delete=models.CASCADE)
 
     class Meta:
@@ -285,5 +299,7 @@ class EmailProfessional(Email):
 
     class Meta:
         ordering = ['id']
+
+
 
 

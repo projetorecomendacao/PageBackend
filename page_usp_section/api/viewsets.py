@@ -1,8 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import action
 
 from participant_section.models import Participant, ParticipantSituation
-from experts_section.models import Expert
+from experts_section.models import Expert, Orientador
 from page_usp_section.models_1_psicologico_usp import NegativeAttitudesAgingUsp, CognitionDeficitUsp, DepressionUsp, PsychologicalAspectsUsp
 from page_usp_section.models_2_Biologicos_usp import BiologicalAspectsUsp, SensoryDeficitUsp, FunctionalDisabilityUsp, MalnutritionUsp, CardiovascularFactorsUsp, MisuseMedicationsUsp
 from page_usp_section.models_3_sociais_usp import SocialAspectsUsp, LowSocialSupportUsp, EnvironmentalProblemsUsp, ViolenceUsp
@@ -174,6 +175,14 @@ class PageViewSetUsp(CustomModelViewSet):
         'update': [IsExpert]
     }
 
+    @action(detail=True, methods=['post'],permission_classes=[IsExpert])
+    def get_page_orientador(self, request, pk=None):
+        ori = Orientador.objects.get(pk=pk)
+        exp = Expert.objects.get(email=ori.orientando_email)
+        page = PageUsp.objects.filter(gerontologist=exp)
+        serializer = self.get_serializer(page,many=True)
+        return Response(serializer.data)
+
 
     def get_queryset(self):
         # Define um filtro para retornar apenas os pages do gerontologista logado
@@ -281,6 +290,13 @@ class PageViewSetUsp(CustomModelViewSet):
         else : 
             demandMap = [{'id' : -1}]
 
+        if page_.participant:
+            #participant
+            dados = Participant.objects.filter(pk = page_.participant.pk).values()
+            participant = list(dados)
+        else:
+            participant = [{'id' : -1}]
+
         #cabeça page
         cabecaPage = {
             'id' : page_.pk,
@@ -314,7 +330,8 @@ class PageViewSetUsp(CustomModelViewSet):
             'psi' : psi_,
             'bio' : bio_,
             'soc' : soc_,
-            'mul' : mul_
+            'mul' : mul_,
+            'participant' : participant
          })
 
     ##o método atribui auxilia no preenchimento dos valores dos objetos no create e no update
@@ -763,3 +780,11 @@ class PageViewSetUsp(CustomModelViewSet):
 
 
         return Response (volta)
+
+
+##
+## Usados para iplementar as funções necessárias para o orientador..
+##
+
+
+

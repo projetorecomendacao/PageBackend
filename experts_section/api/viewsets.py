@@ -10,6 +10,8 @@ from rest_framework.viewsets import ModelViewSet
 from experts_section.models import Expert, Expertise, Orientador
 from experts_section.api.serializers import ExpertiseSerializer, ExpertSerializer, OrientadorSerializer
 from utils.api.serializer import CustomModelViewSet, IsExpert
+from django.db.models import Count
+from page_usp_section.models_0_page_usp import PageUsp
 
 
 class ExpertViewSet(CustomModelViewSet):
@@ -50,6 +52,7 @@ class ExpertiseViewSet(ModelViewSet):
     search_fields = ('description',)
 
 
+
 class OrientadorViewSet(ModelViewSet):
     queryset = Orientador.objects.all()
     serializer_class = OrientadorSerializer
@@ -63,6 +66,17 @@ class OrientadorViewSet(ModelViewSet):
         if ori_teste.exists(): #Verifica se o email já está cadastrado no orientandos
             return True
         return False
+
+    def get_queryset(self):
+        # Define um filtro para retornar a quantidade de pages de cada orientando.
+        oris = Orientador.objects.all()
+        for ori in oris:
+            oriUp = Orientador.objects.get(pk=ori.pk)
+            oriUp.qtdPages = PageUsp.objects.filter(gerontologist=ori.orientando_id).count()
+            oriUp.save()
+        volta = Orientador.objects.all()
+        print(volta)
+        return volta
 
     def create(self, request, *args, **kwargs):
         #Verifica se o email do aluno já está cadastrado
@@ -81,10 +95,12 @@ class OrientadorViewSet(ModelViewSet):
                 ori.dupla_email = request.data['dupla_email']
                 expert = Expert.objects.filter(email=request.data['orientando_email'])
                 if expert.exists():
-                    expert = expert.first()
-                    expert.name = request.data['orientando_name']
-                    expert.save()
-                    ori.orientando_id = expert
+                    #Não deixa salvar se o e-mail já existe nos experts
+                    return Response({'id' : -1})
+                    #expert = expert.first()
+                    #expert.name = request.data['orientando_name']
+                    #expert.save()
+                    #ori.orientando_id = expert
                 else:
                     exp = Expert()
                     exp.name = request.data['orientando_name']
@@ -111,7 +127,7 @@ class OrientadorViewSet(ModelViewSet):
             if self.achaEmailAluno(request.data['dupla_email']):
                 return Response({'id' : -2})               
 
-        exp = Expert.objects.get (id = ori.orientando_id)
+        exp = Expert.objects.get (id = ori.orientando_id.pk)
         exp.name = request.data['orientando_name']
         exp.email = request.data['orientando_email']
         exp.save()
