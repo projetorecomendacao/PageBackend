@@ -1,5 +1,5 @@
 from django.contrib import admin
-from page_usp_section.models_0_page_usp import PageUsp
+from page_usp_section.models_0_page_usp import PageUsp, Avaliacao
 from page_usp_section.models_1_psicologico_usp import CognitionDeficitUsp, DepressionUsp, NegativeAttitudesAgingUsp, PsychologicalAspectsUsp
 from page_usp_section.models_2_Biologicos_usp import BiologicalAspectsUsp, CardiovascularFactorsUsp, FunctionalDisabilityUsp, MalnutritionUsp, Medicines, MisuseMedicationsUsp, SensoryDeficitUsp
 from page_usp_section.models_3_sociais_usp import EnvironmentalProblemsUsp, LowSocialSupportUsp, SocialAspectsUsp, ViolenceUsp
@@ -22,3 +22,4 @@ admin.site.register(ViolenceUsp)
 admin.site.register(SocialAspectsUsp)
 admin.site.register(FallsUsp)
 admin.site.register(MultidisciplinaryDomainUsp)
+admin.site.register(Avaliacao)
