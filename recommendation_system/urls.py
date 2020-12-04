@@ -22,15 +22,10 @@ from rest_framework import routers
 
 from activities_section.api.viewsets import CharacteristicViewSet, BenefitViewSet, RestrictionViewSet, TypeViewSet, \
     ActivityViewSet
-from institution_section.api.viewsets import CidadeViewSet, AddressViewSet, \
-     LocalsViewSet, ProfessionalViewSet, InstitutionViewSet, \
-     AssistanceModalityViewSet, WebAddressViewSet, OffersViewSet, CapacityViewSet, \
-     ExpertiseAreasViewSet, AcademicEducationViewSet, TypeDigitalAddressViewSet, \
-     TypePhoneEmailViewSet, ActingTimeViewSet, LongaDuracaoViewSet, LocalsViewSet, \
-     OffersViewSet, WebAddressViewSet, WebAddressInstitutionViewSet, \
-     WebAddressLocalsViewSet, WebAddressProfessionalViewSet, \
-     PhoneInstitutionViewSet, PhoneLocalsViewSet, PhoneProfessionalViewSet,\
-     EmailViewSet, EmailInstitutionViewSet, EmailLocalsViewSet, EmailProfessionalViewSet
+from institution_section.api.viewsets import CidadeViewSet, AddressPlaceViewSet, \
+     ProfessionalViewSet, InstitutionViewSet, OffersViewSet, CapacityViewSet, \
+     ExpertiseAreasViewSet, AcademicEducationViewSet, OffersViewSet, ActingAreaViewSet,\
+     WebAddressInstitutionViewSet, PhoneInstitutionViewSet, EmailInstitutionViewSet
 
 from page_section.api.viewsets import  NegativeAttitudesAgingViewSet, CognitionDeficitViewSet, DepressionViewSet,\
     PsychologicalAspectsViewSet, BiologicalAspectsViewSet, SensoryDeficitViewSet, FunctionalDisabilityViewSet,\
@@ -52,7 +47,7 @@ from page_usp_section.api.viewsets import  NegativeAttitudesAgingViewSetUsp, Cog
     PsychologicalAspectsViewSetUsp, BiologicalAspectsViewSetUsp, SensoryDeficitViewSetUsp, FunctionalDisabilityViewSetUsp,\
     MalnutritionViewSetUsp, CardiovascularFactorsViewSetUsp, MisuseMedicationsViewSetUsp, SocialAspectsViewSetUsp,\
     LowSocialSupportViewSetUsp, EnvironmentalProblemsViewSetUsp, ViolenceViewSetUsp, MultidisciplinaryDomainViewSetUsp,\
-    FallsViewSetUsp, PageViewSetUsp
+    FallsViewSetUsp, PageViewSetUsp, AvaliacaoViewSet
 
 
 
@@ -60,31 +55,16 @@ router = routers.DefaultRouter()
 
 # institution_section
 router.register(r'cidades', CidadeViewSet, basename='Cidade')
-router.register(r'addresses', AddressViewSet, basename='Address')
-router.register(r'locals', LocalsViewSet, basename='Location')
+router.register(r'addresses', AddressPlaceViewSet, basename='Address')
 router.register(r'professionals', ProfessionalViewSet, basename='Location')
 router.register(r'institutions', InstitutionViewSet, basename='Institution')
-router.register(r'assitancemodality', AssistanceModalityViewSet, basename='Assistance')
-router.register(r'webaddress', WebAddressViewSet, basename='WebAddress')
 router.register(r'offers', OffersViewSet, basename='Offers')
-router.register(r'capacity', CapacityViewSet, basename='Capacity')
 router.register(r'expertiseareas',ExpertiseAreasViewSet, basename='ExpertiseAreas')
 router.register(r'academicaducation',AcademicEducationViewSet, basename='AcademicEducation')
-router.register(r'typeDigitaladdress',TypeDigitalAddressViewSet, basename='ypeDigitalAddress')
-router.register(r'typePhoneemail',TypePhoneEmailViewSet, basename='TypePhoneEmail')
-router.register(r'actingtime',ActingTimeViewSet, basename='ActingTime')
-router.register(r'longaduracao',LongaDuracaoViewSet, basename='LongaDuracao')
 router.register(r'webaddressinstitution',WebAddressInstitutionViewSet, basename='WebAddressInstitution')
-router.register(r'webaddresslocals',WebAddressLocalsViewSet, basename='WebAddressLocals')
-router.register(r'webaddressprofessional',WebAddressProfessionalViewSet, basename='WebAddressProfessional')
 router.register(r'phoneInstitution',PhoneInstitutionViewSet, basename='PhoneInstitution')
-router.register(r'phonelocals',PhoneLocalsViewSet, basename='PhoneLocals')
-router.register(r'phoneprofessional',PhoneProfessionalViewSet, basename='PhoneProfessional')
-router.register(r'email',EmailViewSet, basename='Email')
 router.register(r'emailinstitution',EmailInstitutionViewSet, basename='EmailInstitution')
-router.register(r'emaillocals',EmailLocalsViewSet, basename='EmailLocals')
-router.register(r'emailprofessional',EmailProfessionalViewSet, basename='EmailProfessional')
-
+router.register(r'actingarea', ActingAreaViewSet, basename='ActingArea')
 
 # activities_section
 router.register(r'characteristics', CharacteristicViewSet, basename='Characteristic')
@@ -112,6 +92,7 @@ router.register(r'violence', ViolenceViewSet, basename='violence')
 router.register(r'multidisciplinaryDomain', MultidisciplinaryDomainViewSet, basename='multidisciplinaryDomain')
 router.register(r'falls', FallsViewSet, basename='falls')
 router.register(r'page', PageViewSet, basename='page')
+router.register(r'avaliacao', AvaliacaoViewSet, basename='avaliacao')
 
 # participant_section
 router.register(r'participants', ParticipantViewSet, basename='DA_attitudes')

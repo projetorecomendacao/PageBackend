@@ -1,20 +1,11 @@
 from rest_framework.serializers import ModelSerializer
-from institution_section.models import Cidade, Address, Locals, Professional, \
-     Institution, AssistanceModality, WebAddress, Offers, Capacity,  ExpertiseAreas, \
-     AcademicEducation, TypeDigitalAddress, TypePhoneEmail, ActingTime, LongaDuracao, \
-     Locals, Offers, WebAddress, WebAddressInstitution, WebAddressLocals, WebAddressProfessional, \
-     PhoneInstitution, PhoneLocals, PhoneProfessional, Email, EmailInstitution, EmailLocals, \
-     EmailProfessional
+from institution_section.models import Cidade, AddressPlace, Professional, \
+     Institution, ActingArea, Offers, Capacity,  ExpertiseAreas, \
+     AcademicEducation, WebAddressInstitution, PhoneInstitution, EmailInstitution
 
-class AssistanceModalitySerializer(ModelSerializer):
+class ActingAreaSerializer(ModelSerializer):
     class Meta:
-        model = AssistanceModality
-        fields = '__all__'
-
-
-class WebAddressSerializer(ModelSerializer):
-    class Meta:
-        model = WebAddress
+        model = ActingArea
         fields = '__all__'
 
 
@@ -36,15 +27,9 @@ class CidadeSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class AddressSerializer(ModelSerializer):
+class AddressPlaceSerializer(ModelSerializer):
     class Meta:
-        model = Address
-        fields = '__all__'
-
-
-class LocalsSerializer(ModelSerializer):
-    class Meta:
-        model = Locals
+        model = AddressPlace
         fields = '__all__'
 
 
@@ -71,51 +56,9 @@ class AcademicEducationSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class TypeDigitalAddressSerializer(ModelSerializer):
-    class Meta:
-        model = TypeDigitalAddress
-        fields = '__all__'
-
-
-class TypePhoneEmailSerializer(ModelSerializer):
-    class Meta:
-        model = TypePhoneEmail
-        fields = '__all__'
-
-
-class ActingTimeSerializer(ModelSerializer):
-    class Meta:
-        model = ActingTime
-        fields = '__all__'
-
-
-class LongaDuracaoSerializer(ModelSerializer):
-    class Meta:
-        model = LongaDuracao
-        fields = '__all__'
-
-
-class WebAddressSerializer(ModelSerializer):
-    class Meta:
-        model = WebAddress
-        fields = '__all__'
-
-
 class WebAddressInstitutionSerializer(ModelSerializer):
     class Meta:
         model = WebAddressInstitution
-        fields = '__all__'
-
-
-class WebAddressLocalsSerializer(ModelSerializer):
-    class Meta:
-        model = WebAddressLocals
-        fields = '__all__'
-
-
-class WebAddressProfessionalSerializer(ModelSerializer):
-    class Meta:
-        model = WebAddressProfessional
         fields = '__all__'
 
 
@@ -125,39 +68,7 @@ class PhoneInstitutionSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class PhoneLocalsSerializer(ModelSerializer):
-    class Meta:
-        model = PhoneLocals
-        fields = '__all__'
-
-
-class PhoneProfessionalSerializer(ModelSerializer):
-    class Meta:
-        model = PhoneProfessional
-        fields = '__all__'
-
-
-class EmailSerializer(ModelSerializer):
-    class Meta:
-        model = Email 
-        fields = '__all__'
-
-
 class EmailInstitutionSerializer(ModelSerializer):
     class Meta:
         model = EmailInstitution
         fields = '__all__'
-
-
-class EmailLocalsSerializer(ModelSerializer):
-    class Meta:
-        model = EmailLocals
-        fields = '__all__'
-
-
-class EmailProfessionalSerializer(ModelSerializer):
-    class Meta:
-        model = EmailProfessional
-        fields = '__all__'
-
-

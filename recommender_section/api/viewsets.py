@@ -3,11 +3,11 @@ from rest_framework.viewsets import ModelViewSet
 from recommender_section.models import RecommendedActivities, RecommendedActivitiesOffers
 from recommender_section.api.serializers import RecommendedActivitiesOffersSerializer, RecommendedActivitiesSerializer 
 
-class RecommendedActivitiesViewSet(ModelViewSet):
+class RecommendedActivitiesViewSet(CustomModelViewSet):
     queryset = RecommendedActivities.objects.all()
     serializer_class = RecommendedActivitiesSerializer
 
 
-class RecommendedActivitiesOffersViewSet(ModelViewSet):
+class RecommendedActivitiesOffersViewSet(CustomModelViewSet):
     queryset = RecommendedActivitiesOffers.objects.all()
     serializer_class = RecommendedActivitiesOffersSerializer

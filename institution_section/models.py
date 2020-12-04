@@ -2,33 +2,32 @@ from django.db import models
 from activities_section.models import Activity
 
 class Cidade(models.Model):
-    cityName = models.CharField(max_length=50, null=True)
-    state = models.CharField(max_length=50, null=True)
-    country = models.CharField(max_length=50, null=True)
+    cityName = models.CharField(max_length=50)
+    state = models.CharField(max_length=50)
+    country = models.CharField(max_length=50)
+
+    class Meta:
+        ordering = ['id']
+
+
+class AddressPlace(models.Model):
+    public_place = models.CharField(max_length=75, blank=True)     # logradouro
+    number_place = models.CharField(max_length=8, blank=True)      #número 
+    complement = models.CharField(max_length=50, blank=True)
+    district = models.CharField(max_length=60, blank=True)         # bairro
+    cep = models.CharField(max_length=9, blank=True)
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
+    cidade = models.ForeignKey(Cidade, on_delete=models.DO_NOTHING, null=True, blank=True)
+    reference_point = models.CharField(max_length=50, blank=True)
+    haveParking = models.BooleanField(null=True, blank=True)
+    parkingDescription = models.TextField(null=True, blank=True)
 
     class Meta:
         ordering = ['id']
 
     def __str__ (self):
-        return self.cityName
-
-
-class Address(models.Model):
-    address = models.CharField(max_length=75)                       # logradouro
-    number = models.CharField(max_length=8)
-    complement = models.CharField(max_length=50)
-    district = models.CharField(max_length=60)                      # bairro
-    cep = models.CharField(max_length=9)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-    cidade = models.ForeignKey(Cidade, on_delete=models.DO_NOTHING, null=True)
-    reference = models.CharField(max_length=50)
-
-    class Meta:
-        ordering = ['id']
-
-    def __str__ (self):
-        return self.address + ' , ' + self.number
+        return self.public_place + ' , ' + self.number_place
 
 
 class TypePhoneEmail(models.Model):
@@ -51,7 +50,7 @@ class TypeDigitalAddress(models.Model):
         return self.description
 
 
-class AssistanceModality (models.Model): ##Área de atuação
+class ActingArea (models.Model): ##Área de atuação
     title = models.CharField(max_length=40)
     description = models.CharField(max_length=100)
 
@@ -61,93 +60,36 @@ class AssistanceModality (models.Model): ##Área de atuação
     def __str__ (self):
         return self.title
 
+
 class TargetAudience (models.Model):
-    description = models.TextField(null=True)
+    most_people_served_type = models.CharField(max_length=40, null=True, blank=True)
+    people_can_be_served = models.CharField(max_length=40, null=True, blank=True)
+    most_people_served_sex = models.CharField(max_length=40, null=True, blank=True)
+    most_people_served_range_age = models.CharField(max_length=40, null=True, blank=True)
+    most_people_served_incapacity = models.CharField(max_length=140, null=True, blank=True)
+    comments = models.TextField(null=True,blank=True)
 
     class Meta:
         ordering = ['id']
 
     def __str__ (self):
-        return self.description
-
-
-class Institution(models.Model):
-    companyName = models.CharField(max_length=60,null=True)
-    companyFancyName = models.CharField(max_length=60,null=True)
-    CNPJ = models.TextField(max_length=17,null=True)
-    category = models.CharField(max_length=60, null= True)
-    foundedIn = models.IntegerField(default=0, null=True)
-    legalKind = models.CharField(max_length=60, null=True) # natureza legal
-    objective = models.TextField(null=True)
-    schedules = models.TextField(null=True)
-    targetAudience = models.OneToOneField(TargetAudience, on_delete=models.DO_NOTHING, null=True)
-    assitenceModality = models.ManyToManyField(AssistanceModality, through='ActingTime')
-    address = models.OneToOneField (Address, on_delete= models.CASCADE, null=True)
-    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailInstitution', related_name='emails_institution')
-    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneInstitution', related_name='telefones_instituicao')
-    webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressInstitution', related_name='paginas_instituicao')
-
-    class Meta:
-        ordering = ['id']
-
-    def __str__ (self):
-        return self.companyName
-
-
-class ActingTime (models.Model):
-    assistenceModality = models.ForeignKey(AssistanceModality, on_delete=models.CASCADE)
-    institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
-    timeActing = models.IntegerField(default=0)
-    historic = models.TextField(null= True)
-
-    class Meta:
-        ordering = ['id']
-
-    def __str__ (self):
-        return self.assistenceModality
-
+        return self.most_people_served_type + ' : ' + self.people_can_be_served + ' : ' + self.most_people_served_sex
 
 class Capacity(models.Model):
-    CAD = models.IntegerField(null=True) # capacidade de atendimento
-    CAD_M = models.IntegerField(null=True)
-    CAD_F = models.IntegerField(null=True)
-    CAP = models.IntegerField(null=True) # capacidade de atendimento preenchida
-    CAP_M = models.IntegerField(null=True)
-    CAP_F = models.IntegerField(null=True)
+    capacity_free_m = models.IntegerField(null=True)
+    capacity_used_m = models.IntegerField(null=True)
+    capacity_free_f = models.IntegerField(null=True)
+    capacity_used_f = models.IntegerField(null=True)
 
-    class Meta:
-        ordering = ['id']
-
-
-class LongaDuracao(models.Model):
-    capacity = models.OneToOneField (Capacity, on_delete=models.CASCADE)
-    
-    class Meta:
-        ordering = ['id']
-
-
-class Locals(models.Model):
-    name = models.CharField(max_length=45)
-    objective = models.TextField(null=True)
-    schedules = models.TextField(null=True)
-    haveParking = models.BooleanField(null=True)
-    parkingDescription = models.TextField(null=True)
-    targetAudience = models.OneToOneField(TargetAudience, on_delete=models.DO_NOTHING, null=True)
-    address = models.OneToOneField (Address, on_delete= models.CASCADE)
-    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailLocals', related_name='emails_local')
-    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneLocals', related_name='telefones_local')
-    webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressLocals', related_name='paginas_local')
-    #technicalResponsible = models.ForeignKey(Professional, on_delete=models.DO_NOTHING)
- 
     class Meta:
         ordering = ['id']
 
     def __str__ (self):
-        return self.name
+        return  'M (free/used): ' + str(self.capacity_free_m) + '/' + str(self.capacity_used_m) +  '-  F(free/used): ' + str(self.capacity_free_f) + '/' + str(self.capacity_used_f) 
 
 
 class ExpertiseAreas (models.Model):
-    description : models.CharField(max_length=60)
+    description = models.CharField(max_length=60)
 
     class Meta:
         ordering = ['id'] 
@@ -157,7 +99,7 @@ class ExpertiseAreas (models.Model):
 
 
 class AcademicEducation (models.Model):
-    description : models.CharField(max_length=60)
+    description = models.CharField(max_length=60)
 
     class Meta:
         ordering = ['id']    
@@ -165,15 +107,16 @@ class AcademicEducation (models.Model):
     def __str__ (self):
         return self.description
 
+
 class Professional(models.Model):
     name = models.CharField(max_length=45)
     RG = models.CharField(max_length=12, null=True)
     CPF = models.CharField(max_length=15, null=True)
-    expertiseAreas = models.ManyToManyField(ExpertiseAreas)
-    academicEducation = models.ManyToManyField(AcademicEducation)
-    emailList = models.ManyToManyField(TypePhoneEmail,through='EmailProfessional', related_name='emails_professional')
-    phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneProfessional', related_name='telefones_professional')
-    webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressProfessional', related_name="paginas_professional")
+    expertiseAreas = models.ManyToManyField(ExpertiseAreas, null=True)
+    academicEducation = models.ManyToManyField(AcademicEducation, null=True)
+    #emailList = models.ManyToManyField(TypePhoneEmail,through='EmailProfessional', related_name='emails_professional', null=True)
+    #phoneList = models.ManyToManyField(TypePhoneEmail,through='PhoneProfessional', related_name='telefones_professional', null=True)
+    #webAddressList = models.ManyToManyField(TypeDigitalAddress,through='WebAddressProfessional', related_name="paginas_professional", null=True)
 
     class Meta:
         ordering = ['id']
@@ -182,13 +125,36 @@ class Professional(models.Model):
         return self.name
 
 
+class Institution(models.Model):
+    company_name = models.CharField(max_length=60,null=True)
+    trading_name = models.CharField(max_length=60,null=True)
+    trading_name_know = models.CharField(max_length=60,null=True)
+    cnpj = models.CharField(max_length=18,null=True)
+    category = models.CharField(max_length=60, null= True)
+    foundation_year = models.IntegerField(default=0, null=True)
+    legal_nature = models.CharField(max_length=60, null=True) # natureza legal
+    objective = models.TextField(null=True)
+    addressPlace = models.OneToOneField (AddressPlace, on_delete= models.CASCADE, null=True) 
+    capacity = models.OneToOneField(Capacity,on_delete=models.CASCADE ,null=True, blank=True)
+    mainActingArea = models.ForeignKey(ActingArea, on_delete=models.DO_NOTHING, null=True)
+    schedules = models.TextField(null=True)
+    targetAudience = models.OneToOneField(TargetAudience, on_delete=models.DO_NOTHING, null=True)
+    technicalResponsible = models.ForeignKey(Professional, on_delete=models.DO_NOTHING, null=True)
+ 
+    class Meta:
+        ordering = ['id']
+
+    def __str__ (self):
+        return self.company_name
+
+
 class Offers(models.Model):
-    location = models.ForeignKey(Locals, on_delete=models.DO_NOTHING)
+    institution = models.ForeignKey(Institution, on_delete=models.CASCADE,null=True)
     activities = models.ManyToManyField(Activity,'atividades_ofertadas')
     responsibles = models.ManyToManyField(Professional, related_name="_responsibles")
     instructors = models.ManyToManyField(Professional,related_name="_instructors")
     targetAudience = models.OneToOneField(TargetAudience, on_delete=models.DO_NOTHING, null=True)
-    enrollmentOpen = models.BooleanField(null=True)
+    enrollmentOpen = models.BooleanField(null=True) ## marículas abertas
     date_begin = models.DateField()
     date_end = models.DateField()
     environmentType = models.CharField(max_length=40, null=True)
@@ -199,14 +165,8 @@ class Offers(models.Model):
     exemption = models.CharField(max_length=100, null=True)
     motivation = models.TextField()
     requisites = models.TextField()
-
-    healthyAging = models.BooleanField(null=True)
-
-    partnership = models.TextField()
-    home_care = models.CharField(max_length=1)
-
+    peopleRecommender = models.CharField(max_length=100,null=True, blank=True)
     comments = models.TextField()
-    
     capacity = models.OneToOneField (Capacity, on_delete=models.CASCADE)
 
     class Meta:
@@ -217,8 +177,8 @@ class Offers(models.Model):
 
 
 class WebAddress (models.Model):
-    digitalAddress = models.CharField(max_length=100)
-    type = models.ForeignKey(TypeDigitalAddress, on_delete=models.CASCADE)
+    digital_address = models.CharField(max_length=100)
+    description = models.CharField(max_length=40, null=True, blank=True)
 
     class Meta:
         ordering = ['id']    
@@ -230,22 +190,10 @@ class WebAddressInstitution (WebAddress):
     class Meta:
         ordering = ['id']    
 
-class WebAddressLocals (WebAddress):
-    local = models.ForeignKey(Locals, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ['id']    
-
-
-class WebAddressProfessional (WebAddress):
-    professional = models.ForeignKey(Professional, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ['id']    
 
 class Phone(models.Model):
-    type = models.ForeignKey(TypePhoneEmail, on_delete=models.CASCADE)
-    phoneNumber = models.CharField(max_length=14)
+    description = models.CharField(max_length=40, null=True, blank=True)
+    phone_number = models.CharField(max_length=14)
 
     class Meta:
         ordering = ['id']
@@ -258,23 +206,9 @@ class PhoneInstitution(Phone):
         ordering = ['id']
 
 
-class PhoneLocals(Phone):
-    local = models.ForeignKey(Locals, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ['id']
-
-
-class PhoneProfessional(Phone):
-    professional = models.ForeignKey(Professional, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ['id']
-
-
 class Email(models.Model):
-    type = models.ForeignKey(TypePhoneEmail, on_delete=models.CASCADE)
-    email = models.EmailField()
+    description = models.CharField(max_length=40, null=True, blank=True)
+    email_address = models.EmailField()
 
     class Meta:
         ordering = ['id']
@@ -286,9 +220,16 @@ class EmailInstitution(Email):
     class Meta:
         ordering = ['id']
 
+'''
+class WebAddressProfessional (WebAddress):
+    professional = models.ForeignKey(Professional, on_delete=models.CASCADE)
 
-class EmailLocals(Email):
-    local = models.ForeignKey(Locals, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['id']    
+
+
+class PhoneProfessional(Phone):
+    professional = models.ForeignKey(Professional, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']
@@ -300,6 +241,5 @@ class EmailProfessional(Email):
     class Meta:
         ordering = ['id']
 
-
-
+'''
 

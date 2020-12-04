@@ -31,12 +31,14 @@ class Type (Detail):
 class Activity(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
-    image = models.URLField(null=True, blank=True)
+    imageURL = models.URLField(null=True, blank=True)
+    general_activity_objective = models.TextField(null=True)
+    author = models.TextField(null=True)
 
     characteristic = models.ManyToManyField(Characteristic, blank=True, related_name='activities')
     benefit = models.ManyToManyField(Benefit, blank=True, related_name='activities')
     restriction = models.ManyToManyField(Restriction, blank=True, related_name='activities')
-    type = models.ManyToManyField(Type, blank=True, related_name='activities')
+    type_activity = models.ManyToManyField(Type, blank=True, related_name='activities')
 
     class Meta:
         ordering = ['id']

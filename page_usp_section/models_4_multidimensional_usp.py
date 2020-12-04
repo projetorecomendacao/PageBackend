@@ -23,7 +23,7 @@ class FallsUsp (models.Model):
     q102_prior_ave = models.CharField(OptionsUsp.questions[100], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q103_psychotropic_medications_use = models.CharField(OptionsUsp.questions[101], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q104_has_diseases = models.CharField(OptionsUsp.questions[102], max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    comments = models.TextField("Observações",null=True)
+    comments = models.TextField("Observações",null=True, blank=True)
     need_investigation = models.CharField(OptionsUsp.need_investigation_question,max_length=1, default="N",choices=OptionsUsp.CHOICES)
     max_score = models.IntegerField(default=6)
     score = models.IntegerField(null=True)
@@ -42,7 +42,7 @@ class FallsUsp (models.Model):
 
 class MultidisciplinaryDomainUsp (models.Model):
     falls = models.OneToOneField(FallsUsp, on_delete=models.CASCADE, null=True)
-    comments = models.TextField('Observações Sobre o Bloco Multidimensional')
+    comments = models.TextField('Observações Sobre o Bloco Multidimensional', blank=True, null=True)
     maxScore = models.IntegerField('Pontuação Máxima',default=8)
 
     def investigate(self):

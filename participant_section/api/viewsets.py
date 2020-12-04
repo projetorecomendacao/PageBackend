@@ -13,12 +13,17 @@ from participant_section.models import Participant, Income, ParticipantSocialMed
 from utils.api.serializer import IsExpert, CustomModelViewSet
 
 
-class ParticipantViewSet(ModelViewSet):
+class ParticipantViewSet(CustomModelViewSet):
     queryset = Participant.objects.all()
     serializer_class = ParticipantSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('name', 'communication', 'birth_date', 'gender')
-    permission_classes = [IsExpert]
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert],
+        'destroy': [IsExpert],
+        'update': [IsExpert],
+    }
 
     def get_queryset(self):
         return Expert.objects.get(email=self.request.user.email).contacts
@@ -41,42 +46,42 @@ class ParticipantViewSet(ModelViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class IncomeViewSet(ModelViewSet):
+class IncomeViewSet(CustomModelViewSet):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
     # filter_backends = (SearchFilter,)
     # search_fields = ('range', )
 
 
-class ParticipantSocialMediaViewSet(ModelViewSet):
+class ParticipantSocialMediaViewSet(CustomModelViewSet):
     queryset = ParticipantSocialMedia.objects.all()
     serializer_class = ParticipantSocialMediaSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('description',)
 
 
-class MaritalStatusViewSet(ModelViewSet):
+class MaritalStatusViewSet(CustomModelViewSet):
     queryset = MaritalStatus.objects.all()
     serializer_class = MaritalStatusSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('status',)
 
 
-class SchoolingViewSet(ModelViewSet):
+class SchoolingViewSet(CustomModelViewSet):
     queryset = Schooling.objects.all()
     serializer_class = SchoolingSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('schooling',)
 
 
-class ProfessionalsActivitiesViewSet(ModelViewSet):
+class ProfessionalsActivitiesViewSet(CustomModelViewSet):
     queryset = ProfessionalsActivities.objects.all()
     serializer_class = ProfessionalsActivitiesSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('description',)
 
 
-class ReligionViewSet(ModelViewSet):
+class ReligionViewSet(CustomModelViewSet):
     queryset = Religion.objects.all()
     serializer_class = ReligionSerializer
     filter_backends = (SearchFilter,)

@@ -34,6 +34,7 @@ class Orientador (models.Model):
     orientando_email = models.CharField(max_length=60, blank=True)
     dupla_name = models.CharField(max_length=60, blank=True)
     dupla_email = models.CharField(max_length=60, blank=True)
+    trio_name = models.CharField(max_length=60, blank=True)
     qtdPages = models.IntegerField(default=0)
 
 

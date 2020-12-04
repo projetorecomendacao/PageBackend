@@ -55,4 +55,32 @@ class PageUsp (models.Model):
         pass
 
 
+class Avaliacao (models.Model):
+    q_01 = models.CharField(max_length=30, null=True, blank=True)
+    q_02 = models.CharField(max_length=30, null=True, blank=True)
+    q_03 = models.CharField(max_length=30, null=True, blank=True)
+    q_04 = models.CharField(max_length=30, null=True, blank=True)        
+    q_05 = models.CharField(max_length=30, null=True, blank=True)
+    q_06 = models.CharField(max_length=30, null=True, blank=True)
+    q_07 = models.CharField(max_length=30, null=True, blank=True)
+    q_08 = models.CharField(max_length=30, null=True, blank=True)
+    q_09 = models.CharField(max_length=30, null=True, blank=True)
+    q_10 = models.CharField(max_length=30, null=True, blank=True)
+    q_11 = models.CharField(max_length=30, null=True, blank=True)
+    q_12 = models.CharField(max_length=30, null=True, blank=True)        
+    q_13 = models.CharField(max_length=30, null=True, blank=True)
+    q_14 = models.CharField(max_length=30, null=True, blank=True)
+    q_15 = models.CharField(max_length=30, null=True, blank=True)
+    q_16 = models.CharField(max_length=30, null=True, blank=True)
+    q_17 = models.CharField(max_length=30, null=True, blank=True)
+    q_18 = models.CharField(max_length=30, null=True, blank=True)
+    q_19 = models.CharField(max_length=30, null=True, blank=True)
+    q_20 = models.CharField(max_length=30, null=True, blank=True)        
+    q_21 = models.CharField(max_length=30, null=True, blank=True)
+    q_22 = models.CharField(max_length=30, null=True, blank=True)
+    q_23 = models.CharField(max_length=30, null=True, blank=True)
+    q_24 = models.CharField(max_length=30, null=True, blank=True)
+    q_25 = models.CharField(max_length=30, null=True, blank=True)
+    comments = models.TextField(null=True, blank=True)    
+
 

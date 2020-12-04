@@ -8,12 +8,12 @@ from page_usp_section.models_1_psicologico_usp import NegativeAttitudesAgingUsp,
 from page_usp_section.models_2_Biologicos_usp import BiologicalAspectsUsp, SensoryDeficitUsp, FunctionalDisabilityUsp, MalnutritionUsp, CardiovascularFactorsUsp, MisuseMedicationsUsp
 from page_usp_section.models_3_sociais_usp import SocialAspectsUsp, LowSocialSupportUsp, EnvironmentalProblemsUsp, ViolenceUsp
 from page_usp_section.models_4_multidimensional_usp import MultidisciplinaryDomainUsp, FallsUsp
-from page_usp_section.models_0_page_usp import PageUsp
+from page_usp_section.models_0_page_usp import PageUsp, Avaliacao
 from page_usp_section.api.serializers import NegativeAttitudesAgingUspSerializer, CognitionDeficitUspSerializer,\
     DepressionUspSerializer, PsychologicalAspectsUspSerializer, BiologicalAspectsUspSerializer, SensoryDeficitUspSerializer,\
     FunctionalDisabilityUspSerializer, MalnutritionUspSerializer, CardiovascularFactorsUspSerializer,\
     MisuseMedicationsUspSerializer, SocialAspectsUspSerializer, LowSocialSupportUspSerializer, EnvironmentalProblemsUspSerializer,\
-    ViolenceUspSerializer, MultidisciplinaryDomainUspSerializer, FallsUspSerializer, PageUspSerializer
+    ViolenceUspSerializer, MultidisciplinaryDomainUspSerializer, FallsUspSerializer, PageUspSerializer, AvaliacaoSerializer
 from utils.api.serializer import CustomModelViewSet, IsExpert
 from assessment_section.models import DemandMap
 from datetime import datetime
@@ -782,9 +782,15 @@ class PageViewSetUsp(CustomModelViewSet):
         return Response (volta)
 
 
-##
-## Usados para iplementar as funções necessárias para o orientador..
-##
+class AvaliacaoViewSet(CustomModelViewSet):
+    queryset = Avaliacao.objects.all()
+    serializer_class = AvaliacaoSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert]
+    }
+
+
 
 
 

@@ -45,7 +45,7 @@ class ExpertViewSet(CustomModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class ExpertiseViewSet(ModelViewSet):
+class ExpertiseViewSet(CustomModelViewSet):
     queryset = Expertise.objects.all()
     serializer_class = ExpertiseSerializer
     filter_backends = (SearchFilter,)
@@ -53,10 +53,15 @@ class ExpertiseViewSet(ModelViewSet):
 
 
 
-class OrientadorViewSet(ModelViewSet):
+class OrientadorViewSet(CustomModelViewSet):
     queryset = Orientador.objects.all()
     serializer_class = OrientadorSerializer
-    permission_classes = [IsExpert]
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert],
+        'destroy': [IsExpert],
+        'update': [IsExpert],
+    }
 
     #método que verifica se existe o e-mail do aluno
     def achaEmailAluno(self, email):
@@ -75,7 +80,6 @@ class OrientadorViewSet(ModelViewSet):
             oriUp.qtdPages = PageUsp.objects.filter(gerontologist=ori.orientando_id).count()
             oriUp.save()
         volta = Orientador.objects.all()
-        print(volta)
         return volta
 
     def create(self, request, *args, **kwargs):
@@ -93,6 +97,7 @@ class OrientadorViewSet(ModelViewSet):
                 ori.orientando_name = request.data['orientando_name']
                 ori.dupla_name = request.data['dupla_name']
                 ori.dupla_email = request.data['dupla_email']
+                ori.trio_name = request.data['trio_name']
                 expert = Expert.objects.filter(email=request.data['orientando_email'])
                 if expert.exists():
                     #Não deixa salvar se o e-mail já existe nos experts
@@ -135,6 +140,7 @@ class OrientadorViewSet(ModelViewSet):
         ori.orientando_name = request.data['orientando_name']
         ori.dupla_name = request.data['dupla_name']
         ori.dupla_email = request.data['dupla_email']
+        ori.trio_name = request.data['trio_name']
         ori.save()
         return Response({'id' : ori.pk})        
 

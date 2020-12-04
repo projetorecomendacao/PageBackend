@@ -5,7 +5,7 @@ from page_usp_section.models_1_psicologico_usp import NegativeAttitudesAgingUsp,
 from page_usp_section.models_2_Biologicos_usp import BiologicalAspectsUsp, SensoryDeficitUsp, FunctionalDisabilityUsp, MalnutritionUsp, CardiovascularFactorsUsp, MisuseMedicationsUsp
 from page_usp_section.models_3_sociais_usp import SocialAspectsUsp, LowSocialSupportUsp, EnvironmentalProblemsUsp, ViolenceUsp
 from page_usp_section.models_4_multidimensional_usp import MultidisciplinaryDomainUsp, FallsUsp
-from page_usp_section.models_0_page_usp import PageUsp
+from page_usp_section.models_0_page_usp import PageUsp, Avaliacao
 
 
 class NegativeAttitudesAgingUspSerializer (ModelSerializer):
@@ -107,4 +107,9 @@ class FallsUspSerializer (ModelSerializer):
 class PageUspSerializer (ModelSerializer):
     class Meta:
         model = PageUsp
+        fields = '__all__'
+
+class AvaliacaoSerializer (ModelSerializer):
+    class Meta:
+        model = Avaliacao
         fields = '__all__'
