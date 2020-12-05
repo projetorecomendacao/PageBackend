@@ -65,6 +65,9 @@ class OrientadorViewSet(CustomModelViewSet):
 
     #método que verifica se existe o e-mail do aluno
     def achaEmailAluno(self, email):
+        print(email)
+        if (email == ''):
+            return False
         ori_teste = Orientador.objects.filter(
             models.Q(orientando_email = email) | \
             models.Q(dupla_email = email) ) 
