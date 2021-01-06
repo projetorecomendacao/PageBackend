@@ -109,7 +109,7 @@ class MisuseMedicationsUsp (models.Model):
     q44_diseases_last_5_years_j = models.CharField(OptionsUsp.questions[42][10], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q44_diseases_last_5_years_k = models.CharField(OptionsUsp.questions[42][11], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q44_diseases_last_5_years_l = models.CharField(OptionsUsp.questions[42][12], max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    q44_diseases_last_5_years_l_other = models.CharField(OptionsUsp.questions[42][12], max_length=30, blank=True, null=True)
+    q44_diseases_last_5_years_l_other = models.CharField(OptionsUsp.questions[42][12], max_length=200, blank=True, null=True)
     q44_diseases_last_5_years_amount = models.IntegerField(OptionsUsp.questions[42][12],default=0)
 
     q45_health_problems_a = models.CharField(OptionsUsp.questions[43][1], max_length=1, default="N", choices=OptionsUsp.CHOICES)

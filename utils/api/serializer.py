@@ -30,4 +30,6 @@ class CustomModelViewSet(ModelViewSet):
 
 class IsExpert(BasePermission):
     def has_permission(self, request, view):
-        return bool(request.user and Expert.objects.filter(email=request.user.email).exists())
+        if (request.user):
+            return bool(Expert.objects.filter(email=request.user.email).exists())
+        return False

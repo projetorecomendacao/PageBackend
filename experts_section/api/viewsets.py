@@ -31,12 +31,14 @@ class ExpertViewSet(CustomModelViewSet):
             serializer = self.get_serializer(expert)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            data = {
-                'email': request.user.email,
-                'name': request.user.first_name + ' ' + request.user.last_name
-            }
-            request._full_data = data
-            return super().create(request, args, kwargs)
+            #data = {
+            #    'email': request.user.email,
+            #    'name': request.user.first_name + ' ' + request.user.last_name
+            #}
+            #request._full_data = data
+            #return super().create(request, args, kwargs)
+            return Response({'id' : -1}, status=status.HTTP_200_OK)
+
 
     @action(detail=False, methods=['post'])
     def getSelf(self, request, *args, **kwargs):

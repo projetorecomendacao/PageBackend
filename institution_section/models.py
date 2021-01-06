@@ -172,8 +172,6 @@ class Offers(models.Model):
     class Meta:
         ordering = ['id']
 
-    def __str__ (self):
-        return self.location
 
 
 class WebAddress (models.Model):
