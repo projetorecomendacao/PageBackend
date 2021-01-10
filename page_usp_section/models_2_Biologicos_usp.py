@@ -48,7 +48,7 @@ class MalnutritionUsp (models.Model):
     d31_less3_meal_daily = models.CharField(OptionsUsp.questions[31], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     d32_decreases_amount_food = models.CharField(OptionsUsp.questions[32], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     d33_lost_weight_no_reason = models.CharField(OptionsUsp.questions[33], max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    d33_lost_weight_no_reason_amount = models.CharField(OptionsUsp.questions[33], max_length=15, default="N", choices=OptionsUsp.LOSTWEIGHT)
+    d33_lost_weight_no_reason_amount = models.CharField(OptionsUsp.questions[33], max_length=30, default="N", choices=OptionsUsp.LOSTWEIGHT)
     d34_stress_illness_hospitalization = models.CharField(OptionsUsp.questions[34], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q35_bmi_less22 = models.CharField(OptionsUsp.questions[35], max_length=1, default="N", choices=OptionsUsp.CHOICES)  # Usar cálculo de BMI do participante
     comments = models.TextField("Observações",null=True, blank=True)
