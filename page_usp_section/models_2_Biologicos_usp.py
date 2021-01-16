@@ -120,7 +120,7 @@ class MisuseMedicationsUsp (models.Model):
     q45_health_problems_f = models.CharField(OptionsUsp.questions[43][6], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q45_health_problems_g = models.CharField(OptionsUsp.questions[43][7], max_length=1, default="N", choices=OptionsUsp.CHOICES)
     q45_health_problems_h = models.CharField(OptionsUsp.questions[43][8], max_length=1, default="N", choices=OptionsUsp.CHOICES)
-    q45_health_problems_h_other = models.CharField(OptionsUsp.questions[43][8], max_length=30, blank=True, null=True)
+    q45_health_problems_h_other = models.CharField(OptionsUsp.questions[43][8], max_length=200, blank=True, null=True)
 
 
 #    q46_medicines = models.ManyToManyField(Medicines, verbose_name="Medicamentos")
