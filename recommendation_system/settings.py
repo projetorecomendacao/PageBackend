@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'drinks_section',
     'recommender_section',
     'page_usp_section',
-    'django_extensions'
+    'django_extensions',
+    'esm_program_section'
 ]
 
 MIDDLEWARE = [

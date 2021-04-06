@@ -7,3 +7,4 @@ admin.site.register(Benefit)
 admin.site.register(Restriction)
 admin.site.register(Type)
 admin.site.register(Activity)
+

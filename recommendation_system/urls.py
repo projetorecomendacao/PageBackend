@@ -48,6 +48,7 @@ from page_usp_section.api.viewsets import  NegativeAttitudesAgingViewSetUsp, Cog
     MalnutritionViewSetUsp, CardiovascularFactorsViewSetUsp, MisuseMedicationsViewSetUsp, SocialAspectsViewSetUsp,\
     LowSocialSupportViewSetUsp, EnvironmentalProblemsViewSetUsp, ViolenceViewSetUsp, MultidisciplinaryDomainViewSetUsp,\
     FallsViewSetUsp, PageViewSetUsp, AvaliacaoViewSet
+from esm_program_section.api.viewsets import EditorProgramViewSet, ProgramViewSet, ActiveEventViewSet, InterventionViewSet, ActionsEsmViewSet
 
 
 
@@ -149,6 +150,14 @@ router.register(r'violenceUsp', ViolenceViewSetUsp, basename='violenceUsp')
 router.register(r'multidisciplinaryDomainUsp', MultidisciplinaryDomainViewSetUsp, basename='multidisciplinaryDomainUsp')
 router.register(r'fallsUsp', FallsViewSetUsp, basename='fallsUsp')
 router.register(r'pageUsp', PageViewSetUsp, basename='pageUsp')
+
+
+# esm_program_section
+router.register(r'programEsm', ProgramViewSet, basename='programEsm')
+router.register(r'activeEvent', ActiveEventViewSet, basename='activeEvent')
+router.register(r'actionsEsm', ActionsEsmViewSet, basename='actionsEsm')
+router.register(r'intervention', InterventionViewSet, basename='intervention')
+router.register(r'editorProgram', EditorProgramViewSet, basename='editorProgram')
 
 
 urlpatterns = [

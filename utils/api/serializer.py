@@ -1,3 +1,4 @@
+from esm_program_section.models import EditorProgram
 from rest_framework.permissions import BasePermission
 from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 from rest_framework.viewsets import ModelViewSet
@@ -32,4 +33,10 @@ class IsExpert(BasePermission):
     def has_permission(self, request, view):
         if (request.user):
             return bool(Expert.objects.filter(email=request.user.email).exists())
+        return False
+
+class IsEditor(BasePermission):
+    def has_permission(self, request, view):
+        if (request.user):
+            return bool(EditorProgram.objects.filter(email=request.user.email).exists())
         return False

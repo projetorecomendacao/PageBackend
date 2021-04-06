@@ -12,7 +12,7 @@ from experts_section.api.serializers import ExpertiseSerializer, ExpertSerialize
 from utils.api.serializer import CustomModelViewSet, IsExpert
 from django.db.models import Count
 from page_usp_section.models_0_page_usp import PageUsp
-
+ 
 
 class ExpertViewSet(CustomModelViewSet):
     queryset = Expert.objects.all()

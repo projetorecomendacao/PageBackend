@@ -44,7 +44,8 @@ class PageUsp (models.Model):
     demandMap = models.OneToOneField(DemandMap,on_delete=models.CASCADE, null=True,verbose_name='Mapa de Demandas')
     #Atividades Recomendadas
     #recommendedActivities = models.ForeignKey(RecommendedActivities, null=True, verbose_name="Atividades Recomendadas", on_delete=models.CASCADE)
-    #recommendedActivitiesOffers = models.ForeignKey(RecommendedActivitiesOffers, null=True, verbose_name="Atividades Ofertadas Recomendadas", on_delete=models.CASCADE)
+    #tyu
+    # recommendedActivitiesOffers = models.ForeignKey(RecommendedActivitiesOffers, null=True, verbose_name="Atividades Ofertadas Recomendadas", on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['id']
