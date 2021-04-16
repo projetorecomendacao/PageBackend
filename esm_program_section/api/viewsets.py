@@ -245,7 +245,7 @@ class InterventionViewSet(CustomModelViewSet):
         if (Intervention.objects.count() == 0):  
             biggerInterventionId = 0
         else:
-            biggerInterventionId = ActiveEvent.objects.values('id').order_by('-id').first()['id']
+            biggerInterventionId = Intervention.objects.values('id').order_by('-id').first()['id']
         if (ActionsEsm.objects.count() == 0):
             biggerActionId = 0
         else:
@@ -260,7 +260,7 @@ class InterventionViewSet(CustomModelViewSet):
         if (Intervention.objects.count() == 0):  
             biggerInterventionId = 0
         else:
-            biggerInterventionId = ActiveEvent.objects.values('id').order_by('-id').first()['id']
+            biggerInterventionId = Intervention.objects.values('id').order_by('-id').first()['id']
         if (ActionsEsm.objects.count() == 0):
             biggerActionId = 0
         else:
@@ -269,16 +269,24 @@ class InterventionViewSet(CustomModelViewSet):
         return Response(volta)      
 
     def create(self, request):
+        #cria a lista de intervenções que foram criadas antes da que está sendo criada..
+        idIntervention = request.data['idIntervention']
+        idEvent = ActiveEvent.objects.get(pk=request.data['idEvent'])
+        lista = Intervention.objects.filter(Q(id__gt= idIntervention),Q(activate ='y'),Q(event =idEvent)).order_by('id')
+        listaSerializer = InterventionSerializer(lista, many=True) 
+        #salva a intervenção
         intervention = Intervention()
         #método que atribui os dados do evento
-        self.atribui(intervention,request.data)
+        self.atribui(intervention,request.data['intervention'])
+        intervention.event = idEvent
         intervention.save()
-        event = request.data['event']
+        #Salva a operação no action
+        event = request.data['idEvent']
         program = ActiveEvent.objects.get(pk=event).program.pk
         editor = EditorProgram.objects.get(email=request.user.email)
         apoio = Apoio()
         action = apoio.grava('c','i',program,event,intervention.pk,editor,request.data)
-        return Response({'intervention' : intervention.pk, 'action' : action.pk}) 
+        return Response({'intervention' : intervention.pk, 'action' : action.pk, 'lista' : listaSerializer.data}) 
 
     def partial_update(self, request, pk=None):
         ## vai ser utilizada para guardar o antigos valores do programa

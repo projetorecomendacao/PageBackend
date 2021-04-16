@@ -120,6 +120,15 @@ class ActiveEvent(models.Model):
     description = models.CharField(max_length=500, default="", blank=True)
     type = models.CharField(max_length=50, default="active")
     activate = models.CharField(max_length=1, default='y')  # y-yes  n=no
+    program = models.ForeignKey(Program, null=True, on_delete=models.DO_NOTHING)
+
+    #campos criados para controle do gráfico
+    first = models.IntegerField(null=True, blank=True, default=0)
+    next = models.IntegerField(null=True, blank=True, default=0)
+
+
+    ## Esta parte está implementada de forma simplificada para facilitar a implementação da
+    ## colaboração.. Deve ser colocada no padrão na próxima versão..
     typeBell = models.CharField(max_length=2, null=True, default='NC')
     durationBell = models.IntegerField(null=True, default=0)
     seg = models.CharField(max_length=1, null=True, default='n') # y=yes n=no
@@ -131,7 +140,6 @@ class ActiveEvent(models.Model):
     dom = models.CharField(max_length=1, null=True, default='n')
     hour = models.IntegerField(null=True, default=0)
     minute = models.IntegerField(null=True,default=0)
-    program = models.ForeignKey(Program, null=True, on_delete=models.DO_NOTHING)
     color = models.CharField(max_length=50, default='#0F5394', blank=True, null=True)
     
     class Meta:
@@ -140,37 +148,42 @@ class ActiveEvent(models.Model):
 
 # Intervenções
 class Intervention(models.Model):
-    type = models.CharField(max_length=10, default="empty")
-    statement = models.CharField(max_length=800)
-    orderPosition = models.IntegerField()
-    first = models.BooleanField(default=False)
-    next = models.IntegerField()
-    obligatory = models.BooleanField(default=False)
-    medias = models.ManyToManyField(MediaPresentation, blank=True)
-    event = models.ForeignKey(ActiveEvent, null=True, on_delete=models.DO_NOTHING)
     activate = models.CharField(max_length=1, default='y')  # y-yes  n=no
+    
+ 
+    #type = models.CharField(max_length=10, default="empty")
+    #questionType = models.IntegerField(default=0, null=True, blank=True)
 
-    # Coletar mídia
-    mediaType = models.CharField(
-        max_length=10, default="image", null=True, blank=True)
+    # o campo statement irá conter todos os dados da intervenção
+    # nesta versão de teste não está sendo pensado no app
+    #depois precisa ser ampliado isso e transformado tudo em BD
+    intervention = models.JSONField(null=True, blank = True)
 
-    # Questões
-    question = models.TextField(null=True, blank=True)
+    #Chave Primária do Evento
+    event = models.ForeignKey(ActiveEvent, null=True, on_delete=models.DO_NOTHING)
 
-    # Tarefa
-    appPackage = models.CharField(max_length=100, null=True, blank=True)
-    parameters = models.CharField(max_length=100, null=True, blank=True)
-    startFromNotification = models.BooleanField(default=False)
-
+    #esta é a parte sensível da colaboração
+    #todos estes dados serão criados por um dos clientes no frontend
+    #mas terá que ser trazida para o backend...
+    #inclusive o posicionamento..
+    #orderPosition = models.IntegerField(default=1000000)
+    #first = models.BooleanField(default=False)
+    #next = models.IntegerField(default=-1)
+    #obligatory = models.BooleanField(default=False)
     # Pensando no modelo colaborativo a posição é importante
     # Posicionamento
-    window_x = models.IntegerField(null=True, default=0)
-    window_y = models.IntegerField(null=True, default=0)
-    window_width = models.IntegerField(null=True, default=0)
-    window_height = models.IntegerField(null=True, default=0)
+
+
+    ## Estes campos ainda não estão sendo utilizados...
+    ## Mas deverão ser acertados quando a parte da colaboração for finalizada..
+
+    # Mídias que irão junto com a intervenção
+    #medias = models.ManyToManyField(MediaPresentation, blank=True, null=True)
+
+
 
     # As condições complexas serão repensadas na próxima versão
-    #complexConditions = models.ManyToManyField(ComplexCondition, blank=True)
+    #complexConditions = models.ManyToManyField(ComplexCondition, blank=True, null=True)
 
     class Meta:
         ordering = ['id']
