@@ -286,7 +286,8 @@ class InterventionViewSet(CustomModelViewSet):
         editor = EditorProgram.objects.get(email=request.user.email)
         apoio = Apoio()
         action = apoio.grava('c','i',program,event,intervention.pk,editor,request.data)
-        return Response({'intervention' : intervention.pk, 'action' : action.pk, 'lista' : listaSerializer.data}) 
+        eventSerializer = ActiveEventSerializer(event)
+        return Response({'intervention' : intervention.pk, 'action' : action.pk, 'lista' : listaSerializer.data, 'event' : eventSerializer.data}) 
 
     def partial_update(self, request, pk=None):
         ## vai ser utilizada para guardar o antigos valores do programa
