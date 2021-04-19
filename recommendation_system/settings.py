@@ -10,9 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+import django_heroku
 import os
 
-#Channels
+# Channels
 ASGI_APPLICATION = 'recommendation_system.asgi.application'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -107,7 +108,7 @@ TEMPLATES = [
 # }
 
 if 'RDS_DB_NAME' in os.environ:
-    DATABASES = {     
+    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': os.environ['RDS_DB_NAME'],
@@ -198,15 +199,25 @@ LOGIN_REDIRECT_URL = '/teste/'
 LOGOUT_REDIRECT_URL = '/login/'
 
 # Configure Django App for Heroku.
-import django_heroku
 django_heroku.settings(locals())
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'CONFIG': {
+#             'hosts': [('localhost', 6379)],
+#         },
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         # 'ROUTING': 'recommendation_system.routing.channel_routing',
+#     }
+# }
+
 CHANNEL_LAYERS = {
-    'default': {
-        'CONFIG': {
-            'hosts': [('localhost', 6379)],
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
         },
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        #'ROUTING': 'recommendation_system.routing.channel_routing',
-    }
+        #"ROUTING": "chat.routing.channel_routing",
+    },
 }
+
