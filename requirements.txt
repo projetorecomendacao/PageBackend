@@ -1,6 +1,8 @@
 asn1crypto==0.24.0
 configparser==3.5.0b2
 cryptography==2.3
+channels
+channels_redis
 daphne
 Django
 entrypoints==0.3
