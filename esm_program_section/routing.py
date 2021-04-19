@@ -3,5 +3,5 @@ from . import consumers
 
 
 websocket_urlpatterns = [
-    url(r'ws/chat/<room_name>/', consumers.ChatConsumer),
+    url(r'ws/chat/', consumers.ChatConsumer),
 ]
