@@ -325,7 +325,6 @@ class Apoio:
     ##alterações parciais
     def atribui (self, model_, json_,copia_):
         for attr, value in json_.items():
-            copia_[attr] = getattr(model_,attr)
             setattr(model_, attr, value) 
-
+ 
    

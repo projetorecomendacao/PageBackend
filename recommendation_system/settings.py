@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+#Channels
+ASGI_APPLICATION = 'recommendation_system.asgi.application'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'bootstrapform',
     'widget_tweaks',
+    'channels',
     'activities_section',
     'assessment_section',
     'experts_section',
@@ -55,6 +59,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'esm_program_section'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,7 +94,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'recommendation_system.wsgi.application'
+#WSGI_APPLICATION = 'recommendation_system.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -195,3 +200,13 @@ LOGOUT_REDIRECT_URL = '/login/'
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
+
+CHANNEL_LAYERS = {
+    'default': {
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        #'ROUTING': 'recommendation_system.routing.channel_routing',
+    }
+}

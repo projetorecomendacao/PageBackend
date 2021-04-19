@@ -1,6 +1,7 @@
 asn1crypto==0.24.0
 configparser==3.5.0b2
 cryptography==2.3
+daphne
 Django
 entrypoints==0.3
 enum34==1.1.6
@@ -16,6 +17,8 @@ pycrypto==2.6.1
 pycryptodomex==3.6.1
 pytz==2018.9
 pyxdg==0.25
+pyasn1
+pyasn1-modules
 SecretStorage==2.3.1
 Shapely==1.6.4.post2
 simplejson==3.16.0
