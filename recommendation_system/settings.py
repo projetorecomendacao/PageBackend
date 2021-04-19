@@ -13,9 +13,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import django_heroku
 import os
 
-# Channels
-ASGI_APPLICATION = 'recommendation_system.asgi.application'
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -96,7 +93,7 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = 'recommendation_system.wsgi.application'
+WSGI_APPLICATION = 'recommendation_system.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -212,6 +209,8 @@ django_heroku.settings(locals())
 #     }
 # }
 
+# Channels
+ASGI_APPLICATION = 'recommendation_system.routing.application'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -221,3 +220,7 @@ CHANNEL_LAYERS = {
     },
 }
 
+#https://github.com/pocosoft/django_channels_heroku/blob/master/django_channels_heroku/settings.py
+IS_CI = os.environ.get('IS_CI', False)
+if not IS_CI:
+    django_heroku.settings(locals())
