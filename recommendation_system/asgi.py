@@ -1,22 +1,21 @@
 import os
-import channels
-import django
+from django.conf.urls import url
+from django.core.asgi import get_asgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "recommendation_system.settings")
-django.setup()
+django_asgi_app = get_asgi_application()
 
 
 from channels.auth import AuthMiddlewareStack
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
-import esm_program_section.routing
+from esm_program_section.consumers import ChatConsumer
 
 application = ProtocolTypeRouter({
-    'http': get_asgi_application(),
-    # changed
+    "http": django_asgi_app,
     "websocket": AuthMiddlewareStack(
-        URLRouter(
-            esm_program_section.routing.websocket_urlpatterns
-        )
+        URLRouter([
+            url(r'ws/chat/(?P<room_name>\w+)/$', ChatConsumer.as_asgi()),
+        ])
     ),
 })
