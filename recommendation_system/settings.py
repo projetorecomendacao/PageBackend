@@ -210,7 +210,7 @@ django_heroku.settings(locals())
 # }
 
 # Channels
-ASGI_APPLICATION = 'recommendation_system.routing.application'
+ASGI_APPLICATION = 'recommendation_system.asgi.application'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -221,6 +221,3 @@ CHANNEL_LAYERS = {
 }
 
 #https://github.com/pocosoft/django_channels_heroku/blob/master/django_channels_heroku/settings.py
-IS_CI = os.environ.get('IS_CI', False)
-if not IS_CI:
-    django_heroku.settings(locals())
