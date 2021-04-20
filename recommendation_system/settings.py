@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import django_heroku
 import os
 
-ASGI_APPLICATION = 'recommendation_system.asgi.application'
+ASGI_APPLICATION = 'recommendation_system.routing.application'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,11 +28,12 @@ SECRET_KEY = 'y%i)rt^dcexz66b)z3ws#bly@6#y_m#_ei_6lbbcm&$p=$80i$'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'esm_program_section',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +47,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'bootstrapform',
     'widget_tweaks',
-    'channels',
     'activities_section',
     'assessment_section',
     'experts_section',
@@ -57,8 +57,7 @@ INSTALLED_APPS = [
     'drinks_section',
     'recommender_section',
     'page_usp_section',
-    'django_extensions',
-    'esm_program_section'
+    'django_extensions'
 ]
 
 
@@ -95,7 +94,7 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = 'recommendation_system.wsgi.application'
+WSGI_APPLICATION = 'recommendation_system.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -204,21 +203,18 @@ django_heroku.settings(locals())
 # CHANNEL_LAYERS = {
 #     'default': {
 #         'CONFIG': {
-#             'hosts': [('localhost', 6379)],
+#             'hosts': [('127.0.0.1', 6379)],
 #         },
 #         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         # 'ROUTING': 'recommendation_system.routing.channel_routing',
+#          # 'ROUTING': 'recommendation_system.routing.channel_routing',
 #     }
 # }
 
-# Channels
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("redis-server-name", 6379)],
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
         },
     },
 }
-
-#https://github.com/pocosoft/django_channels_heroku/blob/master/django_channels_heroku/settings.py
