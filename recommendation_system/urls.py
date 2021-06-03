@@ -50,6 +50,7 @@ from page_usp_section.api.viewsets import  NegativeAttitudesAgingViewSetUsp, Cog
     FallsViewSetUsp, PageViewSetUsp, AvaliacaoViewSet
 from esm_program_section.api.viewsets import EditorProgramViewSet, ProgramViewSet, ActiveEventViewSet, InterventionViewSet, ActionsEsmViewSet
 
+from editor_psicometrico.api.viewsets import DocumentoViewSet
 
 
 router = routers.DefaultRouter()
@@ -158,6 +159,10 @@ router.register(r'activeEvent', ActiveEventViewSet, basename='activeEvent')
 router.register(r'actionsEsm', ActionsEsmViewSet, basename='actionsEsm')
 router.register(r'intervention', InterventionViewSet, basename='intervention')
 router.register(r'editorProgram', EditorProgramViewSet, basename='editorProgram')
+
+#editor_colaborativo
+router.register(r'documento', DocumentoViewSet, basename='documento')
+
 
 
 urlpatterns = [

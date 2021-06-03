@@ -62,6 +62,15 @@ class ProgramViewSet(CustomModelViewSet):
         'update': [IsEditor]
     }
 
+    def destroy(self, request, pk=None):
+        program = Program.objects.get(pk=pk)      
+        program.activate = 'n'
+        program.save()
+        apoio = Apoio()
+        editor = EditorProgram.objects.get(email=request.user.email)   
+        action = apoio.grava('d','p',program.pk,0,0,editor,{})
+        return Response({'program' : program.pk})
+
     def partial_update(self, request, pk=None):
         ## vai ser utilizada para guardar o antigos valores do programa
         tProgram = copy(request.data)
@@ -211,8 +220,16 @@ class ActiveEventViewSet(CustomModelViewSet):
         volta = serializer.data
         interventionsList = Intervention.objects.filter(event = event)
         interventios = InterventionSerializer(interventionsList,many=True).data
-
         return Response({'event' : volta, 'interventions' : interventios})   
+    
+    def destroy(self, request, pk=None):
+        event = ActiveEvent.objects.get(pk=pk)      
+        event.activate = 'n'
+        event.save()
+        apoio = Apoio()
+        editor = EditorProgram.objects.get(email=request.user.email)   
+        action = apoio.grava('d','e',event.program.pk,event.pk,0,editor,{})
+        return Response({'event' : event.pk})
 
 
 class InterventionViewSet(CustomModelViewSet):
@@ -224,6 +241,17 @@ class InterventionViewSet(CustomModelViewSet):
         'destroy': [IsEditor],
         'update': [IsEditor]
     }
+
+    def destroy(self, request, pk=None):
+        intervention = Intervention.objects.get(pk=pk)      
+        intervention.activate = 'n'
+        intervention.save()
+        apoio = Apoio()
+        editor = EditorProgram.objects.get(email=request.user.email)   
+        program = intervention.event.program.pk
+        event = intervention.event.pk
+        action = apoio.grava('d','i',program,event,intervention.pk,editor,{})
+        return Response({'intervention' : intervention.pk})
 
     ##o método atribui auxilia na atribuição dos valores do objeto 
     def atribui (self, model_, json_):
