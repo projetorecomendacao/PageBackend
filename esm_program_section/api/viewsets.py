@@ -209,7 +209,6 @@ class ActiveEventViewSet(CustomModelViewSet):
         ##Este método atualiza os valores no evento e guarda os valores antigos do evento
         ##no tEvent, este valores serão guardados para quando for desfazer a ação
         apoio.atribui(event,request.data,tEvent)
-        print(tEvent)
         event.save()
         editor = EditorProgram.objects.get(email=request.user.email)        
         program = event.program.pk

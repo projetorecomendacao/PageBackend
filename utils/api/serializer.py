@@ -4,7 +4,7 @@ from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializ
 from rest_framework.viewsets import ModelViewSet
 from experts_section.models import Expert
 
-
+# Este modelo permite a inserçãos campos da tabela relacionadao quanto tem uma relação N x N
 # This is here so that I can check it better later (not used yet)
 # https://stackoverflow.com/questions/38245414/django-rest-framework-how-to-include-all-fields-and-a-related-field-in-mo
 class GenericExtraFieldsSerializer(ModelSerializer):
