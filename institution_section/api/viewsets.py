@@ -1,20 +1,152 @@
+from rest_framework.fields import NullBooleanField
 from rest_framework.response import Response
-import json
 from django.forms.models import model_to_dict
 
-from rest_framework.filters import SearchFilter
-from rest_framework.viewsets import ModelViewSet
 from institution_section.models import Cidade, AddressPlace, Professional, \
      Institution, ActingArea, Offers, Capacity, ExpertiseAreas, \
      AcademicEducation, WebAddressInstitution, PhoneInstitution, \
-     TargetAudience, EmailInstitution
+     TargetAudience, EmailInstitution, \
+     LegalNature, PeopleType, PeopleSex, PeopleRangeAge, PeopleIncapacity,\
+     TypeDigitalAddress
 
 from institution_section.api.serializers import CidadeSerializer, AddressPlaceSerializer, \
      ProfessionalSerializer, InstitutionSerializer, ActingAreaSerializer, OffersSerializer,\
      CapacitySerializer, ExpertiseAreasSerializer, AcademicEducationSerializer,  \
-     WebAddressInstitutionSerializer, PhoneInstitutionSerializer, EmailInstitutionSerializer
+     WebAddressInstitutionSerializer, PhoneInstitutionSerializer, EmailInstitutionSerializer, \
+     LegalNatureSerializer, PeopleTypeSerializer, PeopleSexSerializer, \
+     PeopleRangeAgeSerializer, PeopleIncapacitySerializer, TypeDigitalAddressSerializer
 
 from utils.api.serializer import CustomModelViewSet, IsExpert
+
+class TypeDigitalAddressViewSet(CustomModelViewSet):
+    queryset = TypeDigitalAddress.objects.all()
+    serializer_class = TypeDigitalAddressSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert],
+        'destroy': [IsExpert],
+        'update': [IsExpert]
+    }
+
+    def list(self, request):
+        volta = TypeDigitalAddress.objects.all()
+        if not volta.exists():
+            TypeDigitalAddress.objects.create(description = 'Twitter')
+            TypeDigitalAddress.objects.create(description = 'LinkedIn')
+            volta = TypeDigitalAddress.objects.all()            
+        dados = TypeDigitalAddressSerializer(volta,many=True)
+        return Response(dados.data)
+
+
+class LegalNatureViewSet(CustomModelViewSet):
+    queryset = LegalNature.objects.all()
+    serializer_class = LegalNatureSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert],
+        'destroy': [IsExpert],
+        'update': [IsExpert]
+    }
+
+    def list(self, request):
+        volta = LegalNature.objects.all()
+        if not volta.exists():
+            LegalNature.objects.create(description = 'Pública')
+            LegalNature.objects.create(description = 'Privada')
+            LegalNature.objects.create(description = 'Terceiro Setor')
+            volta = LegalNature.objects.all()            
+        dados = LegalNatureSerializer(volta,many=True)
+        return Response(dados.data)
+
+class PeopleTypeViewSet(CustomModelViewSet):
+    queryset = PeopleType.objects.all()
+    serializer_class = PeopleTypeSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert],
+        'destroy': [IsExpert],
+        'update': [IsExpert]
+    }
+
+    def list(self, request):
+        volta = PeopleType.objects.all()
+        if not volta.exists():
+            r1 = PeopleType.objects.create(description = 'Adulto')
+            r2 = PeopleType.objects.create(description = 'Idoso')
+            r3 = PeopleType.objects.create(description = 'Criança')
+            volta = PeopleType.objects.all()            
+        dados = PeopleTypeSerializer(volta,many=True)
+        return Response(dados.data)
+
+class PeopleSexViewSet(CustomModelViewSet):
+    queryset = PeopleSex.objects.all()
+    serializer_class = PeopleSexSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert],
+        'destroy': [IsExpert],
+        'update': [IsExpert]
+    }
+
+    def list(self, request):
+        volta = PeopleSex.objects.all()
+        if not volta.exists():
+            r1 = PeopleSex.objects.create(description = 'Homem')
+            r2 = PeopleSex.objects.create(description = 'Mulher')
+            r3 = PeopleSex.objects.create(description = 'Ambos')
+            volta = PeopleSex.objects.all()            
+        dados = PeopleSexSerializer(volta,many=True)
+        return Response(dados.data)    
+
+
+class PeopleRangeAgeViewSet(CustomModelViewSet):
+    queryset = PeopleRangeAge.objects.all()
+    serializer_class = PeopleRangeAgeSerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert],
+        'destroy': [IsExpert],
+        'update': [IsExpert]
+    }
+
+    def list(self, request):
+        volta = PeopleRangeAge.objects.all()
+        if not volta.exists():
+            r1 = PeopleRangeAge.objects.create(description = '20 a 29 anos')
+            r2 = PeopleRangeAge.objects.create(description = '30 a 39 anos')
+            r3 = PeopleRangeAge.objects.create(description = '40 a 49 anos')
+            r4 = PeopleRangeAge.objects.create(description = '50 a 29 anos')
+            r5 = PeopleRangeAge.objects.create(description = '60 a 39 anos')
+            r6 = PeopleRangeAge.objects.create(description = '70 a 49 anos')
+            r7 = PeopleRangeAge.objects.create(description = '80 a 29 anos')
+            r8 = PeopleRangeAge.objects.create(description = '90 a 99 anos')
+            r9 = PeopleRangeAge.objects.create(description = '100 a mais anos')
+            volta = PeopleRangeAge.objects.all()            
+        dados = PeopleRangeAgeSerializer(volta,many=True)
+        return Response(dados.data)   
+    
+
+class PeopleIncapacityViewSet(CustomModelViewSet):
+    queryset = PeopleIncapacity.objects.all()
+    serializer_class = PeopleIncapacitySerializer
+    permission_classes_by_action = {
+        'create': [IsExpert],
+        'partial_update': [IsExpert],
+        'destroy': [IsExpert],
+        'update': [IsExpert]
+    }
+
+    def list(self, request):
+        volta = PeopleIncapacity.objects.all()
+        if not volta.exists():
+            r1 = PeopleIncapacity.objects.create(description = 'Totalmente independente, não precisa de qualquer tipo de apoio na vida cotidiana')
+            r2 = PeopleIncapacity.objects.create(description = 'Necessita de pequenos apoio na vida cotidiana e no apoio à mobilidade')
+            r3 = PeopleIncapacity.objects.create(description = 'Necessita de apoio na higiene pessoal, tarefas de vida cotidiana e na mobilidade')
+            r4 = PeopleIncapacity.objects.create(description = 'Totalmente dependente para a satisfação das necessidades básicas (alimentação,higiene, vestuário, mobilidade e etc)')
+            volta = PeopleIncapacity.objects.all()            
+
+        dados = PeopleIncapacitySerializer(volta,many=True)
+        return Response(dados.data)    
 
 class OffersViewSet(CustomModelViewSet):
     queryset = Offers.objects.all()
@@ -113,14 +245,15 @@ class InstitutionViewSet(CustomModelViewSet):
 
     ## Método de criação de um novo Instituto
     def create(self,request, *args, **kwargs):
-        ## Cria o objeto Intitution
+        ## Cria o objeto Institution
         institution_ = Institution()
 
         ## Cria e atribui o endereço
         address_ = AddressPlace()
         self.atribui(address_,request.data['addressPlace'])
-        cidade_ = Cidade.objects.get(pk=request.data['addressPlace']['cidade'])
-        address_.cidade = cidade_
+        if not request.data['addressPlace']['cidade'] == '':
+            cidade_ = Cidade.objects.get(pk=request.data['addressPlace']['cidade'])
+            address_.cidade = cidade_
         address_.haveParking = request.data['addressPlace']['haveParking'] == 'true'
         address_.save()
         institution_.addressPlace = address_
@@ -131,9 +264,14 @@ class InstitutionViewSet(CustomModelViewSet):
         capacity_.save()
         institution_.capacity = capacity_
 
-        ## Cria e atribui o Longa Duração
+        ## Cria e atribui O público alvo
         targetAudience_ = TargetAudience()
-        self.atribui(targetAudience_,request.data['targetAudience'])
+        targetAudience_.most_people_served_type = PeopleType.objects.get(pk=request.data['targetAudience']['most_people_served_type'])
+        targetAudience_.people_can_be_served = PeopleType.objects.get(pk=request.data['targetAudience']['people_can_be_served'])
+        targetAudience_.most_people_served_sex = PeopleSex.objects.get(pk=request.data['targetAudience']['most_people_served_sex'])
+        targetAudience_.most_people_served_range_age = PeopleRangeAge.objects.get(pk=request.data['targetAudience']['most_people_served_range_age'])
+        targetAudience_.most_people_served_incapacity = PeopleIncapacity.objects.get(pk=request.data['targetAudience']['most_people_served_incapacity'])
+        targetAudience_.comments = request.data['targetAudience']['comments']
         targetAudience_.save()
         institution_.targetAudience = targetAudience_
 
@@ -141,9 +279,10 @@ class InstitutionViewSet(CustomModelViewSet):
         mainActingArea_ = ActingArea.objects.get(pk=request.data['mainActingArea'])
         institution_.mainActingArea = mainActingArea_
 
+        ##Este campo está desativado no frontend
         ## Atribui a chave primária ao Responsável Técnico
-        professional_ = Professional.objects.get(pk=request.data['technicalResponsible'])
-        institution_.technicalResponsible = professional_
+        ##professional_ = Professional.objects.get(pk=request.data['technicalResponsible'])
+        ##institution_.technicalResponsible = professional_
 
         ## Atribui os campos simples do model
         institution_.company_name = request.data['company_name']
@@ -155,6 +294,12 @@ class InstitutionViewSet(CustomModelViewSet):
         institution_.legal_nature = request.data['legal_nature'] 
         institution_.objective = request.data['objective'] 
         institution_.schedules = request.data['schedules'] 
+        institution_.phoneMain = request.data['phoneMain'] 
+        institution_.phoneWhatsapp = request.data['phoneWhatsapp'] 
+        institution_.emailMain = request.data['emailMain'] 
+        institution_.facebook = request.data['facebook'] 
+        institution_.instagram = request.data['instagram'] 
+        institution_.webPage = request.data['webPage'] 
 
         ## Salva o objeto antes de povoar os relacionamentos
         institution_.save()
@@ -174,7 +319,8 @@ class InstitutionViewSet(CustomModelViewSet):
         ##Guarda a lista de Endereços WEB
         webAddressList_ = request.data['webAddressList']
         for web_ in webAddressList_:
-            web_inst = WebAddressInstitution(description=web_['description'],digital_address=web_['digital_address'],institution=institution_)
+            typeDigitalAddress = TypeDigitalAddress.objects.get(pk=web_['description'])
+            web_inst = WebAddressInstitution(description=typeDigitalAddress,digital_address=web_['digital_address'],institution=institution_)
             web_inst.save()
 
         ##Retorna o objeto
@@ -189,27 +335,16 @@ class InstitutionViewSet(CustomModelViewSet):
         emailList_ = list(EmailInstitution.objects.filter(institution=inst_).values())
         webAddressList_ = list(WebAddressInstitution.objects.filter(institution=inst_).values())
         targetAudience_ = model_to_dict(TargetAudience.objects.get(pk=inst_.targetAudience.pk))
+        institution = InstitutionSerializer(inst_).data
+        institution['targetAudience'] = targetAudience_
+        institution['addressPlace'] = address_
+        institution['phoneList'] = phoneList_ 
+        institution['emailList'] = emailList_ 
+        institution['webAddressList'] = webAddressList_
+        institution['capacity'] = capacity_
+        return Response(institution)
 
-
-        return Response({'id' : inst_.pk,
-                        'company_name' : inst_.company_name,
-                        'trading_name' : inst_.trading_name,
-                        'trading_name_know' : inst_.trading_name_know,
-                        'cnpj' : inst_.cnpj,
-                        'category' : inst_.category,
-                        'foundation_year' : inst_.foundation_year,
-                        'legal_nature' : inst_.legal_nature,
-                        'objective' : inst_.objective,
-                        'schedules' : inst_.schedules,
-                        'technicalResponsible' : inst_.technicalResponsible.pk,
-                        'targetAudience' : targetAudience_,
-                        'addressPlace': address_,
-                        'phoneList' : phoneList_, 
-                        'emailList' : emailList_, 
-                        'webAddressList' : webAddressList_,
-                        'capacity' : capacity_,
-                        'mainActingArea' : inst_.mainActingArea.pk, 
-                        })
+        
     def update(self, request, pk=None):
         ## Cria o objeto Institution
         institution_ = Institution.objects.get(pk=pk)
@@ -228,18 +363,24 @@ class InstitutionViewSet(CustomModelViewSet):
         self.atribui(capacity_,request.data['capacity'])
         capacity_.save()
 
-        ## Cria e atribui o Longa Duração
+        ## Cria e atribui o público alvo
         targetAudience_ = TargetAudience.objects.get(pk=institution_.targetAudience.pk)
-        self.atribui(targetAudience_,request.data['targetAudience'])
+        targetAudience_.most_people_served_type = PeopleType.objects.get(pk=request.data['targetAudience']['most_people_served_type'])
+        targetAudience_.people_can_be_served = PeopleType.objects.get(pk=request.data['targetAudience']['people_can_be_served'])
+        targetAudience_.most_people_served_sex = PeopleSex.objects.get(pk=request.data['targetAudience']['most_people_served_sex'])
+        targetAudience_.most_people_served_range_age = PeopleRangeAge.objects.get(pk=request.data['targetAudience']['most_people_served_range_age'])
+        targetAudience_.most_people_served_incapacity = PeopleIncapacity.objects.get(pk=request.data['targetAudience']['most_people_served_incapacity'])
+        targetAudience_.comments = request.data['targetAudience']['comments']
         targetAudience_.save()
 
         ## Atribui a chave primária da Área de Atuação
         mainActingArea_ = ActingArea.objects.get(pk=request.data['mainActingArea'])
         institution_.mainActingArea = mainActingArea_
 
+        #Desligado no frontend
         ## Atribui a chave primária ao Responsável Técnico
-        professional_ = Professional.objects.get(pk=request.data['technicalResponsible'])
-        institution_.technicalResponsible = professional_
+        #professional_ = Professional.objects.get(pk=request.data['technicalResponsible'])
+        #institution_.technicalResponsible = professional_
 
         ## Atribui os campos simples do model
         institution_.company_name = request.data['company_name']
@@ -251,6 +392,13 @@ class InstitutionViewSet(CustomModelViewSet):
         institution_.legal_nature = request.data['legal_nature'] 
         institution_.objective = request.data['objective'] 
         institution_.schedules = request.data['schedules'] 
+        institution_.phoneMain = request.data['phoneMain'] 
+        institution_.phoneWhatsapp = request.data['phoneWhatsapp'] 
+        institution_.emailMain = request.data['emailMain'] 
+        institution_.facebook = request.data['facebook'] 
+        institution_.instagram = request.data['instagram'] 
+        institution_.webPage = request.data['webPage'] 
+
 
         ## Salva o objeto antes de povoar os relacionamentos
         institution_.save()
@@ -277,9 +425,11 @@ class InstitutionViewSet(CustomModelViewSet):
         #apaga a lista de endereços WEB
         delWeb = WebAddressInstitution.objects.filter(institution=institution_).delete()
         #cria lista de novo
+        ##Guarda a lista de Endereços WEB
         webAddressList_ = request.data['webAddressList']
         for web_ in webAddressList_:
-            web_inst = WebAddressInstitution(description=web_['description'],digital_address=web_['digital_address'],institution=institution_)
+            typeDigitalAddress = TypeDigitalAddress.objects.get(pk=web_['description'])
+            web_inst = WebAddressInstitution(description=typeDigitalAddress,digital_address=web_['digital_address'],institution=institution_)
             web_inst.save()
 
         ##Retorna o objeto

@@ -25,7 +25,9 @@ from activities_section.api.viewsets import CharacteristicViewSet, BenefitViewSe
 from institution_section.api.viewsets import CidadeViewSet, AddressPlaceViewSet, \
      ProfessionalViewSet, InstitutionViewSet, OffersViewSet, CapacityViewSet, \
      ExpertiseAreasViewSet, AcademicEducationViewSet, OffersViewSet, ActingAreaViewSet,\
-     WebAddressInstitutionViewSet, PhoneInstitutionViewSet, EmailInstitutionViewSet
+     WebAddressInstitutionViewSet, PhoneInstitutionViewSet, EmailInstitutionViewSet, \
+     LegalNatureViewSet, PeopleTypeViewSet, PeopleSexViewSet, PeopleRangeAgeViewSet, PeopleIncapacityViewSet,\
+     TypeDigitalAddressViewSet
 
 from page_section.api.viewsets import  NegativeAttitudesAgingViewSet, CognitionDeficitViewSet, DepressionViewSet,\
     PsychologicalAspectsViewSet, BiologicalAspectsViewSet, SensoryDeficitViewSet, FunctionalDisabilityViewSet,\
@@ -67,6 +69,13 @@ router.register(r'webaddressinstitution',WebAddressInstitutionViewSet, basename=
 router.register(r'phoneInstitution',PhoneInstitutionViewSet, basename='PhoneInstitution')
 router.register(r'emailinstitution',EmailInstitutionViewSet, basename='EmailInstitution')
 router.register(r'actingarea', ActingAreaViewSet, basename='ActingArea')
+router.register(r'legalNature',LegalNatureViewSet,basename='LegalNature') 
+router.register(r'peopleType',PeopleTypeViewSet,basename='PeopleType') 
+router.register(r'peopleSex',PeopleSexViewSet,basename='PeopleSex') 
+router.register(r'peopleRangeAge',PeopleRangeAgeViewSet,basename='PeopleRangeAge') 
+router.register(r'peopleIncapacity',PeopleIncapacityViewSet,basename='PeopleIncapacity')
+router.register(r'typedigitaladdress',TypeDigitalAddressViewSet,basename='TypeDigitalAddress')
+
 
 # activities_section
 router.register(r'characteristics', CharacteristicViewSet, basename='Characteristic')

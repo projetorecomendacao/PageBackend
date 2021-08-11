@@ -1,7 +1,14 @@
 from rest_framework.serializers import ModelSerializer
 from institution_section.models import Cidade, AddressPlace, Professional, \
      Institution, ActingArea, Offers, Capacity,  ExpertiseAreas, \
-     AcademicEducation, WebAddressInstitution, PhoneInstitution, EmailInstitution
+     AcademicEducation, WebAddressInstitution, PhoneInstitution, EmailInstitution, \
+     LegalNature, PeopleType, PeopleSex, PeopleRangeAge, PeopleIncapacity,\
+     TypeDigitalAddress
+
+class TypeDigitalAddressSerializer(ModelSerializer):
+    class Meta:
+        model = TypeDigitalAddress
+        fields = '__all__'
 
 class ActingAreaSerializer(ModelSerializer):
     class Meta:
@@ -71,4 +78,29 @@ class PhoneInstitutionSerializer(ModelSerializer):
 class EmailInstitutionSerializer(ModelSerializer):
     class Meta:
         model = EmailInstitution
+        fields = '__all__'
+
+class LegalNatureSerializer(ModelSerializer):
+    class Meta:
+        model = LegalNature
+        fields = '__all__'
+
+class PeopleTypeSerializer(ModelSerializer):
+    class Meta:
+        model = PeopleType
+        fields = '__all__'
+
+class PeopleSexSerializer(ModelSerializer):
+    class Meta:
+        model = PeopleSex 
+        fields = '__all__'
+
+class PeopleRangeAgeSerializer(ModelSerializer):
+    class Meta:
+        model = PeopleRangeAge
+        fields = '__all__'
+
+class PeopleIncapacitySerializer(ModelSerializer):
+    class Meta:
+        model = PeopleIncapacity
         fields = '__all__'
