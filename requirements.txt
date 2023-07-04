@@ -37,3 +37,4 @@ django-widget-tweaks
 matplotlib
 gunicorn
 django-extensions
+libgeos-dev
