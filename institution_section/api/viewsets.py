@@ -1,4 +1,3 @@
-from rest_framework.fields import NullBooleanField
 from rest_framework.response import Response
 from django.forms.models import model_to_dict
 
